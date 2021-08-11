@@ -18,7 +18,7 @@ namespace TG.ModelView
 
     public void CadastrarAction()
     {
-      App.Current.MainPage = new View.CadastroPage();
+      App.Current.MainPage = new TG_App.View.TermosUsoPage();
     }
     public event PropertyChangedEventHandler PropertyChanged;
     private void OnPropertyChange(string param)

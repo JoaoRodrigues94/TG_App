@@ -57,7 +57,7 @@
         <Frame IsVisible="{Binding CkHorario}">
           <StackLayout>
             <Label TextColor="DarkRed" Text="HORÁRIOS" FontAttributes="Bold" HorizontalTextAlignment="Center" IsVisible="{Binding CkHorario}"/>
-            <StackLayout>
+            <StackLayout Padding="0">
               <StackLayout x:Name="AddHorarios" Padding="0" />
 
               <StackLayout Padding="0" Orientation="Horizontal" HorizontalOptions="Center">

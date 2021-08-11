@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TG_App.View.TermosUsoPage">
+  <ContentPage.Content>
+    <ScrollView>
+      <StackLayout>
+        <Frame>
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0" Padding="0">
+                <Label Text="TERMOS DE USO" TextColor="DarkRed" FontSize="30" FontAttributes="Bold"
+                HorizontalOptions="CenterAndExpand" />
+                <Label/>
+                <Label Text="* Esse software destina-se a pessoas portadoras da doença Diabétes Mellitus, que fazem o uso constante de medicamentos para controle de glicêmia." />
+                <Label Text="* O Software têm por finalidade ajudar no controle e monitoramento da doença, exibindo SUGESTÕES referêntes a quantidade de medicamento a ser utilizado, e podendo ser feito anotações referentes ao monitoramento da doença."/>
+                <Label Text="* O software somente deverá ser utilizado com base na receita feita pelo médico, o sistema não substitui as consultas que deveram continuar ser feitas regularmente."/>
+                <Label Text="* Tendo em vista que a doença é de difícil controle, não será calculado os valores inferiores a 50 um/dl, o software destina-se ao controle de hiperglicêmia. "/>
+                <Label Text="* Os valores obtidos através dos exames de glicemia que estiverem entre 50 e 70 um/dl, teram o valor de 1 unidade de medicação subtraidos da sugestão final, tendo em vista manter o controle da doença, esse valor poderá ser alterado em configurações"/>
+                <Label Text="* Os valores obtidos no exame de glicemia que tiverem como resultado HI, terá seu valor cálculado como base no valor de 600 un / dl."/>
+                <Label Text="* Consulte um médico antes de preencher as informações de cadastro, os valores cadastrados devem ser baseados na RECEITA Médica!"/>
+                <TableView>
+                  <TableRoot>
+                    <TableSection>
+                      <SwitchCell x:Name="Termos" On="{Binding Status}" Text="Li e concordo com os termos"/>
+                    </TableSection>
+                  </TableRoot>
+                </TableView>
+              </StackLayout>
+            <StackLayout Grid.Row="1" Padding="0" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+              <Button Text="Continuar" Command="{Binding Next}" BackgroundColor="LightBlue"/>
+              <Button Text="Voltar" Command="{Binding Behind}" BackgroundColor="PaleVioletRed"/>
+            </StackLayout>
+          </Grid>
+        </Frame>
+      </StackLayout>
+    </ScrollView>
+  </ContentPage.Content>
+</ContentPage>
