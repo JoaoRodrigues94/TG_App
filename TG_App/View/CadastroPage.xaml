@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behavior1="clr-namespace:TG.View"
+             x:Class="TG.View.CadastroPage">
+  <ContentPage.Content>
+    <ScrollView>
+      <StackLayout VerticalOptions="FillAndExpand">
+        <Frame>
+          <StackLayout>
+            <Label TextColor="DarkRed" Text="DADOS PESSOAIS" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+            <Entry x:Name="Nome" Text="{Binding NomeEntry}" Placeholder="Nome" />
+            <Entry x:Name="Email" Text="{Binding Email}" Placeholder="Email" Keyboard="Email" />
+            <Entry x:Name="Celular" Text="{Binding Celular}" Placeholder="Celular" Keyboard="Telephone" >
+              <Entry.Behaviors>
+                <behavior1:MaskedTelefone Mask="(XX)XXXXX-XXXX"/>
+              </Entry.Behaviors>
+            </Entry>
+            <Button Text="Próximo" HorizontalOptions="End" BackgroundColor="Gray" Command="{Binding Proximo_1}" IsVisible="{Binding Prox_1}"/>
+          </StackLayout>
+        </Frame>
+        <Frame IsVisible="{Binding CkMedicamento}">
+          <StackLayout>
+            <Label TextColor="DarkRed" Text="MEDICAMENTOS" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+
+            <Picker Title="Selecione" SelectedIndex="{Binding TipoDiabete}" >
+              <Picker.Items>
+                <x:String>Diabétes tipo 1</x:String>
+                <x:String>Diabétes tipo 2 - Faz uso de insulina de ação rápida e lenta</x:String>
+                <x:String>Diabétes tipo 2 - Faz uso somente de insulina de ação lenta</x:String>
+                <x:String>Diabétes tipo 2 - Faz uso de comprimidos</x:String>
+              </Picker.Items>
+            </Picker>
+
+            <!-- Insulina Lenta -->
+            <StackLayout Orientation="Horizontal" IsVisible="{Binding VisibleInsulinaL}" Padding="0" >
+              <Entry x:Name="NomeInsulinaL" Text="{Binding InsulinaLenta}" Placeholder="Nome da Insulina de Ação Lenta" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Padding="0" IsVisible="{Binding VisibleInsulinaL}">
+              <Label Text="Unidades:"/>
+              <Entry x:Name="Unidades" Placeholder="Unidades" Text="{Binding UnidadesLenta}"  Keyboard="Numeric" HorizontalOptions="FillAndExpand" />
+              <Label Text="Horário:"/>
+              <TimePicker Format="HH:mm" x:Name="HorarioL" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+            
+            <StackLayout Orientation="Horizontal" IsVisible="{Binding VisibleInsulinaR}" Padding="0">
+              <StackLayout HorizontalOptions="FillAndExpand" Padding="0">
+                <Entry x:Name="NomeInsulinaR" Text="{Binding InsulinaRapida}" Placeholder="Nome Insulina/Medicação de Ação Rápida"/>
+              </StackLayout>
+            </StackLayout>
+            <Button Text="Próximo" HorizontalOptions="End" BackgroundColor="Gray" Command="{Binding Proximo_2}" IsVisible="{Binding Prox_2}"/>
+          </StackLayout>
+        </Frame>
+
+        <!--HORARIOS-->
+        <Frame IsVisible="{Binding CkHorario}">
+          <StackLayout>
+            <Label TextColor="DarkRed" Text="HORÁRIOS" FontAttributes="Bold" HorizontalTextAlignment="Center" IsVisible="{Binding CkHorario}"/>
+            <StackLayout>
+              <StackLayout x:Name="AddHorarios" Padding="0" />
+
+              <StackLayout Padding="0" Orientation="Horizontal" HorizontalOptions="Center">
+                <Button ImageSource="Add.png" Clicked="AddHorarioAcion" />
+                <Image Source="delete.png">
+                  <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ExcluirAction"/>
+                  </Image.GestureRecognizers>
+                </Image>
+              </StackLayout>
+              <Button Text="Próximo" HorizontalOptions="End" BackgroundColor="White" Command="{Binding Proximo_3}" IsVisible="{Binding Prox_3}"/>
+            </StackLayout>
+          </StackLayout>
+        </Frame>
+
+
+        <Frame IsVisible="{Binding CkUnidades}">
+          <StackLayout>
+            <Label TextColor="DarkRed" Text="CORREÇÕES" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+            <Label Text="Correção Alimentar" FontAttributes="Bold"/>
+            <StackLayout Orientation="Horizontal" Padding="0">
+              <Entry Placeholder="Unidades" HorizontalOptions="FillAndExpand" Keyboard="Numeric"/>
+              <Label Text="Para cada: "/>
+              <Entry Placeholder="Gramas de Carboidratos" HorizontalOptions="FillAndExpand" Keyboard="Numeric"/>
+            </StackLayout>
+
+            <Label Text="Correção de Glicemia" FontAttributes="Bold"/>
+            <StackLayout Orientation="Horizontal" Padding="0">
+              <Entry Placeholder="Unidades" Keyboard="Numeric" HorizontalOptions="FillAndExpand" />
+              <Label Text="para cada"/>
+              <Entry Placeholder="Unidades de Glicemia" Keyboard="Numeric" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+            <Button Text="Próximo" HorizontalOptions="End" BackgroundColor="Gray" Command="{Binding Proximo_4}" IsVisible="{Binding Prox_4}"/>
+          </StackLayout>
+        </Frame>
+        <Frame IsVisible="{Binding CkSenha}">
+          <StackLayout>
+            <Label TextColor="DarkRed" Text="SENHA" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+            <Entry Placeholder="Senha Com no Minímo 6 Caracteres" Text="{Binding Senha}" IsPassword="True"/>
+            <Entry Placeholder="Confirmar Senha" Text="{Binding ConfirmarSenha}" IsPassword="True"/>
+          </StackLayout>
+        </Frame>
+        <Button HorizontalOptions="Center" VerticalOptions="Center" Text="Salvar" Command="{Binding Salvar}" IsVisible="{Binding CkSenha}" />
+      </StackLayout>
+    </ScrollView>
+  </ContentPage.Content>
+</ContentPage>

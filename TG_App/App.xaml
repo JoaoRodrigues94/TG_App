@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TG_App.App">
+  <Application.Resources>
+    <!-- Estilos Globais -->
+    <Style TargetType="Frame">
+      <Setter Property="OutlineColor" Value="Black" />
+      <Setter Property="Padding" Value="0" />
+    </Style>
+
+    <!-- Stack Layout -->
+    <Style TargetType="StackLayout">
+      <Setter Property="Padding" Value="10"/>
+    </Style>
+  </Application.Resources>
+</Application>
