@@ -30,7 +30,10 @@ namespace TG.ModelView
     private string _ConfirmarSenha;
     public string ConfirmarSenha { get { return _ConfirmarSenha; } set { _ConfirmarSenha = value; OnPropertyChange("ConfirmarSenha"); } }
     // Números
-    public byte Idade { get; set; }
+    private decimal _AlimentoUni;
+    public decimal AlimentoUni { get { return _AlimentoUni; } set { _AlimentoUni = value; OnPropertyChange("AlimentoUni"); } }
+    private decimal _GramasCarbo;
+    public decimal GramasCarbo { get { return _GramasCarbo; } set { _GramasCarbo = value; OnPropertyChange("GramasCarbo"); } }
     public int _TipoDiabete { get; set; }
     public int TipoDiabete { get { return _TipoDiabete; } set { _TipoDiabete = value; ProximoAction(); } }
     private int _UnidadesLenta;
@@ -92,6 +95,21 @@ namespace TG.ModelView
       if(Senha.Length < 6)
       {
         App.Current.MainPage.DisplayAlert("Erro", "Informe uma senha com no mínimo 6 caracteres!", "OK");
+      }
+      else
+      {
+        Usuario user = new Usuario
+        {
+          Nome = NomeEntry,
+          Email = this.Email,
+          Celular = this.Celular,
+          TipoDiabete = this.TipoDiabete,
+          InsulinaLenta = this.InsulinaLenta,
+          UnidadesLenta = this.UnidadesLenta,
+          InsulinaRapida = this.InsulinaRapida,
+          AlimentoUni = this.AlimentoUni,
+          GramasCarbo = this.GramasCarbo
+        };
       }
     }
 
