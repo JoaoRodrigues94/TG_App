@@ -59,6 +59,11 @@ namespace TG.View
     {
       List<Horarios> dadosLista = new List<Horarios>();
 
+      if(Senha.Text != ConfirmarSenha.Text)
+      {
+        DisplayAlert("ERRO", "deu ruim", "ok");
+      }
+
       if (TipoDiabete.SelectedIndex != 3)
       {
         Horarios lenta = new Horarios

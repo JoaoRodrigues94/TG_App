@@ -31,7 +31,6 @@ namespace TG_App.DB
     {
       _conexao.Insert(horario);
     }
-
     // Métodos Update
     public void UpdateUsuario(Usuario user)
     {

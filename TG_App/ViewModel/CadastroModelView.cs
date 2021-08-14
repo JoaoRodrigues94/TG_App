@@ -121,16 +121,11 @@ namespace TG.ModelView
           UnidadeGlicemia = Convert.ToDecimal(this.UnidadeGlicemia),
           Senha = this.Senha
         };
-        DataBase DB = new DataBase();
-        DB.CadastrarUsuario(user);
-
-        ID = 
       }
     }
 
     public void AddHorarios(List<Horarios> id)
     {
-      DataBase DB = new DataBase();
       foreach(var item in id)
       {
         Horarios dados = new Horarios
@@ -140,7 +135,6 @@ namespace TG.ModelView
           Pickers = item.Pickers,
           Unidades = item.Unidades
         };
-        DB.CadastrarHorario(dados);
       }
     }
 
