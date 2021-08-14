@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using TG.Model;
 using TG.ModelView;
+using TG_App;
+using TG_App.DB;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static TG.Model.Horarios;
@@ -20,7 +22,7 @@ namespace TG.View
     int picker;
     DateTime TimeCadastro;
     List<Horarios> ListaDados = new List<Horarios>();
-    List<StackLayout> stackLayout = new List<StackLayout>();
+    List<Horarios> stackLayout = new List<Horarios>();
     public CadastroPage()
     {
       InitializeComponent();
@@ -33,27 +35,57 @@ namespace TG.View
     public void DadosHorarios(StackLayout dados)
     {
       var t = (Picker)dados.Children[0];
-      var ts = (TimePicker)dados.Children[1];
-      var sl = (StackLayout)dados.Children[2];
-
-      var sqlSl = (StackLayout)sl.Children[0];
-      var g = (Entry)sqlSl.Children[0];
-
-      var y = t.SelectedIndex;
-
-      /*
-      Horarios dadosHorario = new Horarios
+      if(t.SelectedIndex != -1)
       {
-        Horario = Convert.ToDateTime(ts.Time),
-        Pickers = t.SelectedIndex,
-        Unidades = Convert.ToInt32(g.Text == null ? 0 : g.Text)
-      }; 
-      */
-      stackLayout.Add(dados);
+        
+        var sl = (StackLayout)dados.Children[1];
+
+        var sqlSl = (StackLayout)sl.Children[0];
+        var entrySql = (StackLayout)sl.Children[1];
+        var ts = (TimePicker)sqlSl.Children[0];
+        var g = (Entry)entrySql.Children[0];
+        
+        var y = t.SelectedIndex;
+        Horarios dadosHorario = new Horarios();
+        //{
+        dadosHorario.Horario = Convert.ToString(ts.Time);
+        dadosHorario.Pickers = t.SelectedIndex;
+        dadosHorario.Unidades = Convert.ToInt32(g.Text);
+        //};
+        stackLayout.Add(dadosHorario);
+      }
     }
-    public void Salvar()
+    public void Salvar(object sender, EventArgs args)
     {
-      var x = 1;
+      List<Horarios> dadosLista = new List<Horarios>();
+
+      if (TipoDiabete.SelectedIndex != 3)
+      {
+        Horarios lenta = new Horarios
+        {
+          Horario = Convert.ToString(HorarioL.Time),
+          Pickers = 2,
+          NomeMedicamento = NomeInsulinaL.Text,
+          Unidades = Convert.ToDecimal(UnidadesL.Text)
+        };
+
+        dadosLista.Add(lenta);
+      }
+
+
+      foreach(var item in stackLayout)
+      {
+        Horarios dados = new Horarios
+        {
+          Horario = item.Horario,
+          Pickers = item.Pickers,
+          Unidades = item.Unidades,
+          NomeMedicamento = NomeInsulinaR.Text
+        };
+        dadosLista.Add(dados);
+      }
+      new CadastroModelView().AddHorarios(dadosLista);
+      App.Current.MainPage = new LoginPage();
     }
     public void CarregarHorarios(char verif)
     {
@@ -66,7 +98,7 @@ namespace TG.View
       var y = picker;
       foreach (var item in Lista)
       {
-        //DadosHorarios(item);
+        DadosHorarios(item);
         ListaStacks(i, 1, Lista);
         i++;
       }
@@ -75,6 +107,10 @@ namespace TG.View
         ListaStacks(cont, 0, Lista);
         cont++;
       }
+    }
+    public void Next(object sender, EventArgs args)
+    {
+      CarregarHorarios('N');
     }
     public void ListaStacks(int id, int verif, List<StackLayout> lista)
     {
@@ -127,6 +163,15 @@ namespace TG.View
             Children =
           {
             tp
+          }
+          });
+          un.Text = "0";
+          horizontal.Children.Add(new StackLayout
+          {
+            IsVisible = false,
+            Children =
+          {
+            un
           }
           });
         }

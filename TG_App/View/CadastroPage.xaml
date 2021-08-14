@@ -23,7 +23,7 @@
           <StackLayout>
             <Label TextColor="DarkRed" Text="MEDICAMENTOS" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
 
-            <Picker Title="Selecione" SelectedIndex="{Binding TipoDiabete}" >
+            <Picker Title="Selecione" x:Name="TipoDiabete" SelectedIndex="{Binding TipoDiabete}" >
               <Picker.Items>
                 <x:String>Diabétes tipo 1</x:String>
                 <x:String>Diabétes tipo 2 - Faz uso de insulina de ação rápida e lenta</x:String>
@@ -39,7 +39,7 @@
 
             <StackLayout Orientation="Horizontal" Padding="0" IsVisible="{Binding VisibleInsulinaL}">
               <Label Text="Unidades:"/>
-              <Entry x:Name="Unidades" Placeholder="Unidades" Text="{Binding UnidadesLenta}"  Keyboard="Numeric" HorizontalOptions="FillAndExpand" />
+              <Entry x:Name="UnidadesL" Placeholder="Unidades" Text="{Binding UnidadesLenta}"  Keyboard="Numeric" HorizontalOptions="FillAndExpand" />
               <Label Text="Horário:"/>
               <!--TODO Gravar em Horários -->
               <TimePicker Format="HH:mm" x:Name="HorarioL" HorizontalOptions="FillAndExpand" />
@@ -69,7 +69,7 @@
                   </Image.GestureRecognizers>
                 </Image>
               </StackLayout>
-              <Button Text="Próximo" HorizontalOptions="End" BackgroundColor="White" Command="{Binding Proximo_3}" IsVisible="{Binding Prox_3}"/>
+              <Button Text="Próximo" HorizontalOptions="End" BackgroundColor="White" Command="{Binding Proximo_3}" IsVisible="{Binding Prox_3}" Clicked="Next"/>
             </StackLayout>
           </StackLayout>
         </Frame>
@@ -87,9 +87,9 @@
 
             <Label Text="Correção de Glicemia" FontAttributes="Bold"/>
             <StackLayout Orientation="Horizontal" Padding="0">
-              <Entry Placeholder="Unidades" Keyboard="Numeric" Text="{Binding UnidadeGlicemia}" HorizontalOptions="FillAndExpand" />
+              <Entry Placeholder="Unidades" Text="{Binding UnidadeCorrecao}" HorizontalOptions="FillAndExpand" Keyboard="Numeric" />
               <Label Text="para cada"/>
-              <Entry Placeholder="Unidades de Glicemia" Keyboard="Numeric" HorizontalOptions="FillAndExpand"/>
+              <Entry Placeholder="Unidades de Glicemia" Text="{Binding UnidadeGlicemia}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" />
             </StackLayout>
             <Button Text="Próximo" HorizontalOptions="End" BackgroundColor="Gray" Command="{Binding Proximo_4}" IsVisible="{Binding Prox_4}"/>
           </StackLayout>
@@ -97,11 +97,11 @@
         <Frame IsVisible="{Binding CkSenha}">
           <StackLayout>
             <Label TextColor="DarkRed" Text="SENHA" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
-            <Entry Placeholder="Senha Com no Minímo 6 Caracteres" Text="{Binding Senha}" IsPassword="True"/>
-            <Entry Placeholder="Confirmar Senha" Text="{Binding ConfirmarSenha}" IsPassword="True"/>
+            <Entry x:Name="Senha" Placeholder="Senha Com no Minímo 6 Caracteres"  IsPassword="True"/>
+            <Entry x:Name="ConfirmarSenha" Placeholder="Confirmar Senha" Text="{Binding ConfirmarSenha}" IsPassword="True"/>
           </StackLayout>
         </Frame>
-        <Button HorizontalOptions="Center" VerticalOptions="Center" Text="Salvar" Command="{Binding Salvar}" IsVisible="{Binding CkSenha}" />
+        <Button HorizontalOptions="Center" VerticalOptions="Center" Text="Salvar" Clicked="Salvar" IsVisible="{Binding CkSenha}" />
       </StackLayout>
     </ScrollView>
   </ContentPage.Content>

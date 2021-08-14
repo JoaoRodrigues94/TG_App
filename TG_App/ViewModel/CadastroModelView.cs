@@ -7,12 +7,15 @@ using System.Windows.Input;
 using TG.Model;
 using TG.View;
 using TG_App;
+using TG_App.DB;
 using Xamarin.Forms;
 
 namespace TG.ModelView
 {
   public class CadastroModelView : INotifyPropertyChanged
   {
+    private int _ID;
+    public int ID { get { return _ID; } set { _ID = value; OnPropertyChange("ID"); } }
     private string _Nome;
     public string Nome { get { return _Nome; } set { _Nome = value; OnPropertyChange("Nome"); } }
     private string _NomeEntry;
@@ -29,11 +32,15 @@ namespace TG.ModelView
     public string Senha { get { return _Senha; } set { _Senha = value; OnPropertyChange("Senha"); } }
     private string _ConfirmarSenha;
     public string ConfirmarSenha { get { return _ConfirmarSenha; } set { _ConfirmarSenha = value; OnPropertyChange("ConfirmarSenha"); } }
+    private string _UnidadeCorrecao;
+    public string UnidadeCorrecao { get { return _UnidadeCorrecao; } set { _UnidadeCorrecao = value; OnPropertyChange("UnidadeCorrecao"); } }
+    private string _UnidadeGlicemia;
+    public string UnidadeGlicemia { get { return _UnidadeGlicemia; } set { _UnidadeGlicemia = value; OnPropertyChange("UnidadeGlicemia"); } }
     // Números
-    private decimal _AlimentoUni;
-    public decimal AlimentoUni { get { return _AlimentoUni; } set { _AlimentoUni = value; OnPropertyChange("AlimentoUni"); } }
-    private decimal _GramasCarbo;
-    public decimal GramasCarbo { get { return _GramasCarbo; } set { _GramasCarbo = value; OnPropertyChange("GramasCarbo"); } }
+    private string _AlimentoUni;
+    public string AlimentoUni { get { return _AlimentoUni; } set { _AlimentoUni = value; OnPropertyChange("AlimentoUni"); } }
+    private string _GramasCarbo;
+    public string GramasCarbo { get { return _GramasCarbo; } set { _GramasCarbo = value; OnPropertyChange("GramasCarbo"); } }
     public int _TipoDiabete { get; set; }
     public int TipoDiabete { get { return _TipoDiabete; } set { _TipoDiabete = value; ProximoAction(); } }
     private int _UnidadesLenta;
@@ -70,6 +77,7 @@ namespace TG.ModelView
     public Command Proximo_2 { get; set; }
     public Command Proximo_3 { get; set; }
     public Command Proximo_4 { get; set; }
+    private List<Horarios> horas;
     public CadastroModelView()
     {
       Proximo = new Command(ProximoAction);
@@ -88,11 +96,11 @@ namespace TG.ModelView
     }
     public void SalvarAction()
     {
-      if(Senha != ConfirmarSenha)
+      if (Senha != ConfirmarSenha)
       {
         App.Current.MainPage.DisplayAlert("ERRO", "As Senhas não Conferem!", "OK");
       }
-      if(Senha.Length < 6)
+      if (Senha.Length < 6)
       {
         App.Current.MainPage.DisplayAlert("Erro", "Informe uma senha com no mínimo 6 caracteres!", "OK");
       }
@@ -107,9 +115,32 @@ namespace TG.ModelView
           InsulinaLenta = this.InsulinaLenta,
           UnidadesLenta = this.UnidadesLenta,
           InsulinaRapida = this.InsulinaRapida,
-          AlimentoUni = this.AlimentoUni,
-          GramasCarbo = this.GramasCarbo
+          AlimentoUni = Convert.ToDecimal(this.AlimentoUni),
+          GramasCarbo = Convert.ToDecimal(this.GramasCarbo),
+          UnidadeCorrecao = Convert.ToDecimal(this.UnidadeCorrecao),
+          UnidadeGlicemia = Convert.ToDecimal(this.UnidadeGlicemia),
+          Senha = this.Senha
         };
+        DataBase DB = new DataBase();
+        DB.CadastrarUsuario(user);
+
+        ID = 
+      }
+    }
+
+    public void AddHorarios(List<Horarios> id)
+    {
+      DataBase DB = new DataBase();
+      foreach(var item in id)
+      {
+        Horarios dados = new Horarios
+        {
+          Horario = item.Horario,
+          NomeMedicamento = item.NomeMedicamento,
+          Pickers = item.Pickers,
+          Unidades = item.Unidades
+        };
+        DB.CadastrarHorario(dados);
       }
     }
 
