@@ -238,6 +238,10 @@ namespace TG.View
       CarregarHorarios('A');
     }
 
+    public void Voltar(object sender, EventArgs args)
+    {
+      App.Current.MainPage = new LoginPage();
+    }
     private void ExcluirAction(object sender, EventArgs args)
     {
       var itens = new Gerenciador().Listagem();

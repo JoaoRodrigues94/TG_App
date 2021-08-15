@@ -32,6 +32,12 @@ namespace TG_App.Banco
     {
       _conexao.Insert(horario);
     }
+    // Métodos Pesquisa
+    public List<Usuario> PesquisarEmail(string email)
+    {
+
+      return _conexao.Table<Usuario>().Where(x => x.Email == email).ToList();
+    }
     // Métodos Update
     public void UpdateUsuario(Usuario user)
     {

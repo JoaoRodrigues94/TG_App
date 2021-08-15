@@ -101,7 +101,10 @@
             <Entry x:Name="ConfirmarSenha" Placeholder="Confirmar Senha" Text="{Binding ConfirmarSenha}" IsPassword="True"/>
           </StackLayout>
         </Frame>
-        <Button HorizontalOptions="Center" VerticalOptions="Center" Text="Salvar" Clicked="Salvar" IsVisible="{Binding CkSenha}" />
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+          <Button HorizontalOptions="CenterAndExpand" VerticalOptions="Center" BackgroundColor="DarkGreen" Text="Salvar" Clicked="Salvar" IsVisible="{Binding CkSenha}"/>
+          <Button Text="Voltar" HorizontalOptions="CenterAndExpand" BackgroundColor="DarkRed" Clicked="Voltar"/>
+        </StackLayout>
       </StackLayout>
     </ScrollView>
   </ContentPage.Content>

@@ -7,6 +7,7 @@ using System.Windows.Input;
 using TG.Model;
 using TG.View;
 using TG_App;
+using TG_App.Banco;
 using Xamarin.Forms;
 
 namespace TG.ModelView
@@ -144,6 +145,7 @@ namespace TG.ModelView
 
     public void NextAction()
     {
+      DataBase DB = new DataBase();
       bool next = true;
       string message = "";
       if (NomeEntry == null || NomeEntry == " ")
@@ -156,6 +158,14 @@ namespace TG.ModelView
       {
         next = false;
         message += "Email inválido \n";
+      }
+
+      var emailExiste = DB.PesquisarEmail(Email).Count();
+
+      if (emailExiste != 0)
+      {
+        next = false;
+        message += "Email já cadastrado, informe outro email ou faça login";
       }
 
       if (Celular == null || Celular == "Celular" || Celular.Length < 14)
