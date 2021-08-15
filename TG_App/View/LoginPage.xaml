@@ -18,10 +18,10 @@
           </StackLayout>
 
           <StackLayout Padding="0" Grid.Row="1">
-            <Entry Placeholder="Email ou Celular do Usuário"/>
-            <Entry Placeholder="Senha do Usuário" IsPassword="true"/>
+            <Entry x:Name="Login" Placeholder="Email do Usuário"/>
+            <Entry x:Name="Senha" Placeholder="Senha do Usuário" IsPassword="true"/>
 
-            <Button Text="Entrar" />
+            <Button Text="Entrar" Clicked="EntrarAction"/>
             <Button Text="Cadastrar novo usuário" BackgroundColor="Transparent" TextColor="DarkBlue" Command="{Binding Cadastrar}"/>
           </StackLayout>
         </Grid>

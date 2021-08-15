@@ -9,6 +9,7 @@ using TG.Model;
 using TG.ModelView;
 using TG_App;
 using TG_App.Banco;
+using TG_App.View;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static TG.Model.Horarios;
@@ -116,7 +117,7 @@ namespace TG.View
             };
             DB.CadastrarHorario(dados);
           }
-          App.Current.MainPage = new LoginPage();
+          App.Current.MainPage = new HomePage();
         }
       }
     }
