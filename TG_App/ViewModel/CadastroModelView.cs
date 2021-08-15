@@ -7,7 +7,6 @@ using System.Windows.Input;
 using TG.Model;
 using TG.View;
 using TG_App;
-using TG_App.DB;
 using Xamarin.Forms;
 
 namespace TG.ModelView

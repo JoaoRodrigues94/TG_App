@@ -1,11 +1,12 @@
 ﻿using System.IO;
 using Xamarin.Forms;
 using TG_App.iOS.Banco;
+using TG_App.Banco;
 
 [assembly: Dependency(typeof(Caminho))]
 namespace TG_App.iOS.Banco
 {
-  class Caminho
+  public class Caminho: ICaminho
   {
     public string ObterCaminho(string NomeArquivoBanco)
     {

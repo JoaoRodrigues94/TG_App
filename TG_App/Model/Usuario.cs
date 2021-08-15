@@ -14,7 +14,6 @@ namespace TG.Model
     public string Email { get; set; }
     public string Celular { get; set; }
     public string Senha { get; set; }
-    public string Idade { get; set; }
     public int TipoDiabete { get; set; }
     public string InsulinaLenta { get; set; }
     public string InsulinaRapida { get; set; }

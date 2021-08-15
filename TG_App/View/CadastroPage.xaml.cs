@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using TG.Model;
 using TG.ModelView;
 using TG_App;
-using TG_App.DB;
+using TG_App.Banco;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static TG.Model.Horarios;
@@ -35,16 +35,16 @@ namespace TG.View
     public void DadosHorarios(StackLayout dados)
     {
       var t = (Picker)dados.Children[0];
-      if(t.SelectedIndex != -1)
+      if (t.SelectedIndex != -1)
       {
-        
+
         var sl = (StackLayout)dados.Children[1];
 
         var sqlSl = (StackLayout)sl.Children[0];
         var entrySql = (StackLayout)sl.Children[1];
         var ts = (TimePicker)sqlSl.Children[0];
         var g = (Entry)entrySql.Children[0];
-        
+
         var y = t.SelectedIndex;
         Horarios dadosHorario = new Horarios();
         //{
@@ -59,38 +59,66 @@ namespace TG.View
     {
       List<Horarios> dadosLista = new List<Horarios>();
 
-      if(Senha.Text != ConfirmarSenha.Text)
+      if (Senha.Text.Length < 6)
       {
-        DisplayAlert("ERRO", "deu ruim", "ok");
+        DisplayAlert("ERRO", "A senha deve conter no mínimo 6 caracteres!", "OK");
       }
-
-      if (TipoDiabete.SelectedIndex != 3)
+      else
       {
-        Horarios lenta = new Horarios
+
+
+        if (Senha.Text != ConfirmarSenha.Text)
         {
-          Horario = Convert.ToString(HorarioL.Time),
-          Pickers = 2,
-          NomeMedicamento = NomeInsulinaL.Text,
-          Unidades = Convert.ToDecimal(UnidadesL.Text)
-        };
-
-        dadosLista.Add(lenta);
-      }
-
-
-      foreach(var item in stackLayout)
-      {
-        Horarios dados = new Horarios
+          DisplayAlert("ERRO", "As Senhas não conferem!", "OK");
+        }
+        else
         {
-          Horario = item.Horario,
-          Pickers = item.Pickers,
-          Unidades = item.Unidades,
-          NomeMedicamento = NomeInsulinaR.Text
-        };
-        dadosLista.Add(dados);
+          DataBase DB = new DataBase();
+          Usuario user = new Usuario
+          {
+            Nome = Nome.Text,
+            Email = Email.Text,
+            Celular = Celular.Text,
+            TipoDiabete = TipoDiabete.SelectedIndex,
+            InsulinaLenta = NomeInsulinaL.Text,
+            UnidadesLenta = Convert.ToDecimal(UnidadesL.Text),
+            InsulinaRapida = NomeInsulinaR.Text,
+            AlimentoUni = Convert.ToDecimal(UniAlimento.Text),
+            GramasCarbo = Convert.ToDecimal(Carboidratos.Text),
+            UnidadeCorrecao = Convert.ToDecimal(Correcao.Text),
+            UnidadeGlicemia = Convert.ToDecimal(GlicemiaUnd.Text),
+            Senha = Senha.Text
+          };
+
+          DB.CadastrarUsuario(user);
+
+          if (TipoDiabete.SelectedIndex != 3)
+          {
+            Horarios lenta = new Horarios
+            {
+              UsuarioID = user.UsuarioID,
+              Horario = Convert.ToString(HorarioL.Time),
+              Pickers = 2,
+              NomeMedicamento = NomeInsulinaL.Text,
+              Unidades = Convert.ToDecimal(UnidadesL.Text)
+            };
+            DB.CadastrarHorario(lenta);
+          }
+          foreach (var item in stackLayout)
+          {
+            Horarios dados = new Horarios
+            {
+              UsuarioID = user.UsuarioID,
+              Horario = item.Horario,
+              Pickers = item.Pickers,
+              Unidades = item.Unidades,
+              NomeMedicamento = NomeInsulinaR.Text
+            };
+            DB.CadastrarHorario(dados);
+          }
+          App.Current.MainPage = new LoginPage();
+        }
       }
-      new CadastroModelView().AddHorarios(dadosLista);
-      App.Current.MainPage = new LoginPage();
     }
     public void CarregarHorarios(char verif)
     {
@@ -124,7 +152,7 @@ namespace TG.View
       p.Items.Add("Exame de Glicemia");
       p.Items.Add("Medicação");
 
-      TimePicker tp = new TimePicker { Format = "HH:mm"};
+      TimePicker tp = new TimePicker { Format = "HH:mm" };
       Entry un = new Entry { Placeholder = "Unidades" };
       Image btn2 = new Image { WidthRequest = 25, VerticalOptions = LayoutOptions.Center };
       btn2.Source = "delete.png";

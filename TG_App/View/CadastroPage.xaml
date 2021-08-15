@@ -80,16 +80,16 @@
             <Label TextColor="DarkRed" Text="CORREÇÕES" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
             <Label Text="Correção Alimentar" FontAttributes="Bold"/>
             <StackLayout Orientation="Horizontal" Padding="0">
-              <Entry Placeholder="Unidades" Text="{Binding AlimentoUni}" HorizontalOptions="FillAndExpand" Keyboard="Numeric"/>
+              <Entry x:Name="UniAlimento" Placeholder="Unidades" Text="{Binding AlimentoUni}" HorizontalOptions="FillAndExpand" Keyboard="Numeric"/>
               <Label Text="Para cada: "/>
-              <Entry Placeholder="Gramas de Carboidratos" Text="{Binding GramasCarbo}" HorizontalOptions="FillAndExpand" Keyboard="Numeric"/>
+              <Entry x:Name="Carboidratos" Placeholder="Gramas de Carboidratos" Text="{Binding GramasCarbo}" HorizontalOptions="FillAndExpand" Keyboard="Numeric"/>
             </StackLayout>
 
             <Label Text="Correção de Glicemia" FontAttributes="Bold"/>
             <StackLayout Orientation="Horizontal" Padding="0">
-              <Entry Placeholder="Unidades" Text="{Binding UnidadeCorrecao}" HorizontalOptions="FillAndExpand" Keyboard="Numeric" />
+              <Entry x:Name="Correcao" Placeholder="Unidades" Text="{Binding UnidadeCorrecao}" HorizontalOptions="FillAndExpand" Keyboard="Numeric" />
               <Label Text="para cada"/>
-              <Entry Placeholder="Unidades de Glicemia" Text="{Binding UnidadeGlicemia}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" />
+              <Entry x:Name="GlicemiaUnd" Placeholder="Unidades de Glicemia" Text="{Binding UnidadeGlicemia}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" />
             </StackLayout>
             <Button Text="Próximo" HorizontalOptions="End" BackgroundColor="Gray" Command="{Binding Proximo_4}" IsVisible="{Binding Prox_4}"/>
           </StackLayout>

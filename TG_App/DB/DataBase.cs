@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using SQLite;
 using TG.Model;
+using TG_App.Banco;
 using Xamarin.Forms;
 
-namespace TG_App.DB
+namespace TG_App.Banco
 {
   class DataBase
   {
@@ -14,7 +15,7 @@ namespace TG_App.DB
     public DataBase()
     {
       var dep = DependencyService.Get<ICaminho>();
-      string caminho = dep.ObterCaminho("database.sqlite");
+      string caminho = dep.ObterCaminho("diabetes.sqlite");
 
       _conexao = new SQLiteConnection(caminho);
       // Criar tabela
