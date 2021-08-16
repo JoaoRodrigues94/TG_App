@@ -18,7 +18,6 @@
               <Label Text="* Os valores obtidos através dos exames de glicemia que estiverem entre 50 e 70 um/dl, teram o valor de 1 unidade de medicação subtraidos da sugestão final, tendo em vista manter o controle da doença, esse valor poderá ser alterado em configurações"/>
               <Label Text="* Os valores obtidos no exame de glicemia que tiverem como resultado HI, terá seu valor cálculado como base no valor de 600 un / dl."/>
               <Label Text="* Consulte um médico antes de preencher as informações de cadastro, os valores cadastrados devem ser baseados na RECEITA Médica!"/>
-              <Button Text="Teste"/>
               <StackLayout Orientation="Horizontal">
                 <Label Text="Li e Concordo com os Termos de uso"/>
                 <CheckBox x:Name="Termos" HorizontalOptions="EndAndExpand" WidthRequest="50"/>
