@@ -77,7 +77,6 @@ namespace TG.ModelView
     public Command Proximo_2 { get; set; }
     public Command Proximo_3 { get; set; }
     public Command Proximo_4 { get; set; }
-    private List<Horarios> horas;
     public CadastroModelView()
     {
       Proximo = new Command(ProximoAction);

@@ -4,6 +4,7 @@ using System.Text;
 using SQLite;
 using TG.Model;
 using TG_App.Banco;
+using TG_App.Model;
 using Xamarin.Forms;
 
 namespace TG_App.Banco
@@ -21,6 +22,7 @@ namespace TG_App.Banco
       // Criar tabela
       _conexao.CreateTable<Usuario>();
       _conexao.CreateTable<Horarios>();
+      _conexao.CreateTable<Alimentos>();
     }
 
     // Métodos  Cadastro
@@ -31,6 +33,10 @@ namespace TG_App.Banco
     public void CadastrarHorario(Horarios horario)
     {
       _conexao.Insert(horario);
+    }
+    public void CadastrarAlimento(Alimentos alimento)
+    {
+      _conexao.Insert(alimento);
     }
     // Métodos Pesquisa
     public List<Usuario> PesquisarEmail(string email)

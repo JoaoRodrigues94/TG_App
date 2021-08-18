@@ -1,4 +1,5 @@
 ﻿using System;
+using TG.View;
 using TG_App.View;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,7 +12,7 @@ namespace TG_App
     {
       InitializeComponent();
 
-      MainPage = new AlimentosPage();
+      MainPage = new CadastrarAlimentoPage();
     }
 
     protected override void OnStart()
