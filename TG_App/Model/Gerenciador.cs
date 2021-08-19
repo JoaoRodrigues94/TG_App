@@ -10,7 +10,6 @@ namespace TG.Model
   public class Gerenciador
   {
     private List<StackLayout> Lista { get; set; }
-    private int ID { get; set; }
 
     public void Deletar(int id)
     {

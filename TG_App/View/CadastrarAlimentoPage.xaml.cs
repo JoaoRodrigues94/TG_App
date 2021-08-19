@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TG.Model;
+using TG_App.Banco;
 using TG_App.Model;
 using TG_App.ViewModel;
 using Xamarin.Forms;
@@ -13,6 +15,7 @@ namespace TG_App.View
   [XamlCompilation(XamlCompilationOptions.Compile)]
   public partial class CadastrarAlimentoPage : ContentPage
   {
+    public int UsuarioID { get; set; }
     public CadastrarAlimentoPage()
     {
       InitializeComponent();
@@ -27,11 +30,13 @@ namespace TG_App.View
     {
       string nome = Alimento.Text;
       int medida = Medida.SelectedIndex;
-      decimal porcao = Convert.ToDecimal((PorcaoAlimento.Text).Replace(",", "."));
-      decimal carbo = Convert.ToDecimal((GramasCarbo.Text.Replace(",", ".")));
+      decimal porcao = Convert.ToDecimal(PorcaoAlimento.Text.Replace(",", "."));
+      decimal carbo = Convert.ToDecimal(GramasCarbo.Text.Replace(",", "."));
       int categoria = Categoria.SelectedIndex;
       bool next = true;
       string message = "";
+
+      DataBase DB = new DataBase();
 
       if(nome == null)
       {
@@ -50,8 +55,24 @@ namespace TG_App.View
       }
       if (next)
       {
-        Alimentos dados = new Alimentos();
+        var user = new Validacao().Listagem().SingleOrDefault();
+        Alimentos dados = new Alimentos
+        {
+          Categoria = categoria,
+          GramasCarbo = carbo,
+          NomeAlimento = nome,
+          Medida = medida,
+          PorcaoAlimento = porcao,
+          UsuarioID = user.UsuarioID
+        };
+        DB.CadastrarAlimento(dados);
+        App.Current.MainPage = new AlimentosPage();
       }
+    }
+
+    public void Usuario(int id)
+    {
+      UsuarioID = id;
     }
     public void ExcluirAlimentoAction(object sender, EventArgs args)
     {

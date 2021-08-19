@@ -12,7 +12,7 @@ namespace TG_App
     {
       InitializeComponent();
 
-      MainPage = new CadastrarAlimentoPage();
+      MainPage = new LoginPage();
     }
 
     protected override void OnStart()
