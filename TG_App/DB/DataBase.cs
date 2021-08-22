@@ -20,11 +20,10 @@ namespace TG_App.Banco
       string caminho = dep.ObterCaminho("diabetes.sqlite");
 
       _conexao = new SQLiteConnection(caminho);
-      _connectionString = new SQLiteConnection(caminho);
       // Criar tabela
       _conexao.CreateTable<Usuario>();
       _conexao.CreateTable<Horarios>();
-      _connectionString.CreateTable<Alimentos>();
+      _conexao.CreateTable<Alimentos>();
     }
 
     // Métodos  Cadastro
@@ -63,7 +62,7 @@ namespace TG_App.Banco
     // Métodos Exclusão
     public void DeleteAlimento(Alimentos alimento)
     {
-      _connectionString.Delete(alimento);
+      _conexao.Table<Alimentos>().Delete(x => x.NomeAlimento == alimento.NomeAlimento);
     }
     public void DeleteUsuario(Horarios horario)
     {

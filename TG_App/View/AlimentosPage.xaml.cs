@@ -17,7 +17,7 @@ namespace TG_App.View
     public AlimentosPage()
     {
       InitializeComponent();
-      DBAlimento DB = new DBAlimento();
+      DataBase DB = new DataBase();
 
       List<ListaAlimentosViewModel> lista = new List<ListaAlimentosViewModel>();
 
@@ -27,7 +27,7 @@ namespace TG_App.View
         var x = item.UsuarioID;
         ListaAlimentosViewModel dados = new ListaAlimentosViewModel
         {
-          AlimentoID = item.AlimentoID,
+          AlimentoID = Convert.ToInt32(item.AlimentoID),
           Alimento = Convert.ToString(item.NomeAlimento),
           Carboidratos = "Carbs:" + Convert.ToString(item.GramasCarbo),
           Categoria = Categoria(item.Categoria)
@@ -43,9 +43,10 @@ namespace TG_App.View
     {
       Button btn = (Button)sender;
       ListaAlimentosViewModel lista = btn.CommandParameter as ListaAlimentosViewModel;
-      DBAlimento DB = new DBAlimento();
+      DataBase DB = new DataBase();
       var encontrar = DB.PesquisarAlimento().SingleOrDefault(x => x.NomeAlimento == lista.Alimento);
       DB.DeleteAlimento(encontrar);
+      App.Current.MainPage = new AlimentosPage();
     }
 
     public static string Categoria(int categoria)
