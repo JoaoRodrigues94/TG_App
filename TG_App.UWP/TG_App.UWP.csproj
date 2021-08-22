@@ -136,6 +136,7 @@
     <Content Include="AvatarLogin.png" />
     <Content Include="delete.png" />
     <Content Include="Properties\Default.rd.xml" />
+    <Content Include="Search.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

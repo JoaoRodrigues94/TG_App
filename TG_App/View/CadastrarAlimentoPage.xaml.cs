@@ -36,7 +36,7 @@ namespace TG_App.View
       bool next = true;
       string message = "";
 
-      DataBase DB = new DataBase();
+      DBAlimento DB = new DBAlimento();
 
       if(nome == null)
       {

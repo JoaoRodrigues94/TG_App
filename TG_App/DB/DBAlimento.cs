@@ -9,43 +9,26 @@ using Xamarin.Forms;
 
 namespace TG_App.Banco
 {
-  class DataBase
+  class DBAlimento
   {
     // String de Conexão
     private SQLiteConnection _conexao;
-    private SQLiteConnection _connectionString;
-    public DataBase()
+    public DBAlimento()
     {
       var dep = DependencyService.Get<ICaminho>();
       string caminho = dep.ObterCaminho("diabetes.sqlite");
 
       _conexao = new SQLiteConnection(caminho);
-      _connectionString = new SQLiteConnection(caminho);
       // Criar tabela
-      _conexao.CreateTable<Usuario>();
-      _conexao.CreateTable<Horarios>();
-      _connectionString.CreateTable<Alimentos>();
+      _conexao.CreateTable<Alimentos>();
     }
 
     // Métodos  Cadastro
-    public void CadastrarUsuario(Usuario user)
-    {
-      _conexao.Insert(user);
-    }
-    public void CadastrarHorario(Horarios horario)
-    {
-      _conexao.Insert(horario);
-    }
     public void CadastrarAlimento(Alimentos alimento)
     {
       _conexao.Insert(alimento);
     }
     // Métodos Pesquisa
-    public List<Usuario> PesquisarEmail(string email)
-    {
-
-      return _conexao.Table<Usuario>().Where(x => x.Email == email).ToList();
-    }
     public List<Alimentos> PesquisarAlimento()
     {
       //.Where(x => x.UsuarioID == id).ToList();
@@ -63,11 +46,7 @@ namespace TG_App.Banco
     // Métodos Exclusão
     public void DeleteAlimento(Alimentos alimento)
     {
-      _connectionString.Delete(alimento);
-    }
-    public void DeleteUsuario(Horarios horario)
-    {
-      _conexao.Delete(horario);
+      _conexao.Delete(alimento);
     }
   }
 }

@@ -2,16 +2,63 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TG_App.View.AlimentosPage">
-    <ContentPage.Content>
+  <ContentPage.Content>
     <ScrollView>
       <StackLayout VerticalOptions="FillAndExpand">
         <Frame>
           <StackLayout Padding="0">
             <Label Text="Alimentos" TextColor="DarkRed" HorizontalOptions="Center" FontAttributes="Bold" />
-            <Button Text="Cadastrar Alimento" Clicked="CadastrarAlimentoAction" TextColor="DarkCyan" HorizontalOptions="End"/>
+            <StackLayout Orientation="Horizontal" Padding="0">
+              <Button Text="Cadastrar Alimento" Clicked="CadastrarAlimentoAction" BackgroundColor="Blue" TextColor="White"/>
+            </StackLayout>
+            <StackLayout>
+              <Frame BorderColor="blue">
+                <StackLayout>
+                  <Entry x:Name="Pesquisar" Placeholder="Pesquisar Por Alimento" HorizontalOptions="FillAndExpand"/>
+                  <StackLayout Orientation="Horizontal">
+                    <Picker Title="Categoria" x:Name="FiltroCategoria" HorizontalOptions="FillAndExpand">
+                      <Picker.Items>
+                        <x:String>Cereais, Pães e Tubérculos</x:String>
+                        <x:String>Hortaliças</x:String>
+                        <x:String>Frutas</x:String>
+                        <x:String>Leguminosas</x:String>
+                        <x:String>Carnes e Ovos</x:String>
+                        <x:String>Leite e Derivados</x:String>
+                        <x:String>Óleos e Gorduras</x:String>
+                        <x:String>Açúcares</x:String>
+                      </Picker.Items>
+                    </Picker>
+                    <Picker x:Name="Medida" Title="Medida" SelectedIndex="{Binding Medida}">
+                      <Picker.Items>
+                        <x:String>Unidade</x:String>
+                        <x:String>Gramas</x:String>
+                        <x:String>ml</x:String>
+                      </Picker.Items>
+                    </Picker>
+                    <Button ImageSource="Search.png" BackgroundColor="Transparent" />
+                  </StackLayout>
+                  <ListView x:Name="ListaAlimentos" HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                      <DataTemplate>
+                        <ViewCell>
+                          <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding AlimentoID}" IsVisible="false"/>
+                            <Label Text="{Binding Alimento}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
+                            <Label Text="{Binding Carboidratos}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
+                            <Label Text="{Binding Categoria}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
+                            <Button Text="Editar" BackgroundColor="Blue" TextColor="White" />
+                            <Button Text="Excluir" BackgroundColor="DarkRed" TextColor="white" Clicked="ExcluirAction" CommandParameter="{Binding .}" />
+                          </StackLayout>
+                        </ViewCell>
+                      </DataTemplate>
+                    </ListView.ItemTemplate>
+                  </ListView>
+                </StackLayout>
+              </Frame>
+            </StackLayout>
           </StackLayout>
         </Frame>
       </StackLayout>
     </ScrollView>
-    </ContentPage.Content>
+  </ContentPage.Content>
 </ContentPage>
