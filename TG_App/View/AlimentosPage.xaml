@@ -37,24 +37,28 @@
                     </Picker>
                     <Button ImageSource="Search.png" BackgroundColor="Transparent" />
                   </StackLayout>
-                  <ListView x:Name="ListaAlimentos" HasUnevenRows="True">
-                    <ListView.ItemTemplate>
-                      <DataTemplate>
-                        <ViewCell>
-                          <StackLayout Orientation="Horizontal">
-                            <Label Text="{Binding AlimentoID}"/>
-                            <Label Text="{Binding Alimento}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
-                            <Label Text="{Binding Carboidratos}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
-                            <Label Text="{Binding Categoria}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
-                            <Button Text="Editar" BackgroundColor="Blue" TextColor="White" />
-                            <Button Text="Excluir" BackgroundColor="DarkRed" TextColor="white" Clicked="ExcluirAction" CommandParameter="{Binding .}" />
-                          </StackLayout>
-                        </ViewCell>
-                      </DataTemplate>
-                    </ListView.ItemTemplate>
-                  </ListView>
                 </StackLayout>
               </Frame>
+              <StackLayout>
+                <ListView x:Name="ListaAlimentos" HasUnevenRows="True">
+                  <ListView.ItemTemplate>
+                    <DataTemplate>
+                      <ViewCell>
+                        <StackLayout>
+                          <Label x:Name="Id" Text="{Binding AlimentoID}"/>
+                          <Label Text="{Binding Alimento}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
+                          <Label Text="{Binding Carboidratos}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
+                          <Label Text="{Binding Categoria}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
+                          <StackLayout Orientation="Horizontal">
+                            <Button Text="Editar" Clicked="EditarAction" BackgroundColor="Blue" TextColor="White" CommandParameter="{Binding .}" />
+                            <Button Text="Excluir" BackgroundColor="DarkRed" TextColor="white" Clicked="ExcluirAction" CommandParameter="{Binding .}" />
+                          </StackLayout>
+                        </StackLayout>
+                      </ViewCell>
+                    </DataTemplate>
+                  </ListView.ItemTemplate>
+                </ListView>
+              </StackLayout>
             </StackLayout>
           </StackLayout>
         </Frame>

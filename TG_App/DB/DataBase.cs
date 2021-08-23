@@ -13,7 +13,6 @@ namespace TG_App.Banco
   {
     // String de Conexão
     private SQLiteConnection _conexao;
-    private SQLiteConnection _connectionString;
     public DataBase()
     {
       var dep = DependencyService.Get<ICaminho>();
@@ -23,7 +22,7 @@ namespace TG_App.Banco
       // Criar tabela
       _conexao.CreateTable<Usuario>();
       _conexao.CreateTable<Horarios>();
-      _conexao.CreateTable<Alimentos>();
+      _conexao.CreateTable<Alimento>();
     }
 
     // Métodos  Cadastro
@@ -35,7 +34,7 @@ namespace TG_App.Banco
     {
       _conexao.Insert(horario);
     }
-    public void CadastrarAlimento(Alimentos alimento)
+    public void CadastrarAlimento(Alimento alimento)
     {
       _conexao.Insert(alimento);
     }
@@ -45,10 +44,10 @@ namespace TG_App.Banco
 
       return _conexao.Table<Usuario>().Where(x => x.Email == email).ToList();
     }
-    public List<Alimentos> PesquisarAlimento()
+    public List<Alimento> PesquisarAlimento()
     {
       //.Where(x => x.UsuarioID == id).ToList();
-      return _conexao.Table<Alimentos>().ToList(); 
+      return _conexao.Table<Alimento>().ToList(); 
     }
     // Métodos Update
     public void UpdateUsuario(Usuario user)
@@ -59,10 +58,14 @@ namespace TG_App.Banco
     {
       _conexao.Update(horarios);
     }
-    // Métodos Exclusão
-    public void DeleteAlimento(Alimentos alimento)
+    public void UpdateAlimento(Alimento alimento)
     {
-      _conexao.Table<Alimentos>().Delete(x => x.NomeAlimento == alimento.NomeAlimento);
+      _conexao.Update(alimento);
+    }
+    // Métodos Exclusão
+    public void DeleteAlimento(Alimento alimento)
+    {
+      _conexao.Table<Alimento>().Delete(x => x.NomeAlimento == alimento.NomeAlimento);
     }
     public void DeleteUsuario(Horarios horario)
     {

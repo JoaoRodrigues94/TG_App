@@ -3,12 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TG_App.Model
+namespace TG.Model
 {
   [Table("Alimentos")]
-  public class Alimentos
+  public class Alimento
   {
-    [AutoIncrement, PrimaryKey]
+    [PrimaryKey]
     public int AlimentoID { get; set; }
     public int UsuarioID { get; set; }
     public int Medida { get; set; }

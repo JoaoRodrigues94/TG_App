@@ -56,8 +56,10 @@ namespace TG_App.View
       if (next)
       {
         var user = new Validacao().Listagem().SingleOrDefault();
-        Alimentos dados = new Alimentos
+        var id = DB.PesquisarAlimento().Count() + 1;
+        Alimento dados = new Alimento
         {
+          AlimentoID = id,
           Categoria = categoria,
           GramasCarbo = carbo,
           NomeAlimento = nome,

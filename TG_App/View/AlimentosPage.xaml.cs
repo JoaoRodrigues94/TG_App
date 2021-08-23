@@ -17,11 +17,12 @@ namespace TG_App.View
     public AlimentosPage()
     {
       InitializeComponent();
-      DataBase DB = new DataBase();
+      DBAlimento DB = new DBAlimento();
 
       List<ListaAlimentosViewModel> lista = new List<ListaAlimentosViewModel>();
+      var user = new Validacao().Listagem().SingleOrDefault();
 
-      var cadastrados = DB.PesquisarAlimento();
+      var cadastrados = DB.PesquisarAlimento().Where(x => x.UsuarioID == user.UsuarioID).ToList();
       foreach (var item in cadastrados)
       {
         var x = item.UsuarioID;
@@ -49,6 +50,16 @@ namespace TG_App.View
       App.Current.MainPage = new AlimentosPage();
     }
 
+    public void EditarAction(object sender, EventArgs args)
+    {
+      Button btn = (Button)sender;
+      ListaAlimentosViewModel lista = btn.CommandParameter as ListaAlimentosViewModel;
+
+      DBAlimento DB = new DBAlimento();
+      var dados = DB.PesquisarAlimento().Where(x => x.NomeAlimento == lista.Alimento).SingleOrDefault();
+
+      App.Current.MainPage = new AlimentosEditPage(dados);
+    }
     public static string Categoria(int categoria)
     {
       string nome = "";

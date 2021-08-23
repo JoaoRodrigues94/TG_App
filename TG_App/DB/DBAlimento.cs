@@ -20,19 +20,19 @@ namespace TG_App.Banco
 
       _conexao = new SQLiteConnection(caminho);
       // Criar tabela
-      _conexao.CreateTable<Alimentos>();
+      _conexao.CreateTable<Alimento>();
     }
 
     // Métodos  Cadastro
-    public void CadastrarAlimento(Alimentos alimento)
+    public void CadastrarAlimento(Alimento alimento)
     {
       _conexao.Insert(alimento);
     }
     // Métodos Pesquisa
-    public List<Alimentos> PesquisarAlimento()
+    public List<Alimento> PesquisarAlimento()
     {
       //.Where(x => x.UsuarioID == id).ToList();
-      return _conexao.Table<Alimentos>().ToList(); 
+      return _conexao.Table<Alimento>().ToList(); 
     }
     // Métodos Update
     public void UpdateUsuario(Usuario user)
@@ -44,7 +44,7 @@ namespace TG_App.Banco
       _conexao.Update(horarios);
     }
     // Métodos Exclusão
-    public void DeleteAlimento(Alimentos alimento)
+    public void DeleteAlimento(Alimento alimento)
     {
       _conexao.Delete(alimento);
     }
