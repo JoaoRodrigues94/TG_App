@@ -14,7 +14,8 @@
             <StackLayout>
               <Frame BorderColor="blue">
                 <StackLayout>
-                  <Entry x:Name="Pesquisar" Placeholder="Pesquisar Por Alimento" HorizontalOptions="FillAndExpand"/>
+                  <Label Text="Filtrar Alimentos" TextColor="Blue"/>
+                  <Entry x:Name="SearchAlimento" Placeholder="Pesquisar Por Alimento" HorizontalOptions="FillAndExpand"/>
                   <StackLayout Orientation="Horizontal">
                     <Picker Title="Categoria" x:Name="FiltroCategoria" HorizontalOptions="FillAndExpand">
                       <Picker.Items>
@@ -35,7 +36,7 @@
                         <x:String>ml</x:String>
                       </Picker.Items>
                     </Picker>
-                    <Button ImageSource="Search.png" BackgroundColor="Transparent" />
+                    <Button ImageSource="Search.png" BackgroundColor="Transparent" Clicked="PesquisaAction" />
                   </StackLayout>
                 </StackLayout>
               </Frame>

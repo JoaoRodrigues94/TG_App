@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TG.Model;
 using TG_App.Banco;
 using TG_App.Model;
 using TG_App.ViewModel;
@@ -14,13 +15,15 @@ namespace TG_App.View
   [XamlCompilation(XamlCompilationOptions.Compile)]
   public partial class AlimentosPage : ContentPage
   {
+    List<ListaAlimentosViewModel> lista { get; set; }
     public AlimentosPage()
     {
       InitializeComponent();
       DBAlimento DB = new DBAlimento();
 
-      List<ListaAlimentosViewModel> lista = new List<ListaAlimentosViewModel>();
       var user = new Validacao().Listagem().SingleOrDefault();
+
+      List<ListaAlimentosViewModel> dadosLista = new List<ListaAlimentosViewModel>();
 
       var cadastrados = DB.PesquisarAlimento().Where(x => x.UsuarioID == user.UsuarioID).ToList();
       foreach (var item in cadastrados)
@@ -33,11 +36,12 @@ namespace TG_App.View
           Carboidratos = "Carbs:" + Convert.ToString(item.GramasCarbo),
           Categoria = Categoria(item.Categoria)
         };
-        lista.Add(dados);
+        dadosLista.Add(dados);
       }
 
 
-      ListaAlimentos.ItemsSource = lista;
+      ListaAlimentos.ItemsSource = dadosLista;
+      lista = dadosLista;
     }
 
     public void ExcluirAction(object sender, EventArgs args)
@@ -59,6 +63,15 @@ namespace TG_App.View
       var dados = DB.PesquisarAlimento().Where(x => x.NomeAlimento == lista.Alimento).SingleOrDefault();
 
       App.Current.MainPage = new AlimentosEditPage(dados);
+    }
+    public void PesquisaAction(object sender, EventArgs args)
+    {
+      var busca = lista;
+
+      if (!String.IsNullOrEmpty(SearchAlimento.Text))
+        busca = (List<ListaAlimentosViewModel>)busca.Where(x => x.Alimento.ToUpper().Contains(SearchAlimento.Text.ToUpper())).ToList();
+
+      ListaAlimentos.ItemsSource = busca;
     }
     public static string Categoria(int categoria)
     {
