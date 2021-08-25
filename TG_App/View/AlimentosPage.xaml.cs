@@ -81,7 +81,7 @@ namespace TG_App.View
       if (!String.IsNullOrEmpty(Convert.ToString(Medida.SelectedItem)))
         busca = (List<ListaAlimentosViewModel>)busca.Where(x => x.Medida.Contains(Medida.SelectedItem.ToString())).ToList();
 
-      ListaAlimentos.ItemsSource = busca;
+      ListaAlimentos.ItemsSource = busca.OrderBy(x => x.Alimento);
       SearchAlimento.Text = null;
       FiltroCategoria.SelectedIndex = -1;
       Medida.SelectedIndex = -1;
