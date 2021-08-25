@@ -35,13 +35,9 @@ namespace TG_App.Banco
       return _conexao.Table<Alimento>().ToList(); 
     }
     // Métodos Update
-    public void UpdateUsuario(Usuario user)
+    public void UpdateAlimento(Alimento alimento)
     {
-      _conexao.Update(user);
-    }
-    public void UpdateHorario(Horarios horarios)
-    {
-      _conexao.Update(horarios);
+      _conexao.Update(alimento);
     }
     // Métodos Exclusão
     public void DeleteAlimento(Alimento alimento)

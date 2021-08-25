@@ -6,6 +6,7 @@ namespace TG_App.ViewModel
 {
   class ListaAlimentosViewModel
   {
+    public int UsuarioID { get; set; }
     public int AlimentoID { get; set; }
     public string Alimento { get; set; }
     public string Medida { get; set; }

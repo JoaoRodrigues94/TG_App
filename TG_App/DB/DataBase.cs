@@ -63,10 +63,6 @@ namespace TG_App.Banco
       _conexao.Update(alimento);
     }
     // Métodos Exclusão
-    public void DeleteAlimento(Alimento alimento)
-    {
-      _conexao.Table<Alimento>().Delete(x => x.NomeAlimento == alimento.NomeAlimento);
-    }
     public void DeleteUsuario(Horarios horario)
     {
       _conexao.Delete(horario);

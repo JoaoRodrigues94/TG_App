@@ -46,10 +46,12 @@
                     <DataTemplate>
                       <ViewCell>
                         <StackLayout>
-                          <Label x:Name="Id" Text="{Binding AlimentoID}"/>
+                          <Label x:Name="Id" IsVisible="false" Text="{Binding AlimentoID}"/>
                           <Label Text="{Binding Alimento}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
+                          <Label Text="{Binding UsuarioID}" IsVisible="false" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
                           <Label Text="{Binding Carboidratos}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
                           <Label Text="{Binding Categoria}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
+                          <Label Text="{Binding Medida}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
                           <StackLayout Orientation="Horizontal">
                             <Button Text="Editar" Clicked="EditarAction" BackgroundColor="Blue" TextColor="White" CommandParameter="{Binding .}" />
                             <Button Text="Excluir" BackgroundColor="DarkRed" TextColor="white" Clicked="ExcluirAction" CommandParameter="{Binding .}" />

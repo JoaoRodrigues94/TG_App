@@ -28,6 +28,7 @@ namespace TG_App.View
 
     public void SalvarAction(object sender, EventArgs args)
     {
+      var user = new Validacao().Listagem().SingleOrDefault();
       Alimento dados = new Alimento
       {
         AlimentoID = Convert.ToInt32(Codigo.Text),
@@ -36,10 +37,10 @@ namespace TG_App.View
         Medida = Medida.SelectedIndex,
         NomeAlimento = Alimento.Text,
         PorcaoAlimento = Convert.ToDecimal(PorcaoAlimento.Text),
-        UsuarioID = 1
+        UsuarioID = user.UsuarioID
       };
 
-      DataBase DB = new DataBase();
+      DBAlimento DB = new DBAlimento();
       DB.UpdateAlimento(dados);
 
       App.Current.MainPage = new AlimentosPage();

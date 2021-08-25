@@ -35,8 +35,17 @@ namespace TG_App.View
       int categoria = Categoria.SelectedIndex;
       bool next = true;
       string message = "";
+      var user = new Validacao().Listagem().SingleOrDefault();
 
       DBAlimento DB = new DBAlimento();
+
+      var encontrar = DB.PesquisarAlimento().Where(x => x.NomeAlimento.ToUpper() == nome.ToUpper() && x.UsuarioID == user.UsuarioID).ToList();
+
+      if(encontrar.Count != 0)
+      {
+        next = false;
+        message += "Já existe um alimento cadastrado com esse nome!\n";
+      }
 
       if(nome == null)
       {
@@ -55,20 +64,23 @@ namespace TG_App.View
       }
       if (next)
       {
-        var user = new Validacao().Listagem().SingleOrDefault();
         var id = DB.PesquisarAlimento().Count() + 1;
         Alimento dados = new Alimento
         {
           AlimentoID = id,
           Categoria = categoria,
-          GramasCarbo = carbo,
+          GramasCarbo = Convert.ToDecimal(carbo.ToString().Replace(",", ".")),
           NomeAlimento = nome,
           Medida = medida,
-          PorcaoAlimento = porcao,
+          PorcaoAlimento = Convert.ToDecimal(porcao.ToString().Replace(",", ".")),
           UsuarioID = user.UsuarioID
         };
         DB.CadastrarAlimento(dados);
         App.Current.MainPage = new AlimentosPage();
+      }
+      else
+      {
+        DisplayAlert("Erro", message, "OK");
       }
     }
 

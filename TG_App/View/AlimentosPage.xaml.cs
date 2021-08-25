@@ -31,16 +31,18 @@ namespace TG_App.View
         var x = item.UsuarioID;
         ListaAlimentosViewModel dados = new ListaAlimentosViewModel
         {
-          AlimentoID = Convert.ToInt32(item.AlimentoID),
-          Alimento = Convert.ToString(item.NomeAlimento),
-          Carboidratos = "Carbs:" + Convert.ToString(item.GramasCarbo),
-          Categoria = Categoria(item.Categoria)
+          AlimentoID = Convert.ToInt32(item.AlimentoID) + 1,
+          Alimento = "Alimento: " + Convert.ToString(item.NomeAlimento).ToUpper(),
+          Carboidratos = "Carboidratos: " + Convert.ToString(item.GramasCarbo) + " gramas",
+          Categoria = "Categoria: " + Categoria(item.Categoria),
+          UsuarioID = item.UsuarioID,
+          Medida = "Medida: " + Convert.ToString(Medidas(item.Medida))
         };
         dadosLista.Add(dados);
       }
 
 
-      ListaAlimentos.ItemsSource = dadosLista;
+      ListaAlimentos.ItemsSource = dadosLista.OrderBy(x => x.Alimento);
       lista = dadosLista;
     }
 
@@ -48,8 +50,9 @@ namespace TG_App.View
     {
       Button btn = (Button)sender;
       ListaAlimentosViewModel lista = btn.CommandParameter as ListaAlimentosViewModel;
-      DataBase DB = new DataBase();
-      var encontrar = DB.PesquisarAlimento().SingleOrDefault(x => x.NomeAlimento == lista.Alimento);
+      var user = new Validacao().Listagem().SingleOrDefault();
+      DBAlimento DB = new DBAlimento();
+      var encontrar = DB.PesquisarAlimento().SingleOrDefault(x => x.NomeAlimento.ToUpper() == lista.Alimento.Replace("Alimento: ", "") && x.UsuarioID == user.UsuarioID);
       DB.DeleteAlimento(encontrar);
       App.Current.MainPage = new AlimentosPage();
     }
@@ -60,7 +63,8 @@ namespace TG_App.View
       ListaAlimentosViewModel lista = btn.CommandParameter as ListaAlimentosViewModel;
 
       DBAlimento DB = new DBAlimento();
-      var dados = DB.PesquisarAlimento().Where(x => x.NomeAlimento == lista.Alimento).SingleOrDefault();
+      var user = new Validacao().Listagem().SingleOrDefault();
+      var dados = DB.PesquisarAlimento().Where(x => x.NomeAlimento.ToUpper() == lista.Alimento.Replace("Alimento: ", "") && x.UsuarioID == user.UsuarioID).SingleOrDefault();
 
       App.Current.MainPage = new AlimentosEditPage(dados);
     }
@@ -68,11 +72,21 @@ namespace TG_App.View
     {
       var busca = lista;
 
-      if (!String.IsNullOrEmpty(SearchAlimento.Text))
-        busca = (List<ListaAlimentosViewModel>)busca.Where(x => x.Alimento.ToUpper().Contains(SearchAlimento.Text.ToUpper())).ToList();
+      if (!String.IsNullOrEmpty(Convert.ToString(SearchAlimento.Text)))
+        busca = (List<ListaAlimentosViewModel>)busca.Where(x => x.Alimento.ToUpper().Contains(SearchAlimento.Text.ToUpper().ToUpper())).ToList();
+
+      if (!String.IsNullOrEmpty(Convert.ToString(FiltroCategoria.SelectedItem)))
+        busca = (List<ListaAlimentosViewModel>)busca.Where(x => x.Categoria.Contains(FiltroCategoria.SelectedItem.ToString())).ToList();
+
+      if (!String.IsNullOrEmpty(Convert.ToString(Medida.SelectedItem)))
+        busca = (List<ListaAlimentosViewModel>)busca.Where(x => x.Medida.Contains(Medida.SelectedItem.ToString())).ToList();
 
       ListaAlimentos.ItemsSource = busca;
+      SearchAlimento.Text = null;
+      FiltroCategoria.SelectedIndex = -1;
+      Medida.SelectedIndex = -1;
     }
+
     public static string Categoria(int categoria)
     {
       string nome = "";
