@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TG_App.View.ExamesPage">
+    <ContentPage.Content>
+    <ScrollView>
+      <StackLayout VerticalOptions="FillAndExpand">
+        <Frame>
+          <StackLayout Padding="0">
+            <Label Text="Cadastro de Exames de Glicemia!" TextColor="DarkRed" FontAttributes="Bold" HorizontalOptions="Center" />
+            <StackLayout Orientation="Horizontal">
+              <Entry Placeholder="Resultado do Exame!" Keyboard="Numeric" HorizontalOptions="FillAndExpand" />
+              <Button Text="LO" BackgroundColor="red"/>
+              <Button Text="HI" BackgroundColor="Red" />
+            </StackLayout>
+          </StackLayout>
+        </Frame>
+      </StackLayout>
+    </ScrollView>
+  </ContentPage.Content>
+</ContentPage>
