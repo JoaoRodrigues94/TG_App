@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behavior1="clr-namespace:TG_App.View"
+             x:Class="TG_App.View.AtividadeFisicaPage"             >
+    <ContentPage.Content>
+    <ScrollView>
+      <StackLayout>
+        <Frame>
+          <StackLayout Padding="0">
+            <Label Text="Cadastro de Atividades Físicas!" TextColor="DarkRed" FontAttributes="Bold" HorizontalOptions="Center" />
+            <StackLayout Orientation="Horizontal">
+              <Label Text="Data"/>
+              <Entry x:Name="Data" Text="{Binding Data}" Keyboard="Numeric" >
+                <Entry.Behaviors>
+                  <behavior1:MaskedData Mask="XX/XX/XXXX"/>
+                </Entry.Behaviors>
+              </Entry>
+              <DatePicker Format="dd/MM/yyyy" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+              <Label Text="Horário"/>
+              <TimePicker Format="HH:mm" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+            <Entry Placeholder="Nome da Atividade"/>
+          </StackLayout>
+        </Frame>
+      </StackLayout>
+    </ScrollView>
+  </ContentPage.Content>
+</ContentPage>

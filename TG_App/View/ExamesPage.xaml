@@ -8,10 +8,14 @@
         <Frame>
           <StackLayout Padding="0">
             <Label Text="Cadastro de Exames de Glicemia!" TextColor="DarkRed" FontAttributes="Bold" HorizontalOptions="Center" />
-            <StackLayout Orientation="Horizontal">
-              <Entry Placeholder="Resultado do Exame!" Keyboard="Numeric" HorizontalOptions="FillAndExpand" />
-              <Button Text="LO" BackgroundColor="red"/>
-              <Button Text="HI" BackgroundColor="Red" />
+            <StackLayout>
+              <Picker x:Name="TipoCalculo" Title="Informe o tipo de Cálculo que o sistema deverá realizar!">
+                <Picker.Items>
+                  <x:String>Somente Resultado do exame de glicemia</x:String>
+                  <x:String>Somente cálcular a quantidade de carboidratos ingeridos</x:String>
+                  <x:String>Resultado do exame de glicemia e alimentos</x:String>
+                </Picker.Items>
+              </Picker>
             </StackLayout>
           </StackLayout>
         </Frame>

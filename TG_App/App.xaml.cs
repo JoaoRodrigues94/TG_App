@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using TG.View;
 using TG_App.View;
 using Xamarin.Forms;
@@ -12,7 +13,7 @@ namespace TG_App
     {
       InitializeComponent();
 
-      MainPage = new ExamesPage();
+      MainPage = new AtividadeFisicaPage();
     }
 
     protected override void OnStart()
