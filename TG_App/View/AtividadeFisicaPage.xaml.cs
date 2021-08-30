@@ -66,24 +66,12 @@ namespace TG_App.View
 
         DB.CadastrarAtividade(dados);
         DisplayAlert("", "Dados cadastrados com sucesso!", "OK");
+        App.Current.MainPage = new ListagemAtividadesPage();
       }
       else
       {
         DisplayAlert("ERRO!", message, "OK");
       }
-    }
-    private bool VerificarData()
-    {
-      int dia = Convert.ToInt32(Data.Text.Substring(0, 2));
-      int mes = Convert.ToInt32(Data.Text.Substring(3, 2));
-      int ano = Convert.ToInt32(Data.Text.Substring(6, 4));
-      bool next;
-
-      next = dia > 31 || dia < 1 ? false : true;
-      next = mes > 12 || mes < 1 ? false : true;
-      next = ano < 2021 ? false : true;
-
-      return next;
     }
   }
   public class MaskedData : Behavior<Entry>
