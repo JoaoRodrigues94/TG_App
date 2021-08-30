@@ -31,7 +31,7 @@ namespace TG_App.View
         var x = item.UsuarioID;
         ListaAlimentosViewModel dados = new ListaAlimentosViewModel
         {
-          AlimentoID = Convert.ToInt32(item.AlimentoID) + 1,
+          AlimentoID = Convert.ToInt32(item.AlimentoID),
           Alimento = "Alimento: " + Convert.ToString(item.NomeAlimento).ToUpper(),
           Carboidratos = "Carboidratos: " + Convert.ToString(item.GramasCarbo) + " gramas",
           Categoria = "Categoria: " + Categoria(item.Categoria),
