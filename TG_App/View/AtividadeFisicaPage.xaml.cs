@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using TG_App.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,6 +19,20 @@ namespace TG_App.View
       Data.Text = DateTime.Now.ToString("dd/MM/yyyy");
     }
 
+    public void SalvarAction(object sender, EventArgs args)
+    {
+      string dia = Data.Text.Substring(0, 2);
+      string mes = Data.Text.Substring(3, 2);
+      string ano = Data.Text.Substring(6, 4);
+
+      AtividadesFisicas dados = new AtividadesFisicas
+      {
+        Data = Convert.ToDateTime(mes + "/" + dia + "/" + ano),
+        Inicio = Inicio.Time.ToString(),
+        Fim = Termino.Time.ToString(),
+        NomeAtividade = Atividade.Text,
+      };
+    }
     private bool VerificarData()
     {
       int dia = Convert.ToInt32(Data.Text.Substring(0, 2));

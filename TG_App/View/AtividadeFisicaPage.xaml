@@ -10,19 +10,29 @@
           <StackLayout Padding="0">
             <Label Text="Cadastro de Atividades Físicas!" TextColor="DarkRed" FontAttributes="Bold" HorizontalOptions="Center" />
             <StackLayout Orientation="Horizontal">
-              <Label Text="Data"/>
+              <Label Text="Data: "/>
               <Entry x:Name="Data" Text="{Binding Data}" Keyboard="Numeric" >
                 <Entry.Behaviors>
                   <behavior1:MaskedData Mask="XX/XX/XXXX"/>
                 </Entry.Behaviors>
               </Entry>
-              <DatePicker Format="dd/MM/yyyy" HorizontalOptions="FillAndExpand"/>
+              <Entry x:Name="Atividade" Placeholder="Nome da Atividade" HorizontalOptions="FillAndExpand"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal">
-              <Label Text="Horário"/>
-              <TimePicker Format="HH:mm" HorizontalOptions="FillAndExpand"/>
+              <Label Text="Horario de início: "/>
+              <TimePicker x:Name="Inicio" Format="HH:mm" HorizontalOptions="FillAndExpand"/>
             </StackLayout>
-            <Entry Placeholder="Nome da Atividade"/>
+            <StackLayout Orientation="Horizontal">
+              <Label Text="Horario de término: "/>
+              <TimePicker x:Name="Termino" Format="HH:mm" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+            <StackLayout>
+              <Entry x:Name="Observacao" Placeholder="Observação"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+              <Button Text="Salvar" BackgroundColor="DarkGreen" TextColor="White" Clicked="SalvarAction" />
+              <Button Text="Voltar" BackgroundColor="DarkRed" TextColor="White" />
+            </StackLayout>
           </StackLayout>
         </Frame>
       </StackLayout>
