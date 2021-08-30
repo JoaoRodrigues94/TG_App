@@ -13,7 +13,7 @@ namespace TG_App
     {
       InitializeComponent();
 
-      MainPage = new AtividadeFisicaPage();
+      MainPage = new LoginPage();
     }
 
     protected override void OnStart()

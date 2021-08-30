@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TG_App.Banco;
 using TG_App.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -21,17 +22,55 @@ namespace TG_App.View
 
     public void SalvarAction(object sender, EventArgs args)
     {
-      string dia = Data.Text.Substring(0, 2);
-      string mes = Data.Text.Substring(3, 2);
-      string ano = Data.Text.Substring(6, 4);
+      var user = new Validacao().Listagem().SingleOrDefault();
+      bool next;
+      string message = "";
 
-      AtividadesFisicas dados = new AtividadesFisicas
+      int dia = Convert.ToInt32(Data.Text.Substring(0, 2));
+      int mes = Convert.ToInt32(Data.Text.Substring(3, 2));
+      int ano = Convert.ToInt32(Data.Text.Substring(6, 4));
+
+      next = dia > 31 || dia < 1 ? false : true;
+      next = mes > 12 || mes < 1 ? false : true;
+      next = ano < 2021 ? false : true;
+
+      message = next ? "" : "A data informada é inválida!\n";
+
+      if(Atividade.Text == null)
       {
-        Data = Convert.ToDateTime(mes + "/" + dia + "/" + ano),
-        Inicio = Inicio.Time.ToString(),
-        Fim = Termino.Time.ToString(),
-        NomeAtividade = Atividade.Text,
-      };
+        next = false;
+        message += "O nome da atividade deve ser informado!\n";
+      }
+
+      if(Inicio.Time >= Termino.Time)
+      {
+        next = false;
+        message += "A data de término deve ser maior do que a data de inicio!";
+      }
+
+      if (next)
+      {
+        DBExercicios DB = new DBExercicios();
+        int id = DB.PesquisarAtividade().Count() + 1;
+
+        AtividadesFisicas dados = new AtividadesFisicas
+        {
+          UsuarioID = user.UsuarioID,
+          Data = Convert.ToDateTime(mes + "/" + dia + "/" + ano),
+          Inicio = Inicio.Time.ToString(),
+          Fim = Termino.Time.ToString(),
+          NomeAtividade = Atividade.Text,
+          Observacao = Observacao.Text,
+          AtividadeFisicaID = id
+        };
+
+        DB.CadastrarAtividade(dados);
+        DisplayAlert("", "Dados cadastrados com sucesso!", "OK");
+      }
+      else
+      {
+        DisplayAlert("ERRO!", message, "OK");
+      }
     }
     private bool VerificarData()
     {

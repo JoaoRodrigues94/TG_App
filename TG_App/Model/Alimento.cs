@@ -8,7 +8,7 @@ namespace TG.Model
   [Table("Alimentos")]
   public class Alimento
   {
-    [PrimaryKey]
+    [PrimaryKey, AutoIncrement]
     public int AlimentoID { get; set; }
     public int UsuarioID { get; set; }
     public int Medida { get; set; }
