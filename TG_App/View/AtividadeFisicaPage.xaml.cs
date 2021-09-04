@@ -51,7 +51,6 @@ namespace TG_App.View
       if (next)
       {
         DBExercicios DB = new DBExercicios();
-        int id = DB.PesquisarAtividade().Count() + 1;
 
         AtividadesFisicas dados = new AtividadesFisicas
         {
@@ -60,8 +59,7 @@ namespace TG_App.View
           Inicio = Inicio.Time.ToString(),
           Fim = Termino.Time.ToString(),
           NomeAtividade = Atividade.Text,
-          Observacao = Observacao.Text,
-          AtividadeFisicaID = id
+          Observacao = Observacao.Text
         };
 
         DB.CadastrarAtividade(dados);

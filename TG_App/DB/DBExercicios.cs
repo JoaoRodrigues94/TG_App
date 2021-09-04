@@ -39,7 +39,7 @@ namespace TG_App.Banco
       _conexao.Update(dados);
     }
     // Métodos Exclusão
-    public void DeleteAlimento(AtividadesFisicas dados)
+    public void DeleteAtividade(AtividadesFisicas dados)
     {
       _conexao.Delete(dados);
     }

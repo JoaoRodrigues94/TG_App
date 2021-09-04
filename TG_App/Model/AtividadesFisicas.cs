@@ -8,7 +8,7 @@ namespace TG_App.Model
   [Table("AtividadesFisicas")]
   class AtividadesFisicas
   {
-    [PrimaryKey]
+    [AutoIncrement,PrimaryKey]
     public int AtividadeFisicaID { get; set; }
     public int UsuarioID { get; set; }
     public string NomeAtividade { get; set; }
