@@ -20,26 +20,26 @@ namespace TG_App.Banco
 
       _conexao = new SQLiteConnection(caminho);
       // Criar tabela
-      _conexao.CreateTable<AtividadesFisicas>();
+      _conexao.CreateTable<AtividadesFisica>();
     }
 
     // Métodos  Cadastro
-    public void CadastrarAtividade(AtividadesFisicas dados)
+    public void CadastrarAtividade(AtividadesFisica dados)
     {
       _conexao.Insert(dados);
     }
     // Métodos Pesquisa
-    public List<AtividadesFisicas> PesquisarAtividade()
+    public List<AtividadesFisica> PesquisarAtividade()
     {
-      return _conexao.Table<AtividadesFisicas>().ToList(); 
+      return _conexao.Table<AtividadesFisica>().ToList(); 
     }
     // Métodos Update
-    public void UpdateAtividade(AtividadesFisicas dados)
+    public void UpdateAtividade(AtividadesFisica dados)
     {
       _conexao.Update(dados);
     }
     // Métodos Exclusão
-    public void DeleteAtividade(AtividadesFisicas dados)
+    public void DeleteAtividade(AtividadesFisica dados)
     {
       _conexao.Delete(dados);
     }

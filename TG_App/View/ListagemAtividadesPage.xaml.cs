@@ -66,5 +66,26 @@ namespace TG_App.View
 
       App.Current.MainPage = new AtividadesEditPage(dados);
     }
+
+    public void Pesquisar(object sender, EventArgs args)
+    {
+      DBExercicios DB = new DBExercicios();
+      var busca = DB.PesquisarAtividade().ToList();
+
+      int dia = Convert.ToInt32(DataCadastro.Text.Substring(0, 2));
+      int mes = Convert.ToInt32(DataCadastro.Text.Substring(3, 2));
+      int ano = Convert.ToInt32(DataCadastro.Text.Substring(6, 4));
+
+
+      if (!String.IsNullOrEmpty(SearchAtividade.Text))
+        busca = busca.Where(x => x.NomeAtividade.ToUpper().Contains(SearchAtividade.Text.ToUpper())).ToList();
+
+      if (!String.IsNullOrEmpty(DataCadastro.Text))
+        busca = busca.Where(x => x.Data == Convert.ToDateTime(mes + "/" + dia + "/" + ano)).ToList();
+
+      ListaAtividades.ItemsSource = busca.OrderBy(x => x.NomeAtividade);
+      SearchAtividade.Text = null;
+      DataCadastro.Text = null;
+    }
   }
 }

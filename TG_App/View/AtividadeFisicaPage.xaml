@@ -31,7 +31,7 @@
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
               <Button Text="Salvar" BackgroundColor="DarkGreen" TextColor="White" Clicked="SalvarAction" />
-              <Button Text="Voltar" BackgroundColor="DarkRed" TextColor="White" />
+              <Button Text="Voltar" BackgroundColor="DarkRed" TextColor="White" Clicked="VoltarAction" />
             </StackLayout>
           </StackLayout>
         </Frame>

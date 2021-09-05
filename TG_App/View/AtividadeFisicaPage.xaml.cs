@@ -20,6 +20,10 @@ namespace TG_App.View
       Data.Text = DateTime.Now.ToString("dd/MM/yyyy");
     }
 
+    public void VoltarAction(object sender, EventArgs args)
+    {
+      App.Current.MainPage = new ListagemAtividadesPage();
+    }
     public void SalvarAction(object sender, EventArgs args)
     {
       var user = new Validacao().Listagem().SingleOrDefault();
@@ -52,7 +56,7 @@ namespace TG_App.View
       {
         DBExercicios DB = new DBExercicios();
 
-        AtividadesFisicas dados = new AtividadesFisicas
+        AtividadesFisica dados = new AtividadesFisica
         {
           UsuarioID = user.UsuarioID,
           Data = Convert.ToDateTime(mes + "/" + dia + "/" + ano),

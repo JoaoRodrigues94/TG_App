@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behavior1="clr-namespace:TG_App.View"
              x:Class="TG_App.View.ListagemAtividadesPage">
     <ContentPage.Content>
     <ScrollView>
@@ -9,13 +9,23 @@
           <StackLayout Padding="0">
             <Label Text="Listagem de Atividades Físicas" TextColor="DarkRed" HorizontalOptions="Center" FontAttributes="Bold" />
             <StackLayout Orientation="Horizontal" Padding="0">
-              <Button Text="Cadastrar Alimento" Clicked="CadastrarAtividadeAction" BackgroundColor="Blue" TextColor="White"/>
+              <Button Text="Cadastrar Atividade Física" Clicked="CadastrarAtividadeAction" BackgroundColor="Blue" TextColor="White"/>
             </StackLayout>
             <StackLayout>
               <Frame BorderColor="blue">
+                <StackLayout Padding="0">
                 <StackLayout>
                   <Label Text="Filtrar Atividades Físicas" TextColor="Blue"/>
                   <Entry x:Name="SearchAtividade" Placeholder="Pesquisar Por Ativida Física" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Entry x:Name="DataCadastro" Keyboard="Numeric" >
+                      <Entry.Behaviors>
+                        <behavior1:MaskedData Mask="XX/XX/XXXX"/>
+                      </Entry.Behaviors>
+                    </Entry>
+                    <Button ImageSource="Search.png" BackgroundColor="Transparent" Clicked="Pesquisar" />
+                </StackLayout>
                 </StackLayout>
               </Frame>
               <StackLayout Padding="0">
@@ -30,7 +40,7 @@
                             <Label Text="{Binding Inicio}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
                             <Label Text="{Binding Fim}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
                             <Label Text="{Binding Observacao}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
-                            <Label Text="{Binding AtividadeFisicaID}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
+                            <Label Text="{Binding AtividadeFisicaID}" FontAttributes="Bold" IsVisible="false" HorizontalOptions="FillAndExpand" />
                             <StackLayout Orientation="Horizontal">
                               <Button Text="Editar" BackgroundColor="Blue" TextColor="White" Clicked="EditAction" CommandParameter="{Binding .}" />
                               <Button Text="Excluir" BackgroundColor="DarkRed" TextColor="white" Clicked="ExcluirAction" CommandParameter="{Binding .}" />
