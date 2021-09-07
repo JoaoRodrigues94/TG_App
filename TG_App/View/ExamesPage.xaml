@@ -2,20 +2,30 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TG_App.View.ExamesPage">
-    <ContentPage.Content>
+  <ContentPage.Content>
     <ScrollView>
       <StackLayout VerticalOptions="FillAndExpand">
         <Frame>
           <StackLayout Padding="0">
             <Label Text="Cadastro de Exames de Glicemia!" TextColor="DarkRed" FontAttributes="Bold" HorizontalOptions="Center" />
             <StackLayout>
-              <Picker x:Name="TipoCalculo" Title="Informe o tipo de Cálculo que o sistema deverá realizar!">
+              <Picker x:Name="TipoCalculo" Title="Informe o tipo de CÁLCULO que o sistema deverá realizar!" SelectedIndex="{Binding Calculo}">
                 <Picker.Items>
-                  <x:String>Somente Resultado do exame de glicemia</x:String>
-                  <x:String>Somente cálcular a quantidade de carboidratos ingeridos</x:String>
-                  <x:String>Resultado do exame de glicemia e alimentos</x:String>
+                  <x:String>Correção de Glicemia</x:String>
+                  <x:String>Correção para alimentos</x:String>
+                  <x:String>Correção de glicemia e alimentos</x:String>
                 </Picker.Items>
               </Picker>
+            </StackLayout>
+            <StackLayout Padding="0">
+              <StackLayout x:Name="Glicemia" Orientation="Horizontal" IsVisible="{Binding BoolGlicemia}">
+                <Entry x:Name="ExameGlicemia" Placeholder="Resultado do Exame de glicemia" HorizontalOptions="FillAndExpand" Keyboard="Numeric"/>
+                <Button Text="LO" BackgroundColor="RED" TextColor="White" Clicked="LO"/>
+                <Button Text="HI" BackgroundColor="DarkRed" TextColor="White" Clicked="HI" />
+              </StackLayout>
+              <StackLayout IsVisible="{Binding Alimento}">
+                <Entry Placeholder="Nome do Alimento"/>
+              </StackLayout>
             </StackLayout>
           </StackLayout>
         </Frame>

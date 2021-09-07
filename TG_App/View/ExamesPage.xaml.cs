@@ -15,7 +15,17 @@ namespace TG_App.View
     public ExamesPage()
     {
       InitializeComponent();
-      BindingContext = new AtividadeFisicaViewModel();
+
+      BindingContext = new ExamesViewModel();
+    }
+
+    public void HI (object sender, EventArgs args)
+    {
+      ExameGlicemia.Text = "HI";
+    }
+    public void LO (object sender, EventArgs args)
+    {
+      ExameGlicemia.Text = "LO";
     }
   }
 }

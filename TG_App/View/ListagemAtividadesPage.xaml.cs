@@ -72,18 +72,36 @@ namespace TG_App.View
       DBExercicios DB = new DBExercicios();
       var busca = DB.PesquisarAtividade().ToList();
 
-      int dia = Convert.ToInt32(DataCadastro.Text.Substring(0, 2));
-      int mes = Convert.ToInt32(DataCadastro.Text.Substring(3, 2));
-      int ano = Convert.ToInt32(DataCadastro.Text.Substring(6, 4));
-
-
       if (!String.IsNullOrEmpty(SearchAtividade.Text))
         busca = busca.Where(x => x.NomeAtividade.ToUpper().Contains(SearchAtividade.Text.ToUpper())).ToList();
 
       if (!String.IsNullOrEmpty(DataCadastro.Text))
+      {
+        int dia = Convert.ToInt32(DataCadastro.Text.Substring(0, 2));
+        int mes = Convert.ToInt32(DataCadastro.Text.Substring(3, 2));
+        int ano = Convert.ToInt32(DataCadastro.Text.Substring(6, 4));
         busca = busca.Where(x => x.Data == Convert.ToDateTime(mes + "/" + dia + "/" + ano)).ToList();
+      }
 
-      ListaAtividades.ItemsSource = busca.OrderBy(x => x.NomeAtividade);
+      List<AtividadeFisicaViewModel> Lista = new List<AtividadeFisicaViewModel>();
+
+      foreach(var item in busca)
+      {
+        AtividadeFisicaViewModel sql = new AtividadeFisicaViewModel
+        {
+          Data = item.Data.ToString("dd/MM/yyyy"),
+          AtividadeFisicaID = item.AtividadeFisicaID,
+          Fim = item.Fim,
+          Inicio = item.Inicio,
+          NomeAtividade = item.NomeAtividade.ToUpper(),
+          Observacao = item.Observacao,
+          UsuarioID = item.UsuarioID
+        };
+        Lista.Add(sql);
+      }
+      
+
+      ListaAtividades.ItemsSource = Lista.OrderBy(x => x.NomeAtividade);
       SearchAtividade.Text = null;
       DataCadastro.Text = null;
     }

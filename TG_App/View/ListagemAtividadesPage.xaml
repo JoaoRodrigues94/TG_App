@@ -19,7 +19,7 @@
                   <Entry x:Name="SearchAtividade" Placeholder="Pesquisar Por Ativida Física" HorizontalOptions="FillAndExpand"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <Entry x:Name="DataCadastro" Keyboard="Numeric" >
+                    <Entry x:Name="DataCadastro" Placeholder="Data" Keyboard="Numeric" >
                       <Entry.Behaviors>
                         <behavior1:MaskedData Mask="XX/XX/XXXX"/>
                       </Entry.Behaviors>
