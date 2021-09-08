@@ -14,10 +14,16 @@ namespace TG_App.ViewModel
     public bool BoolGlicemia { get { return _BoolGlicemia; } set { _BoolGlicemia = value; OnPropertyChange("BoolGlicemia"); } }
     public bool _Alimento;
     public bool Alimento { get { return _Alimento; } set { _Alimento = value; OnPropertyChange("Alimento"); } }
+    public bool _Btn;
+    public bool Btn { get { return _Btn; } set { _Btn = value; OnPropertyChange("Btn"); } }
     public Command Validar { get; set; }
+    public Command AlimentoVisibility { get; set; }
+    public Command MostrarPesquisa { get; set; }
     public ExamesViewModel()
     {
       Validar = new Command(Mostrar);
+      AlimentoVisibility = new Command(NaoVisualizar);
+      MostrarPesquisa = new Command(MostrarPesquisaAction);
     }
     public void Mostrar()
     {
@@ -25,6 +31,7 @@ namespace TG_App.ViewModel
       {
         BoolGlicemia = true;
         Alimento = false;
+        Btn = false;
       } 
       else if(Calculo == 1)
       {
@@ -36,6 +43,15 @@ namespace TG_App.ViewModel
         BoolGlicemia = true;
         Alimento = true;
       }
+    }
+    public void MostrarPesquisaAction()
+    {
+      Alimento = true;
+    }
+    public void NaoVisualizar()
+    {
+      Alimento = false;
+      Btn = true;
     }
 
     public event PropertyChangedEventHandler PropertyChanged;

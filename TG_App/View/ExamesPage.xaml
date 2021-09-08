@@ -23,8 +23,14 @@
                 <Button Text="LO" BackgroundColor="RED" TextColor="White" Clicked="LO"/>
                 <Button Text="HI" BackgroundColor="DarkRed" TextColor="White" Clicked="HI" />
               </StackLayout>
-              <StackLayout IsVisible="{Binding Alimento}">
-                <Entry Placeholder="Nome do Alimento"/>
+              <StackLayout Padding="0" x:Name="slAlimento"/>
+              <StackLayout HorizontalOptions="Center" Orientation="Horizontal" IsVisible="{Binding Btn}">
+                <Button Text="Adicionar Alimento" TextColor="white" BackgroundColor="Green" Clicked="Limpar" Command="{Binding MostrarPesquisa}"/>
+                <Button Text="Remover Alimento" TextColor="white" BackgroundColor="Red" Clicked="Delete"/>
+              </StackLayout>
+              <StackLayout Orientation="Horizontal" IsVisible="{Binding Alimento}">
+                <Entry x:Name="NomeAlimento" Placeholder="Nome do Alimento" HorizontalOptions="FillAndExpand"/>
+                <Button ImageSource="Search.png" BackgroundColor="Transparent" Clicked="Alimento" Command="{Binding AlimentoVisibility}" />
               </StackLayout>
             </StackLayout>
           </StackLayout>
