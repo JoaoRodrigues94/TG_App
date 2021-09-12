@@ -37,6 +37,9 @@
     <EmbeddedResource Update="View\CadastroPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="View\ExamesListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="View\ExamesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -48,6 +51,9 @@
     </EmbeddedResource>
     <EmbeddedResource Update="View\LoginPage.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\RegistrarExamePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\TermosUsoPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
