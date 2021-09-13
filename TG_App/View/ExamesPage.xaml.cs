@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TG.Model;
 using TG_App.Banco;
+using TG_App.Model;
 using TG_App.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -18,6 +20,7 @@ namespace TG_App.View
     {
       InitializeComponent();
 
+      DataExame.Text = "Data: " + DateTime.Now.ToString("dd/MM/yyyy HH:mm");
       BindingContext = new ExamesViewModel();
     }
 
@@ -95,6 +98,76 @@ namespace TG_App.View
       {
         slAlimento.Children.RemoveAt(count);
       }
+    }
+    public void CalcularAction(object sender, EventArgs args)
+    {
+      DBSugestao DB = new DBSugestao();
+      var user = new Validacao().Listagem().SingleOrDefault();
+      decimal c = user.UnidadeCorrecao;
+
+      if (TipoCalculo.SelectedIndex == 0)
+      {
+        int x = ExameGlicemia.Text == "HI" ? 600 : (ExameGlicemia.Text == "LO" ? 20 : Convert.ToInt32(ExameGlicemia.Text));
+        int result = 0;
+        if(x > 180) result = CalculoGlicemia(x, c);
+
+        DisplayAlert("", result.ToString(), "OK");
+      }
+      else if(TipoCalculo.SelectedIndex == 1)
+      {
+        int i = 0;
+        decimal soma = 0;
+        foreach(var item in slAlimento.Children)
+        {
+          StackLayout sl = (StackLayout)slAlimento.Children[i];
+          var x = (Entry)sl.Children[1];
+          var y = Convert.ToDecimal(x.Text);
+          soma += y;
+          i++;
+        }
+        int retorno = CalculoAlimento(soma, user.GramasCarbo, user.AlimentoUni);
+        DisplayAlert("Valor", retorno.ToString(), "Ok");
+      }
+    }
+    private int CalculoGlicemia(int x, decimal carbs)
+    {
+      var ret = 0;
+      decimal media = x;
+      for(var i = 1; i < x; i++)
+      {
+        media -= carbs;
+        if (media >= 80 && media <= 170) 
+        {
+          ret = i;
+          if (media < 80) ret = i--;
+          break;
+        }
+      }
+      return ret;
+    }
+
+    private int CalculoAlimento(decimal x, decimal y, decimal uni)
+    {
+      decimal unidades = y / uni;
+      int val = 0;
+
+      for(var i = 1; i < Convert.ToInt32(x); i++)
+      {
+        if (x >= unidades)
+        {
+          x -= unidades;
+        }
+        else 
+        {
+          val = i;
+          break;
+        }
+      }
+      return val;
+    }
+    public void VoltarAction(object sender, EventArgs args)
+    {
+      App.Current.MainPage = new ExamesListPage();
     }
   }
 }

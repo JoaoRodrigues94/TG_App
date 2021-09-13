@@ -9,6 +9,9 @@
           <StackLayout Padding="0">
             <Label Text="Cadastro de Exames de Glicemia!" TextColor="DarkRed" FontAttributes="Bold" HorizontalOptions="Center" />
             <StackLayout>
+              <Label x:Name="DataExame" FontAttributes="Bold" TextColor="blue" />
+            </StackLayout>
+            <StackLayout>
               <Picker x:Name="TipoCalculo" Title="Informe o tipo de CÁLCULO que o sistema deverá realizar!" SelectedIndex="{Binding Calculo}">
                 <Picker.Items>
                   <x:String>Correção de Glicemia</x:String>
@@ -35,6 +38,10 @@
             </StackLayout>
           </StackLayout>
         </Frame>
+        <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+          <Button Text="Cálcular" TextColor="White" BackgroundColor="Blue" Clicked="CalcularAction"/>
+          <Button Text="Voltar" TextColor="White" BackgroundColor="red" Clicked="VoltarAction"/>
+        </StackLayout>
       </StackLayout>
     </ScrollView>
   </ContentPage.Content>
