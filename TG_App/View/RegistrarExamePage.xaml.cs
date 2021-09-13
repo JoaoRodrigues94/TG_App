@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using TG_App.Banco;
+using TG_App.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,6 +16,9 @@ namespace TG_App.View
     public RegistrarExamePage()
     {
       InitializeComponent();
+
+      Data.Text = DateTime.Now.ToString("dd/MM/yyyy");
+      Minutos.Time = TimeSpan.Parse(DateTime.Now.ToString("HH:mm"));
     }
     public void HI(object sender, EventArgs args)
     {
@@ -51,7 +55,24 @@ namespace TG_App.View
       }
       if (next)
       {
+        var user = new Validacao().Listagem().SingleOrDefault();
 
+        DBExame DB = new DBExame();
+
+        int dia = Convert.ToInt32(Data.Text.Substring(0, 2));
+        int mes = Convert.ToInt32(Data.Text.Substring(3, 2));
+        int ano = Convert.ToInt32(Data.Text.Substring(6, 4));
+        var horas = Convert.ToString(Minutos.Time);
+
+        Exame dados = new Exame
+        {
+          Resultado = ExameGlicemia.Text,
+          UsuarioID = user.UsuarioID,
+          Data = Convert.ToDateTime(mes + "/" + dia + "/" + ano + " " + horas)
+        };
+
+        DB.Cadastrar(dados);
+        DisplayAlert("Sucesso", "Exame Cadastrado!", "Continuar");
       }
       else
       {

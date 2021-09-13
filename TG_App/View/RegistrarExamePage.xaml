@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behavior1="clr-namespace:TG_App.View"
              x:Class="TG_App.View.RegistrarExamePage">
     <ContentPage.Content>
     <ScrollView>
@@ -10,6 +10,15 @@
             <Label Text="Cadastro de Exames de Glicemia!" TextColor="DarkRed" FontAttributes="Bold" HorizontalOptions="Center" />
             <StackLayout>
               <StackLayout Padding="0">
+                <StackLayout Orientation="Horizontal">
+                  <Label Text="Data"/>
+                  <Entry x:Name="Data" Text="{Binding Data}" Keyboard="Numeric" >
+                    <Entry.Behaviors>
+                      <behavior1:MaskedData Mask="XX/XX/XXXX"/>
+                    </Entry.Behaviors>
+                  </Entry>
+                  <TimePicker x:Name="Minutos" Time="{Binding Tempo}" Format="HH:mm"/>
+                </StackLayout>
                 <StackLayout x:Name="Glicemia" Orientation="Horizontal" IsVisible="{Binding BoolGlicemia}">
                   <Entry x:Name="ExameGlicemia" Placeholder="Resultado do Exame de glicemia" HorizontalOptions="FillAndExpand" Keyboard="Numeric"/>
                   <Button Text="LO" BackgroundColor="RED" TextColor="White" Clicked="LO"/>
