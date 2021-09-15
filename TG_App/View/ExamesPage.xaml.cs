@@ -24,11 +24,11 @@ namespace TG_App.View
       BindingContext = new ExamesViewModel();
     }
 
-    public void HI (object sender, EventArgs args)
+    public void HI(object sender, EventArgs args)
     {
       ExameGlicemia.Text = "HI";
     }
-    public void LO (object sender, EventArgs args)
+    public void LO(object sender, EventArgs args)
     {
       ExameGlicemia.Text = "LO";
     }
@@ -38,7 +38,7 @@ namespace TG_App.View
 
       var pesquisa = DB.PesquisarAlimento().Where(x => x.NomeAlimento.ToUpper() == NomeAlimento.Text.ToUpper()).SingleOrDefault();
 
-      if(pesquisa == null)
+      if (pesquisa == null)
       {
         DisplayAlert("ERRO", "Alimento não cadastrado", "OK");
       }
@@ -90,7 +90,7 @@ namespace TG_App.View
     public void Delete(object sender, EventArgs args)
     {
       count--;
-      if(count == -1)
+      if (count == -1)
       {
         DisplayAlert("Erro", "Não existe alimentos para serem excluídos", "OK");
       }
@@ -102,41 +102,48 @@ namespace TG_App.View
     public void CalcularAction(object sender, EventArgs args)
     {
       DBSugestao DB = new DBSugestao();
+      DBAlimento DB2 = new DBAlimento();
       var user = new Validacao().Listagem().SingleOrDefault();
       decimal c = user.UnidadeCorrecao;
+      int resultado = 0;
 
-      if (TipoCalculo.SelectedIndex == 0)
+      if (TipoCalculo.SelectedIndex == 0 || TipoCalculo.SelectedIndex == 2)
       {
         int x = ExameGlicemia.Text == "HI" ? 600 : (ExameGlicemia.Text == "LO" ? 20 : Convert.ToInt32(ExameGlicemia.Text));
         int result = 0;
-        if(x > 180) result = CalculoGlicemia(x, c);
+        if (x > 180) result = CalculoGlicemia(x, c);
 
-        DisplayAlert("", result.ToString(), "OK");
+        resultado += result;
       }
-      else if(TipoCalculo.SelectedIndex == 1)
+      if (TipoCalculo.SelectedIndex == 1 || TipoCalculo.SelectedIndex == 2)
       {
         int i = 0;
         decimal soma = 0;
-        foreach(var item in slAlimento.Children)
+        foreach (var item in slAlimento.Children)
         {
           StackLayout sl = (StackLayout)slAlimento.Children[i];
+          var n = (Label)sl.Children[0];
+          string nome = n.Text.ToUpper();
           var x = (Entry)sl.Children[1];
           var y = Convert.ToDecimal(x.Text);
           soma += y;
           i++;
         }
         int retorno = CalculoAlimento(soma, user.GramasCarbo, user.AlimentoUni);
-        DisplayAlert("Valor", retorno.ToString(), "Ok");
+        resultado += retorno;
       }
+
+      DisplayAlert("Sugestão", resultado.ToString() + " Unidades!", "Ok");
+      App.Current.MainPage = new ExamesListPage();
     }
     private int CalculoGlicemia(int x, decimal carbs)
     {
       var ret = 0;
       decimal media = x;
-      for(var i = 1; i < x; i++)
+      for (var i = 1; i < x; i++)
       {
         media -= carbs;
-        if (media >= 80 && media <= 170) 
+        if (media >= 80 && media <= 170)
         {
           ret = i;
           if (media < 80) ret = i--;
@@ -151,15 +158,15 @@ namespace TG_App.View
       decimal unidades = y / uni;
       int val = 0;
 
-      for(var i = 1; i < Convert.ToInt32(x); i++)
+      for (var i = 1; i < Convert.ToInt32(x); i++)
       {
         if (x >= unidades)
         {
           x -= unidades;
+          val++;
         }
-        else 
+        else
         {
-          val = i;
           break;
         }
       }
