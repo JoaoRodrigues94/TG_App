@@ -133,6 +133,18 @@ namespace TG_App.View
         resultado += retorno;
       }
 
+      Sugestao dados = new Sugestao()
+      {
+        UsuarioID = user.UsuarioID,
+        Data = DataExame.Text,
+        TipoSugestao = TipoCalculo.SelectedIndex, 
+        Resultado = ExameGlicemia.Text,
+        Observacao = Observacao.Text,
+        Dosagem = resultado
+      };
+
+      DB.Cadastrar(dados);
+
       DisplayAlert("Sugestão", resultado.ToString() + " Unidades!", "Ok");
       App.Current.MainPage = new ExamesListPage();
     }

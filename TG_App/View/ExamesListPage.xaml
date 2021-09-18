@@ -11,6 +11,31 @@
             <Button Text="Registrar Exame e Obter Sugestão de Dosagem" BackgroundColor="Green" Clicked="Sugestao" TextColor="White"/>
           </StackLayout>
         </Frame>
+        <Frame>
+          <StackLayout Padding="0">
+            <ListView x:Name="ListaExame" HasUnevenRows="True">
+              <ListView.ItemTemplate>
+                <DataTemplate>
+                  <ViewCell>
+                    <Frame BorderColor="Blue">
+                      <StackLayout>
+                        <Label Text="{Binding TipoSugestao}" IsVisible="false" />
+                        <Label Text="{Binding Data}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
+                        <Label Text="{Binding Resultado}" HorizontalOptions="FillAndExpand" />
+                          <Label Text="{Binding Dosagem}" HorizontalOptions="FillAndExpand" />
+                          <Label Text="{Binding TipoSugestao}" IsVisible="false" /> 
+                        <StackLayout Orientation="Horizontal">
+                          <Button Text="Detalhes" BackgroundColor="Blue" TextColor="White" CommandParameter="{Binding .}" />
+                          <Button Text="Excluir" BackgroundColor="DarkRed" TextColor="white" CommandParameter="{Binding .}" />
+                        </StackLayout>
+                      </StackLayout>
+                    </Frame>
+                  </ViewCell>
+                </DataTemplate>
+              </ListView.ItemTemplate>
+            </ListView>
+          </StackLayout>
+        </Frame>
       </StackLayout>
     </ScrollView>
   </ContentPage.Content>

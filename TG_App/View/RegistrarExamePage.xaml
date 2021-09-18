@@ -24,6 +24,9 @@
                   <Button Text="LO" BackgroundColor="RED" TextColor="White" Clicked="LO"/>
                   <Button Text="HI" BackgroundColor="DarkRed" TextColor="White" Clicked="HI" />
                 </StackLayout>
+                <StackLayout Padding="0">
+                  <Entry x:Name="Observacao" Placeholder="Observação" />
+                </StackLayout>
                 <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
                   <Button Text="Salvar" TextColor="White" BackgroundColor="Green" Clicked="SalvarAction"/>
                   <Button Text="Voltar" TextColor="White" BackgroundColor="PaleVioletRed" Clicked="VoltarAction"/>

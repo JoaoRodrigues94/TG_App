@@ -1,20 +1,18 @@
-﻿using SQLite;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TG_App.Model
+namespace TG_App.ViewModel
 {
-  [Table("Sugestao")]
-  class Sugestao
+  class SugestaoView
   {
-    [AutoIncrement, PrimaryKey]
     public int SugestaoID { get; set; }
-    public int TipoSugestao { get; set; }
+    public string TipoSugestao { get; set; }
     public int UsuarioID { get; set; }
     public string Resultado { get; set; }
-    public int Dosagem { get; set; }
+    public string Dosagem { get; set; }
     public string Observacao { get; set; }
     public string Data { get; set; }
+    public char Identificacao { get; set; }
   }
 }

@@ -36,6 +36,9 @@
                 <Button ImageSource="Search.png" BackgroundColor="Transparent" Clicked="Alimento" Command="{Binding AlimentoVisibility}" />
               </StackLayout>
             </StackLayout>
+            <StackLayout>
+              <Entry x:Name="Observacao" Placeholder="Observação" />
+            </StackLayout>
           </StackLayout>
         </Frame>
         <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
