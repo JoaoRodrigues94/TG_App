@@ -49,7 +49,7 @@ namespace TG_App.View
         dados.Add(x);
       }
 
-      var ret = dados.OrderBy(c => c.Data);
+      var ret = dados.OrderByDescending(c => c.Data);
       ListaExame.ItemsSource = ret;
 
     }
@@ -116,7 +116,7 @@ namespace TG_App.View
         dados.Add(x);
       }
 
-      ListaExame.ItemsSource = dados.OrderBy(x => x.Data);
+      ListaExame.ItemsSource = dados.OrderByDescending(x => x.Data);
       DataSearch.Text = null;
       ResultadoSearch.Text = null;
       SugestaoSearch.Text = null;

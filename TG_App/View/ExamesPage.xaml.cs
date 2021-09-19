@@ -36,6 +36,7 @@ namespace TG_App.View
     {
       DBAlimento DB = new DBAlimento();
 
+      // TODO - Modificar ao alterar o bando de alimentos
       var pesquisa = DB.PesquisarAlimento().Where(x => x.NomeAlimento.ToUpper() == NomeAlimento.Text.ToUpper()).SingleOrDefault();
 
       if (pesquisa == null)
