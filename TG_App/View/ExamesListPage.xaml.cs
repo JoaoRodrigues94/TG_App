@@ -144,5 +144,30 @@ namespace TG_App.View
         App.Current.MainPage = new ExamesListPage();
       }
     }
+    public void Details(object sender, EventArgs args)
+    {
+      DBExame DB = new DBExame();
+      DBSugestao DB2 = new DBSugestao();
+      DBSugestaoAlimento DB3 = new DBSugestaoAlimento();
+
+      var user = new Validacao().Listagem().SingleOrDefault();
+      Button btn = (Button)sender;
+      SugestaoView list = btn.CommandParameter as SugestaoView;
+
+      if(list.TipoSugestao == "E")
+      {
+        var dados = DB.Pesquisar().Where(x => x.ExameID == list.SugestaoID && x.UsuarioID == user.UsuarioID).SingleOrDefault();
+        App.Current.MainPage = new ExameDetailPage(dados);
+      }
+
+      if(list.TipoSugestao == "S")
+      {
+        var dados = DB2.Pesquisar().Where(x => x.SugestaoID == list.SugestaoID && x.UsuarioID == user.UsuarioID).SingleOrDefault();
+
+        var lista = DB3.Pesquisar().Where(x => x.SugestaoID == list.SugestaoID && x.UsuarioID == user.UsuarioID).ToList();
+
+        App.Current.MainPage = new ExameDetailPage(dados, lista);
+      }
+    }
   }
 }

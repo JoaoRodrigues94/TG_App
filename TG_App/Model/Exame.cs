@@ -6,7 +6,7 @@ using System.Text;
 namespace TG_App.Model
 {
   [Table("Exame")]
-  class Exame
+  public class Exame
   {
     [AutoIncrement, PrimaryKey]
     public int ExameID { get; set; }

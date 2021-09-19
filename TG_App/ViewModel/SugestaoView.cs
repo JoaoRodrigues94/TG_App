@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TG_App.ViewModel
 {
-  class SugestaoView
+  public class SugestaoView
   {
     public int SugestaoID { get; set; }
     public string TipoSugestao { get; set; }

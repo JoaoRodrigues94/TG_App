@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TG_App.View.ExameDetailPage">
+    <ContentPage.Content>
+    <ScrollView>
+      <StackLayout VerticalOptions="FillAndExpand">
+        <Frame>
+          <StackLayout Padding="0">
+            <Label Text="Detalhes de Exames" TextColor="DarkRed" FontAttributes="Bold" HorizontalOptions="Center" />
+            <StackLayout>
+              <Label x:Name="DataExame" FontAttributes="Bold" TextColor="blue" />
+            </StackLayout>
+            <StackLayout >
+              <Label x:Name="ExameGlicemia" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+            <StackLayout x:Name="slAlimento"/>
+            <StackLayout>
+              <Label x:Name="Observacao" />
+            </StackLayout>
+          </StackLayout>
+        </Frame>
+        <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+          <Button Text="Voltar" TextColor="White" BackgroundColor="red" Clicked="VoltarAction"/>
+        </StackLayout>
+      </StackLayout>
+    </ScrollView>
+  </ContentPage.Content>
+</ContentPage>
