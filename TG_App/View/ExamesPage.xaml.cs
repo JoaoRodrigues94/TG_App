@@ -145,6 +145,25 @@ namespace TG_App.View
 
       DB.Cadastrar(dados);
 
+
+      DBSugestaoAlimento DBs = new DBSugestaoAlimento();
+      for(var i = 0 ; i < slAlimento.Children.Count(); i++)
+      {
+        var lits = (StackLayout)slAlimento.Children[i];
+        var lbl = (Label)lits.Children[0];
+        var ent = (Entry)lits.Children[1];
+        var lblG = (Label)lits.Children[2];
+        SugestaoAlimento sql = new SugestaoAlimento
+        {
+          SugestaoID = dados.SugestaoID,
+          UsuarioID = user.UsuarioID,
+          Consumo = Convert.ToDecimal(ent.Text),
+          Categoria = lblG.Text,
+          Nome = lbl.Text
+        };
+        DBs.Cadastrar(sql);
+      }
+
       DisplayAlert("Sugestão", resultado.ToString() + " Unidades!", "Ok");
       App.Current.MainPage = new ExamesListPage();
     }
