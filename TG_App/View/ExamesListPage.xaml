@@ -39,11 +39,11 @@
                         <Label Text="{Binding TipoSugestao}" IsVisible="false" />
                         <Label Text="{Binding Data}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
                         <Label Text="{Binding Resultado}" HorizontalOptions="FillAndExpand" />
-                          <Label Text="{Binding Dosagem}" HorizontalOptions="FillAndExpand" />
-                          <Label Text="{Binding TipoSugestao}" IsVisible="false" /> 
+                        <Label Text="{Binding Dosagem}" HorizontalOptions="FillAndExpand" />
+                        <Label Text="{Binding SugestaoID}" IsVisible="false" HorizontalOptions="FillAndExpand" />
                         <StackLayout Orientation="Horizontal">
                           <Button Text="Detalhes" BackgroundColor="Blue" TextColor="White" CommandParameter="{Binding .}" />
-                          <Button Text="Excluir" BackgroundColor="DarkRed" TextColor="white" CommandParameter="{Binding .}" />
+                          <Button Text="Excluir" BackgroundColor="DarkRed" TextColor="white" Clicked="Excluir" CommandParameter="{Binding .}"/>
                         </StackLayout>
                       </StackLayout>
                     </Frame>

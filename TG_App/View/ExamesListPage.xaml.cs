@@ -29,6 +29,7 @@ namespace TG_App.View
       {
         SugestaoView x = new SugestaoView
         {
+          SugestaoID = item.ExameID,
           Data = "DATA: " + item.Data,
           Resultado = "RESULTADO DO EXAME: " +  item.Resultado,
           TipoSugestao = "E"
@@ -39,6 +40,7 @@ namespace TG_App.View
       {
         SugestaoView x = new SugestaoView
         {
+          SugestaoID = item.SugestaoID,
           Data = item.Data + ":00",
           Resultado = "RESULTADO DO EXAME: " + item.Resultado,
           Dosagem = "SUGESTÃO DE DOSAGEM: " + item.Dosagem.ToString() + " UNIDADES",
@@ -94,6 +96,7 @@ namespace TG_App.View
       {
         SugestaoView x = new SugestaoView
         {
+          SugestaoID = item.ExameID,
           Data = "DATA: " + item.Data,
           Resultado = "RESULTADO DO EXAME: " + item.Resultado,
           TipoSugestao = "E"
@@ -104,6 +107,7 @@ namespace TG_App.View
       {
         SugestaoView x = new SugestaoView
         {
+          SugestaoID = item.SugestaoID,
           Data = item.Data + ":00",
           Resultado = "RESULTADO DO EXAME: " + item.Resultado,
           Dosagem = "SUGESTÃO DE DOSAGEM: " + item.Dosagem.ToString() + " UNIDADES",
@@ -116,6 +120,29 @@ namespace TG_App.View
       DataSearch.Text = null;
       ResultadoSearch.Text = null;
       SugestaoSearch.Text = null;
+    }
+    public void Excluir(object sender, EventArgs args)
+    {
+      DBExame DB = new DBExame();
+      DBSugestao DB2 = new DBSugestao();
+
+      Button btn = (Button)sender;
+      var user = new Validacao().Listagem().SingleOrDefault();
+
+      SugestaoView lista = btn.CommandParameter as SugestaoView;
+      
+      if(lista.TipoSugestao == "E")
+      {
+        var busca = DB.Pesquisar().SingleOrDefault(x => x.UsuarioID == user.UsuarioID && x.ExameID == lista.SugestaoID);
+        DB.Delete(busca);
+        App.Current.MainPage = new ExamesListPage();
+      }
+      if(lista.TipoSugestao == "S")
+      {
+        var busca = DB2.Pesquisar().SingleOrDefault(x => x.UsuarioID == user.UsuarioID && x.SugestaoID == lista.SugestaoID);
+        DB2.Delete(busca);
+        App.Current.MainPage = new ExamesListPage();
+      }
     }
   }
 }

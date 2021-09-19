@@ -11,6 +11,7 @@ namespace TG_App.Model
     [AutoIncrement, PrimaryKey]
     public int SugestaoID { get; set; }
     public int TipoSugestao { get; set; }
+    public string Tipo { get; set; }
     public int UsuarioID { get; set; }
     public string Resultado { get; set; }
     public int Dosagem { get; set; }
