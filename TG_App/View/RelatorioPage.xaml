@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behavior1="clr-namespace:TG_App.View"
+             x:Class="TG_App.View.RelatorioPage">
+  <ContentPage.Content>
+    <ScrollView>
+      <StackLayout VerticalOptions="FillAndExpand">
+        <Label Text="Relatório de Exames" TextColor="DarkRed" HorizontalOptions="Center" FontAttributes="Bold" />
+        <Frame BorderColor="Blue">
+          <StackLayout Padding="0">
+            <StackLayout>
+              <Label Text="Filtrar" TextColor="Blue"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+              <Label Text="Início:"/>
+              <Entry x:Name="Inicio" Placeholder="Data" HorizontalOptions="FillAndExpand" Keyboard="Numeric" >
+                <Entry.Behaviors>
+                  <behavior1:MaskedData Mask="XX/XX/XXXX"/>
+                </Entry.Behaviors>
+              </Entry>
+              <Label Text="Término:"/>
+              <Entry x:Name="Termino" Placeholder="Data" HorizontalOptions="FillAndExpand" Keyboard="Numeric" >
+                <Entry.Behaviors>
+                  <behavior1:MaskedData Mask="XX/XX/XXXX"/>
+                </Entry.Behaviors>
+              </Entry>
+              <Button ImageSource="Search.png" BackgroundColor="Transparent" Clicked="Pesquisar" />
+            </StackLayout>
+          </StackLayout>
+        </Frame>
+        <Frame>
+        </Frame>
+      </StackLayout>
+    </ScrollView>
+  </ContentPage.Content>
+</ContentPage>

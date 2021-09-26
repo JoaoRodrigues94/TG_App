@@ -16,7 +16,7 @@ namespace TG_App.View
     public ExameDetailPage(Sugestao e, List<SugestaoAlimento> lista)
     {
       InitializeComponent();
-      DataExame.Text = e.Data;
+      DataExame.Text = e.Data.ToString("dd/MM/yyyy HH:mm");
       ExameGlicemia.Text = "Resultado: " + e.Resultado;
       Observacao.Text = "Observação: " + e.Observacao;
 
@@ -34,7 +34,7 @@ namespace TG_App.View
     public ExameDetailPage(Exame e)
     {
       InitializeComponent();
-      DataExame.Text = e.Data;
+      DataExame.Text = e.Data.ToString("dd/MM/yyyy HH:mm");
       ExameGlicemia.Text = "Resultado: " + e.Resultado;
       Observacao.Text = "Observação: " + e.Observacao;
     }

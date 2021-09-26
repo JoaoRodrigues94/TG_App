@@ -30,7 +30,7 @@ namespace TG_App.View
         SugestaoView x = new SugestaoView
         {
           SugestaoID = item.ExameID,
-          Data = "DATA: " + item.Data,
+          Data = "DATA: " + item.Data.ToString("dd/MM/yyyy HH:mm"),
           Resultado = "RESULTADO DO EXAME: " +  item.Resultado,
           TipoSugestao = "E"
         };
@@ -41,7 +41,7 @@ namespace TG_App.View
         SugestaoView x = new SugestaoView
         {
           SugestaoID = item.SugestaoID,
-          Data = item.Data + ":00",
+          Data = item.Data.ToString("dd/MM/yyyy HH:mm"),
           Resultado = "RESULTADO DO EXAME: " + item.Resultado,
           Dosagem = "SUGESTÃO DE DOSAGEM: " + item.Dosagem.ToString() + " UNIDADES",
           TipoSugestao = "S"
@@ -49,7 +49,7 @@ namespace TG_App.View
         dados.Add(x);
       }
 
-      var ret = dados.OrderByDescending(c => c.Data);
+      var ret = dados.OrderByDescending(c => c.SugestaoID);
       ListaExame.ItemsSource = ret;
 
     }
@@ -74,8 +74,12 @@ namespace TG_App.View
 
       if (!String.IsNullOrEmpty(DataSearch.Text))
       {
-        listaE = listaE.Where(x => x.Data.Contains(DataSearch.Text)).ToList();
-        listaS = listaS.Where(x => x.Data.Contains(DataSearch.Text)).ToList();
+        int dia = Convert.ToInt32(DataSearch.Text.Substring(0, 2));
+        int mes = Convert.ToInt32(DataSearch.Text.Substring(3, 2));
+        int ano = Convert.ToInt32(DataSearch.Text.Substring(6, 4));
+
+        listaE = listaE.Where(x => x.Data >= Convert.ToDateTime(mes + "/" + dia + "/" + ano + " 00:00") && x.Data <= Convert.ToDateTime(mes + "/" + dia + "/" + ano + " 23:59")).ToList();
+        listaS = listaS.Where(x => x.Data >= Convert.ToDateTime(mes + "/" + dia + "/" + ano + " 00:00") && x.Data <= Convert.ToDateTime(mes + "/" + dia + "/" + ano + " 23:59")).ToList();
       }
 
       if (!String.IsNullOrEmpty(ResultadoSearch.Text))
@@ -97,7 +101,7 @@ namespace TG_App.View
         SugestaoView x = new SugestaoView
         {
           SugestaoID = item.ExameID,
-          Data = "DATA: " + item.Data,
+          Data = "DATA: " + item.Data.ToString("dd/MM/yyyy HH:mm"),
           Resultado = "RESULTADO DO EXAME: " + item.Resultado,
           TipoSugestao = "E"
         };
@@ -108,7 +112,7 @@ namespace TG_App.View
         SugestaoView x = new SugestaoView
         {
           SugestaoID = item.SugestaoID,
-          Data = item.Data + ":00",
+          Data = item.Data.ToString("dd/MM/yyyy HH:mm"),
           Resultado = "RESULTADO DO EXAME: " + item.Resultado,
           Dosagem = "SUGESTÃO DE DOSAGEM: " + item.Dosagem.ToString() + " UNIDADES",
           TipoSugestao = "S"
@@ -116,7 +120,7 @@ namespace TG_App.View
         dados.Add(x);
       }
 
-      ListaExame.ItemsSource = dados.OrderByDescending(x => x.Data);
+      ListaExame.ItemsSource = dados.OrderByDescending(x => x.SugestaoID);
       DataSearch.Text = null;
       ResultadoSearch.Text = null;
       SugestaoSearch.Text = null;

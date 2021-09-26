@@ -62,11 +62,15 @@ namespace TG_App.View
 
         var horas = Convert.ToString(Minutos.Time);
 
+        int dia = Convert.ToInt32(Data.Text.Substring(0, 2));
+        int mes = Convert.ToInt32(Data.Text.Substring(3, 2));
+        int ano = Convert.ToInt32(Data.Text.Substring(6, 4));
+
         Exame dados = new Exame
         {
           Resultado = ExameGlicemia.Text,
           UsuarioID = user.UsuarioID,
-          Data = Data.Text + " " + horas,
+          Data = Convert.ToDateTime(mes + "/" + dia + "/" + ano + " " + horas),
           Observacao = Observacao.Text
         };
 

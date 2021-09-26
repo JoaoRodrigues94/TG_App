@@ -12,7 +12,8 @@ namespace TG_App.Model
     public int ExameID { get; set; }
     public int UsuarioID { get; set; }
     public string Resultado { get; set; }
-    public string Data { get; set; }
+    public DateTime Data { get; set; }
+    public string Horario { get; set; }
     public string Observacao { get; set; }
   }
 }

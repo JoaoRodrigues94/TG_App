@@ -133,11 +133,13 @@ namespace TG_App.View
         int retorno = CalculoAlimento(soma, user.GramasCarbo, user.AlimentoUni);
         resultado += retorno;
       }
+      string horas = DataExame.Text.Substring(11, 4);
+
 
       Sugestao dados = new Sugestao()
       {
         UsuarioID = user.UsuarioID,
-        Data = DataExame.Text,
+        Data = DateTime.Now,
         TipoSugestao = TipoCalculo.SelectedIndex, 
         Resultado = ExameGlicemia.Text,
         Observacao = Observacao.Text,
