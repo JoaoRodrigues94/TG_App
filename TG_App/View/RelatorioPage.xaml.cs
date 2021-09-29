@@ -17,6 +17,9 @@ namespace TG_App.View
     public RelatorioPage()
     {
       InitializeComponent();
+
+      Inicio.Text = DateTime.Now.ToString("dd/MM/yyyy");
+      Termino.Text = DateTime.Now.ToString("dd/MM/yyyy");
     }
 
     public void Pesquisar(object sender, EventArgs args)
@@ -26,50 +29,120 @@ namespace TG_App.View
 
       var user = new Validacao().Listagem().SingleOrDefault();
 
+      int dia = Convert.ToInt32(Inicio.Text.Substring(0, 2));
+      int mes = Convert.ToInt32(Inicio.Text.Substring(3, 2));
+      int ano = Convert.ToInt32(Inicio.Text.Substring(6, 4));
 
-      var listaE = DBE.Pesquisar().Where(c => c.UsuarioID == user.UsuarioID).ToList();
-      var listaS = DBS.Pesquisar().Where(c => c.UsuarioID == user.UsuarioID).ToList();
+      DateTime dtInicio = Convert.ToDateTime(mes + "/" + dia + "/" + ano + " 00:00:00");
 
-      int mesInicio = Convert.ToInt32(Inicio.Text.Substring(3, 2));
+      int diaTermino = Convert.ToInt32(Termino.Text.Substring(0, 2));
       int mesTermino = Convert.ToInt32(Termino.Text.Substring(3, 2));
-      string anoInicio = Inicio.Text.Substring(6, 4);
-      string anoTermino = Termino.Text.Substring(6, 4);
+      int anoTermino = Convert.ToInt32(Termino.Text.Substring(6, 4));
+
+      DateTime dtTermino = Convert.ToDateTime(mesTermino + "/" + diaTermino + "/" + anoTermino + " 23:59:59");
+
+
+      var listaE = DBE.Pesquisar().Where(c => c.UsuarioID == user.UsuarioID && c.Data >= dtInicio && c.Data <= dtTermino).ToList();
+      var listaS = DBS.Pesquisar().Where(c => c.UsuarioID == user.UsuarioID && c.Data >= dtInicio && c.Data <= dtTermino).ToList();
 
       List<SugestaoView> dados = new List<SugestaoView>();
-      for(var i = mesInicio; i <= mesTermino; i++)
+
+      int mediaG= 0;
+      int i = 0;
+      string res = "";
+
+      string MaiorResultado = "";
+
+      foreach(var item in listaE)
       {
-        var mes = i;
-        string m = "";
-
-        if (mes.ToString().Length == 1) m = "0" + mes.ToString();
-        else m = mes.ToString();
-
-        for(var j = 1; j <= 31; j++)
+        SugestaoView sql = new SugestaoView
         {
-          var d = j.ToString().Length == 1 ? "0" + j.ToString() : j.ToString();
+          Data = item.Data.ToString("dd/MM/yyyyy HH:mm"),
+          Resultado = item.Resultado,
+        };
 
-          //var e = listaE.Where(x => x.Data.Substring(0, 7).Contains(d + "/" + mes.ToString() + "/" + anoInicio)).ToList();
-          //var s = listaS.Where(x => x.Data.Substring(0, 7).Contains(d + "/" + mes.ToString() + "/" + anoTermino)).ToList();
-
-          foreach(var item in listaE)
-          {
-            SugestaoView y = new SugestaoView
-            {
-              //Data = item.Data
-            };
-            dados.Add(y);
-          }
-          foreach(var item in listaS)
-          {
-            SugestaoView y = new SugestaoView
-            {
-             // Data = item.Data
-            };
-            dados.Add(y);
-          }
+        if(i == 0)
+        {
+          MaiorResultado = "Maior Resultado Registrado: " + sql.Resultado + " em " + sql.Data;
+          res = sql.Resultado;
+        } 
+        else if(Convert.ToInt32(sql.Resultado) > Convert.ToInt32(res) || sql.Resultado == "HI")
+        {
+          MaiorResultado = "Maior Resultado Registrado: " + sql.Resultado + " em " + sql.Data;
+          res = sql.Resultado;
         }
+
+        if(sql.Resultado == res)
+        {
+          MaiorResultado += ", " + sql.Data;
+        }
+
+        i++;
+        mediaG += Convert.ToInt32(sql.Resultado);
+        dados.Add(sql);
       }
-      var res = dados;
+
+      int dosagem = 0;
+      int aux = 0;
+      int j = 0;
+      foreach(var item in listaS)
+      {
+        SugestaoView sql = new SugestaoView
+        {
+          Data = item.Data.ToString("dd/MM/yyyyy HH:mm"),
+          Resultado = item.Resultado,
+          Dosagem = item.Dosagem.ToString()
+        };
+
+        if (Convert.ToInt32(sql.Resultado) > Convert.ToInt32(res) || sql.Resultado == "HI")
+        {
+          MaiorResultado = "Maior Resultado Registrado: " + sql.Resultado + " em " + sql.Data ;
+          res = sql.Resultado;
+        }
+
+        if (sql.Resultado == res)
+        {
+          MaiorResultado += ", " + sql.Data;
+        }
+
+        aux++;
+        mediaG += Convert.ToInt32(sql.Resultado);
+        dosagem += Convert.ToInt32(sql.Dosagem);
+        dados.Add(sql);
+      }
+
+      int MediaGeral = mediaG / dados.Count;
+      int MediaDosagem = dosagem / aux;
+
+      GeraRelatorio(dados.Count, MediaGeral, dosagem, MediaDosagem, MaiorResultado);
+    }
+
+    public void GeraRelatorio(int qtd, int mediaGeral, int dosagem, int MediaDosagem, string maior)
+    {
+      Label lblExames = new Label();
+      Label lblMediaGeral = new Label();
+      Label lblDosagem = new Label();
+      Label lblMediaDosagem = new Label();
+      Label lblMaior= new Label();
+
+      lblExames.Text = "Total de registros no período selecionado: " + qtd + " Registros!";
+
+      lblMediaGeral.Text = "Média da glicemia: " + mediaGeral;
+
+      lblDosagem.Text = "Total de medicamentos consumidos: " + dosagem + " Unidades";
+
+      lblMediaDosagem.Text = "Média de medicamentos consumidos: " + MediaDosagem + " Unidades";
+
+      lblMaior.Text = maior;
+
+      StackLayout sl = new StackLayout();
+      sl.Children.Add(lblExames);
+      sl.Children.Add(lblMediaGeral);
+      sl.Children.Add(lblDosagem);
+      sl.Children.Add(lblMediaDosagem);
+      sl.Children.Add(lblMaior);
+
+      slListagem.Children.Add(sl);
     }
   }
 }

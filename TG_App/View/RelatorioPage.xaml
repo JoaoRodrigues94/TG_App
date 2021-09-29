@@ -29,6 +29,7 @@
           </StackLayout>
         </Frame>
         <Frame>
+          <StackLayout x:Name="slListagem"/>
         </Frame>
       </StackLayout>
     </ScrollView>
