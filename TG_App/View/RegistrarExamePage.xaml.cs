@@ -71,7 +71,8 @@ namespace TG_App.View
           Resultado = ExameGlicemia.Text,
           UsuarioID = user.UsuarioID,
           Data = Convert.ToDateTime(mes + "/" + dia + "/" + ano + " " + horas),
-          Observacao = Observacao.Text
+          Observacao = Observacao.Text,
+          Dosagem = Convert.ToInt16(Dosagem.Text)
         };
 
         DB.Cadastrar(dados);

@@ -15,5 +15,6 @@ namespace TG_App.Model
     public DateTime Data { get; set; }
     public string Horario { get; set; }
     public string Observacao { get; set; }
+    public int Dosagem { get; set; }
   }
 }

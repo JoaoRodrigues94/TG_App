@@ -37,6 +37,10 @@ namespace TG_App.View
       DataExame.Text = e.Data.ToString("dd/MM/yyyy HH:mm");
       ExameGlicemia.Text = "Resultado: " + e.Resultado;
       Observacao.Text = "Observação: " + e.Observacao;
+
+      Label dosagem = new Label();
+      dosagem.Text = "Medicação - " + e.Dosagem.ToString() + " Unidades";
+      slAlimento.Children.Add(dosagem);
     }
     private string Tipo(int id)
     {

@@ -25,6 +25,9 @@
                   <Button Text="HI" BackgroundColor="DarkRed" TextColor="White" Clicked="HI" />
                 </StackLayout>
                 <StackLayout Padding="0">
+                  <Entry x:Name="Dosagem" Placeholder="Dosagem de Medicamento Aplicada" Keyboard="Numeric" />
+                </StackLayout>
+                <StackLayout Padding="0">
                   <Entry x:Name="Observacao" Placeholder="Observação" />
                 </StackLayout>
                 <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
