@@ -52,7 +52,7 @@ namespace TG_App.View
       int mediaG = 0, i = 0;
       string res = "0", resM = "0", MaiorResultado = "", MenorResultado = "";
 
-      int hora0 = 0, count0 = 0, hora1 = 0, count1 = 0, hora2 = 0, count2 = 0, hora3 = 0, count3 = 0, dos0 = 0, dos1 = 0, dos2 = 0, dos3 = 0;
+      int hora0 = 0, count0 = 0, hora1 = 0, count1 = 0, hora2 = 0, count2 = 0, hora3 = 0, count3 = 0, dos0 = 0, dos1 = 0, dos2 = 0, dos3 = 0, menor0 = 0, menor1 = 0, menor2 = 0, menor3 = 0, maior0 = 0, maior1 = 0, maior2 = 0, maior3 = 0;
 
       foreach (var item in listaE)
       {
@@ -105,24 +105,34 @@ namespace TG_App.View
         {
           hora0 += Convert.ToInt32(sql.Resultado);
           count0++;
+
+          // TODO - modificar a lógica implementando LO
+          menor0 = i == 0 ? Convert.ToInt32(sql.Resultado) : Convert.ToInt32(sql.Resultado) < menor0 ? Convert.ToInt32(sql.Resultado) : menor0;
+          maior0 = Convert.ToInt32(sql.Resultado) > maior0 ? Convert.ToInt32(sql.Resultado) : maior0;
         }
 
         if (sql.DataHora >= Convert.ToDateTime(sql.Hora + " 06:01") && sql.DataHora <= Convert.ToDateTime(sql.Hora + " 12:00"))
         {
           hora1 += Convert.ToInt32(sql.Resultado);
           count1++;
+          menor1 = i == 0 ? Convert.ToInt32(sql.Resultado) : Convert.ToInt32(sql.Resultado) < menor1 ? Convert.ToInt32(sql.Resultado) : menor1;
+          maior1 = Convert.ToInt32(sql.Resultado) > maior1 ? Convert.ToInt32(sql.Resultado) : maior1;
         }
 
         if (sql.DataHora >= Convert.ToDateTime(sql.Hora + " 12:01") && sql.DataHora <= Convert.ToDateTime(sql.Hora + " 18:00"))
         {
           hora2 += Convert.ToInt32(sql.Resultado);
           count2++;
+          menor2 = i == 0 ? Convert.ToInt32(sql.Resultado) : Convert.ToInt32(sql.Resultado) < menor2 ? Convert.ToInt32(sql.Resultado) : menor2;
+          maior2 = Convert.ToInt32(sql.Resultado) > maior2 ? Convert.ToInt32(sql.Resultado) : maior2;
         }
 
         if (sql.DataHora >= Convert.ToDateTime(sql.Hora + " 18:01") && sql.DataHora <= Convert.ToDateTime(sql.Hora + " 23:59"))
         {
           hora3 += Convert.ToInt32(sql.Resultado);
           count3++;
+          menor3 = i == 0 ? Convert.ToInt32(sql.Resultado) : Convert.ToInt32(sql.Resultado) < menor3 ? Convert.ToInt32(sql.Resultado) : menor3;
+          maior3 = Convert.ToInt32(sql.Resultado) > maior1 ? Convert.ToInt32(sql.Resultado) : maior3;
         }
 
         lista.Add(sql);
@@ -151,24 +161,32 @@ namespace TG_App.View
           hora0 += Convert.ToInt32(sql.Resultado);
           dos0 = Convert.ToInt32(sql.Dosagem);
           count0++;
+          menor0 = Convert.ToInt32(sql.Resultado) < menor0 ? Convert.ToInt32(sql.Resultado) : menor0;
+          maior0 = Convert.ToInt32(sql.Resultado) > maior0 ? Convert.ToInt32(sql.Resultado) : maior0;
         }
         if (sql.DataHora >= Convert.ToDateTime(sql.Hora + " 06:01") && sql.DataHora <= Convert.ToDateTime(sql.Hora + " 12:00"))
         {
           hora1 += Convert.ToInt32(sql.Resultado);
           dos1 += Convert.ToInt32(sql.Dosagem);
           count1++;
+          menor1 = Convert.ToInt32(sql.Resultado) < menor1 ? Convert.ToInt32(sql.Resultado) : menor1;
+          maior1 = Convert.ToInt32(sql.Resultado) > maior1 ? Convert.ToInt32(sql.Resultado) : maior1;
         }
         if (sql.DataHora >= Convert.ToDateTime(sql.Hora + " 12:01") && sql.DataHora <= Convert.ToDateTime(sql.Hora + " 18:00"))
         {
           hora2 += Convert.ToInt32(sql.Resultado);
           dos2 += Convert.ToInt32(sql.Dosagem);
           count2++;
+          menor2 = Convert.ToInt32(sql.Resultado) < menor2 ? Convert.ToInt32(sql.Resultado) : menor2;
+          maior2 = Convert.ToInt32(sql.Resultado) > maior2 ? Convert.ToInt32(sql.Resultado) : maior2;
         }
         if (sql.DataHora >= Convert.ToDateTime(sql.Hora + " 18:01") && sql.DataHora <= Convert.ToDateTime(sql.Hora + " 23:59"))
         {
           hora3 += Convert.ToInt32(sql.Resultado);
           dos3 += Convert.ToInt32(sql.Dosagem);
           count3++;
+          menor3 = Convert.ToInt32(sql.Resultado) < menor3 ? Convert.ToInt32(sql.Resultado) : menor3;
+          maior3 = Convert.ToInt32(sql.Resultado) > maior3 ? Convert.ToInt32(sql.Resultado) : maior3;
         }
 
         if (sql.Resultado == resM)
@@ -212,8 +230,6 @@ namespace TG_App.View
         lista.Add(sql);
       }
 
-
-      List<RelatorioViewModel> periodos = new List<RelatorioViewModel>();
       RelatorioViewModel per = new RelatorioViewModel
       {
         h0 = count0 != 0 ? hora0 / count0 : 0,
@@ -228,17 +244,27 @@ namespace TG_App.View
         MD1 = count1 != 0 ? dos1 / count1 : 0,
         MD2 = count2 != 0 ? dos2 / count2 : 0,
         MD3 = count3 != 0 ? dos3 / count3 : 0,
+        TR0 = count0,
+        TR1 = count1,
+        TR2 = count2,
+        TR3 = count3,
+        Maior0 = maior0,
+        Maior1 = maior1,
+        Maior2 = maior2,
+        Maior3 = maior3,
+        Menor0 = menor0, 
+        Menor1 = menor1,
+        Menor2 = menor2,
+        Menor3 = menor3
       };
-
-      periodos.Add(per);
 
       int MediaGeral = mediaG / dados.Count;
       int MediaDosagem = dosagem / aux;
 
-      GeraRelatorio(dados.Count, MediaGeral, dosagem, MediaDosagem, MaiorResultado, MenorResultado, periodos);
+      GeraRelatorio(dados.Count, MediaGeral, dosagem, MediaDosagem, MaiorResultado, MenorResultado, per);
     }
 
-    public void GeraRelatorio(int qtd, int mediaGeral, int dosagem, int MediaDosagem, string maior, string menor, List<RelatorioViewModel> periodo)
+    public void GeraRelatorio(int qtd, int mediaGeral, int dosagem, int MediaDosagem, string maior, string menor, RelatorioViewModel periodo)
     {
       Label Titulo = new Label
       {
@@ -251,7 +277,28 @@ namespace TG_App.View
       {
         TextColor = Color.Blue,
         FontAttributes = FontAttributes.Bold,
-        Text = "Relatório por períodos diarios"
+        Text = "Relatório - Período 00:00 ás 06:00"
+      };
+
+      Label Titulo3 = new Label
+      {
+        TextColor = Color.Blue,
+        FontAttributes = FontAttributes.Bold,
+        Text = "Relatório - Período 06:01 ás 12:00"
+      };
+
+      Label Titulo4 = new Label
+      {
+        TextColor = Color.Blue,
+        FontAttributes = FontAttributes.Bold,
+        Text = "Relatório - Período 12:01 ás 18:00"
+      };
+
+      Label Titulo5 = new Label
+      {
+        TextColor = Color.Blue,
+        FontAttributes = FontAttributes.Bold,
+        Text = "Relatório - Período 18:01 ás 23:59"
       };
 
       Label lblExames = new Label();
@@ -260,6 +307,9 @@ namespace TG_App.View
       Label lblMediaDosagem = new Label();
       Label lblMaior = new Label();
       Label lblPeriodo = new Label();
+      Label lblPeriodo1 = new Label();
+      Label lblPeriodo2 = new Label();
+      Label lblPeriodo3 = new Label();
       Label lblMenor = new Label();
 
       lblExames.Text = "Total de registros: " + qtd + " Registros!";
@@ -284,57 +334,70 @@ namespace TG_App.View
       sl.Children.Add(Titulo2);
 
       int j = 0;
-      string per = "";
-      foreach (var item in periodo)
+      string per = "", per1 = "", per2 = "", per3 = "";
+      for (var i = 0; i < 4; i++)
       {
         switch (j)
         {
           case 0:
-            if (item.h0 != 0)
+            if (periodo.h0 != 0)
             {
-              per += "Glicemia Média Estimada Entre as 00:00 e 6:00: " + item.h0 + " md / dl \n" + "Média Estimada Dosagem Aplicada - " + item.MD0 + " Unidades";
+              per += "Glicemia Média Estimada: " + periodo.h0 + " md / dl \n\n" + "Total de Registros - " + periodo.TR0 + "Registros\n\nTotal de Dosagens Aplicadas - " + periodo.TD0 + " Unidades \n\nDosagem Média Estimada - " + periodo.MD0 + " Unidades \n\nMaior Índice de Glicemia Registrado -" + periodo.Maior0+ " md / dl \n\n" +
+                "Menor Índice de Glicemia Registrado - " + periodo.Menor0 +" md / dl";
             }
             else
             {
-              per += "Nenhum Registro Encontrado das 00:00 ás 06:00\n";
+              per += "Nenhum Registro Encontrado das 00:00 ás 06:00\n\n";
             }
             break;
           case 1:
-            if (item.h1 != 0)
+            if (periodo.h1 != 0)
             {
-              per += "Glicemia Média Estimada Entre as 06:00 e 12:00: " + item.h1 + " md / dl \n" + "Média Estimada Dosagem Aplicada - " + item.MD1 + " Unidades";
+              per1 += "Glicemia Média Estimada: " + periodo.h1 + " md / dl \n\n" + "Total de Registros - " + periodo.TR1 + "Registros\n\nTotal de Dosagens Aplicadas - " + periodo.TD1 + " Unidades \n\nDosagem Média Estimada - " + periodo.MD1 + " Unidades \n\nMaior Índice de Glicemia Registrado -" + periodo.Maior1 + " md / dl \n\n" +
+                "Menor Índice de Glicemia Registrado - " + periodo.Menor1 + " md / dl";
             }
             else
             {
-              per += "Nenhum Registro Encontrado das 06:00 ás 12:00 \n";
+              per1 += "Nenhum Registro Encontrado das 06:00 ás 12:00 \n\n";
             }
             break;
           case 2:
-            if (item.h2 != 0)
+            if (periodo.h2 != 0)
             {
-              per += "Glicemia Média Estimada Entre as 12:00 e 18:00: " + item.h2 + " md / dl \n" + "Média Estimada Dosagem Aplicada - " + item.MD2 + " Unidades";
+              per2 += "Glicemia Média Estimada: " + periodo.h2 + " md / dl \n\n" + "Total de Registros - " + periodo.TR2 + "Registros\n\nTotal de Dosagens Aplicadas - " + periodo.TD2 + " Unidades \nDosagem Média Estimada - " + periodo.MD0 + " Unidades \n\nMaior Índice de Glicemia Registrado -" + periodo.Maior2 + " md / dl \n\n" +
+                "Menor Índice de Glicemia Registrado - " + periodo.Menor2 + " md / dl";
             }
             else
             {
-              per += "Nenhum Registro Encontrado das 12:00 ás 18:00\n";
+              per2 += "Nenhum Registro Encontrado das 12:00 ás 18:00\n\n";
             }
             break;
           case 3:
-            if (item.h3 != 0)
+            if (periodo.h3 != 0)
             {
-              per += "Glicemia Média Estimada Entre as 18:00 e 23:59: " + item.h3 + " md / dl \n" +
-                "Média de Dosagem Aplicada - " + item.MD3 + " Unidades";
+              per3 += "Glicemia Média Estimada: " + periodo.h3 + " md / dl \n\n" + "Total de Registros - " + periodo.TR3 + "Registros\n\nTotal de Dosagens Aplicadas - " + periodo.TD3 + " Unidades \n\nDosagem Média Estimada - " + periodo.MD3 + " Unidades /n\nMaior Índice de Glicemia Registrado -" + periodo.Maior3 + " md / dl \n\n" +
+                "Menor Índice de Glicemia Registrado - " + periodo.Menor3 + " md / dl";
             }
             else
             {
-              per += "Nenhum Registro Encontrado das 18:00 ás 23:00\n";
+              per3 += "Nenhum Registro Encontrado das 18:00 ás 23:00\n\n";
             }
             break;
         }
         j++;
       }
       lblPeriodo.Text = per;
+      lblPeriodo1.Text = per1;
+      lblPeriodo2.Text = per2;
+      lblPeriodo3.Text = per3;
+
       sl.Children.Add(lblPeriodo);
+      sl.Children.Add(Titulo3);
+      sl.Children.Add(lblPeriodo1);
+      sl.Children.Add(Titulo4);
+      sl.Children.Add(lblPeriodo2);
+      sl.Children.Add(Titulo5);
+      sl.Children.Add(lblPeriodo3);
 
       slListagem.Children.Add(sl);
     }
