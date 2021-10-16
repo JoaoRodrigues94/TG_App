@@ -31,6 +31,22 @@
         <Frame>
           <StackLayout x:Name="slListagem"/>
         </Frame>
+        <Label x:Name="Titulo_" IsVisible="false" />
+        <Label x:Name="MediaGeral" IsVisible="false" />
+        <Label x:Name="Exames" IsVisible="false" />
+        <Label x:Name="Dosagem" IsVisible="false" />
+        <Label x:Name="MediaDosagem_" IsVisible="false" />
+        <Label x:Name="blMaior" IsVisible="false" />
+        <Label x:Name="blMenor" IsVisible="false" />
+        <Label x:Name="Titulo_2" IsVisible="false" />
+        <Label x:Name="Periodo" IsVisible="false" />
+        <Label x:Name="Titulo_1" IsVisible="false" />
+        <Label x:Name="Periodo1" IsVisible="false" />
+        <Label x:Name="Titulo_4" IsVisible="false" />
+        <Label x:Name="Periodo2" IsVisible="false" />
+        <Label x:Name="Titulo_5" IsVisible="false" />
+        <Label x:Name="Periodo3" IsVisible="false" />
+        <Button Text="Gerar PDF" BackgroundColor="Blue" TextColor="White" Clicked="OnButtonClicked" />
       </StackLayout>
     </ScrollView>
   </ContentPage.Content>

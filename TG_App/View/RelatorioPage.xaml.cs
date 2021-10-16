@@ -9,6 +9,13 @@ using TG_App.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Parsing;
+using Syncfusion.Pdf.Graphics;
+using Syncfusion.Pdf.Grid;
+using Syncfusion.Drawing;
+using System.IO;
+
 namespace TG_App.View
 {
   [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -281,35 +288,35 @@ namespace TG_App.View
     {
       Label Titulo = new Label
       {
-        TextColor = Color.Blue,
+        TextColor = System.Drawing.Color.Blue,
         FontAttributes = FontAttributes.Bold,
         Text = "Relatório de exames - " + Inicio.Text + " até " + Termino.Text
       };
 
       Label Titulo2 = new Label
       {
-        TextColor = Color.Blue,
+        TextColor = System.Drawing.Color.Blue,
         FontAttributes = FontAttributes.Bold,
         Text = "Relatório - Período 00:00 ás 06:00"
       };
 
       Label Titulo3 = new Label
       {
-        TextColor = Color.Blue,
+        TextColor = System.Drawing.Color.Blue,
         FontAttributes = FontAttributes.Bold,
         Text = "Relatório - Período 06:01 ás 12:00"
       };
 
       Label Titulo4 = new Label
       {
-        TextColor = Color.Blue,
+        TextColor = System.Drawing.Color.Blue,
         FontAttributes = FontAttributes.Bold,
         Text = "Relatório - Período 12:01 ás 18:00"
       };
 
       Label Titulo5 = new Label
       {
-        TextColor = Color.Blue,
+        TextColor = System.Drawing.Color.Blue,
         FontAttributes = FontAttributes.Bold,
         Text = "Relatório - Período 18:01 ás 23:59"
       };
@@ -338,13 +345,21 @@ namespace TG_App.View
 
       StackLayout sl = new StackLayout();
       sl.Children.Add(Titulo);
+      Titulo_.Text = Titulo.Text;
       sl.Children.Add(lblMediaGeral);
+      MediaGeral.Text = lblMediaGeral.Text;
       sl.Children.Add(lblExames);
+      Exames.Text = lblExames.Text;
       sl.Children.Add(lblDosagem);
+      Dosagem.Text = lblDosagem.Text;
       sl.Children.Add(lblMediaDosagem);
+      MediaDosagem_.Text = lblMediaDosagem.Text;
       sl.Children.Add(lblMaior);
+      blMaior.Text = lblMaior.Text;
       sl.Children.Add(lblMenor);
+      blMenor.Text = lblMenor.Text;
       sl.Children.Add(Titulo2);
+      Titulo_2.Text = Titulo2.Text;
 
       int j = 0;
       string per = "", per1 = "", per2 = "", per3 = "";
@@ -405,14 +420,65 @@ namespace TG_App.View
       lblPeriodo3.Text = per3;
 
       sl.Children.Add(lblPeriodo);
+      Periodo.Text = lblPeriodo.Text;
       sl.Children.Add(Titulo3);
+      Titulo_1.Text = Titulo3.Text;
       sl.Children.Add(lblPeriodo1);
+      Periodo1.Text = lblPeriodo1.Text;
       sl.Children.Add(Titulo4);
+      Titulo_4.Text = Titulo4.Text;
       sl.Children.Add(lblPeriodo2);
+      Periodo2.Text = lblPeriodo2.Text;
       sl.Children.Add(Titulo5);
+      Titulo_5.Text = Titulo5.Text;
       sl.Children.Add(lblPeriodo3);
+      Periodo3.Text = lblPeriodo3.Text;
 
       slListagem.Children.Add(sl);
+    }
+    public void OnButtonClicked(object sender, EventArgs e)
+    {
+      string pdf = "";
+      pdf += "Período: " + Inicio.Text + " até " + Termino.Text + " \n";
+      pdf += Titulo_.Text + "\n";
+      pdf += MediaGeral.Text + "\n";
+      pdf += Exames.Text + "\n";
+      pdf += Dosagem.Text + "\n";
+      pdf += MediaDosagem_.Text + "\n";
+      pdf += blMaior.Text + "\n";
+      pdf += blMenor.Text + "\n";
+      pdf += Titulo_2.Text + "\n";
+      pdf += Periodo.Text + "\n";
+      pdf += Titulo_1.Text + "\n";
+      pdf += Periodo1.Text + "\n";
+      pdf += Titulo_4.Text + "\n";
+      pdf += Periodo2.Text + "\n";
+      pdf += Titulo_5.Text + "\n";
+      pdf += Periodo3.Text;
+      // Create a new PDF document
+      PdfDocument document = new PdfDocument();
+
+      //Add a page to the document
+      PdfPage page = document.Pages.Add();
+
+      //Create PDF graphics for the page
+      PdfGraphics graphics = page.Graphics;
+
+      //Set the standard font
+      PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);
+
+      //Draw the text
+      graphics.DrawString(pdf, font, PdfBrushes.Black, new PointF(0, 0));
+
+      //Save the document to the stream
+      MemoryStream stream = new MemoryStream();
+      document.Save(stream);
+
+      //Close the document
+      document.Close(true);
+
+      //Save the stream as a file in the device and invoke it for viewing
+      Xamarin.Forms.DependencyService.Get<ISave>().SaveAndView("RelatorioGlicemia.pdf", "application / pdf", stream);
     }
   }
 }
