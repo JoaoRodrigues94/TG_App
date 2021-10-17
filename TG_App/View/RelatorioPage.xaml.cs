@@ -77,7 +77,7 @@ namespace TG_App.View
 
         if (sql.Resultado == resM)
         {
-          MenorResultado += "; " + sql.Data;
+          MenorResultado += "\n" + sql.Data;
         }
 
         else if (sql.Resultado == "LO")
@@ -216,12 +216,12 @@ namespace TG_App.View
 
         else if (sql.Resultado == "LO")
         {
-          MenorResultado = "Menor Índice de Glícemia Registrado: " + sql.Resultado + " mg / dl em - " + sql.Data;
+          MenorResultado = "Menor Índice de Glícemia Registrado: " + sql.Resultado + " mg / dl em - " + sql.Data + "\n";
           resM = "LO";
         }
         else if (Convert.ToInt32(sql.Resultado) < Convert.ToInt32(resM) || i == 0)
         {
-          MenorResultado = "Menor Índice de Glícemia Registrado: " + sql.Resultado + " mg / dl em - " + sql.Data;
+          MenorResultado = "Menor Índice de Glícemia Registrado: " + sql.Resultado + " mg / dl em - " + sql.Data + "\n";
           resM = sql.Resultado;
         }
 
@@ -232,13 +232,13 @@ namespace TG_App.View
 
         else if (sql.Resultado == "HI")
         {
-          MaiorResultado = "Maior Índice de Glicemia Registrado: " + sql.Resultado + " mg / dl em " + sql.Data;
+          MaiorResultado = "Maior Índice de Glicemia Registrado: " + sql.Resultado + " mg / dl em " + sql.Data + "\n";
           res = "HI";
         }
 
         else if (Convert.ToInt32(sql.Resultado) > Convert.ToInt32(res))
         {
-          MaiorResultado = "Maior Índice de Glicemia Registrado: " + sql.Resultado + " mg / dl em " + sql.Data;
+          MaiorResultado = "Maior Índice de Glicemia Registrado: " + sql.Resultado + " mg / dl em " + sql.Data + "\n";
           res = sql.Resultado;
         }
 
@@ -439,20 +439,19 @@ namespace TG_App.View
     public void OnButtonClicked(object sender, EventArgs e)
     {
       string pdf = "";
-      pdf += "Período: " + Inicio.Text + " até " + Termino.Text + " \n";
       pdf += Titulo_.Text + "\n";
       pdf += MediaGeral.Text + "\n";
       pdf += Exames.Text + "\n";
       pdf += Dosagem.Text + "\n";
       pdf += MediaDosagem_.Text + "\n";
       pdf += blMaior.Text + "\n";
-      pdf += blMenor.Text + "\n";
+      pdf += blMenor.Text + "\n\n";
       pdf += Titulo_2.Text + "\n";
-      pdf += Periodo.Text + "\n";
+      pdf += Periodo.Text + "\n\n";
       pdf += Titulo_1.Text + "\n";
-      pdf += Periodo1.Text + "\n";
+      pdf += Periodo1.Text + "\n\n";
       pdf += Titulo_4.Text + "\n";
-      pdf += Periodo2.Text + "\n";
+      pdf += Periodo2.Text + "\n\n";
       pdf += Titulo_5.Text + "\n";
       pdf += Periodo3.Text;
       // Create a new PDF document
@@ -465,7 +464,7 @@ namespace TG_App.View
       PdfGraphics graphics = page.Graphics;
 
       //Set the standard font
-      PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);
+      PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 12);
 
       //Draw the text
       graphics.DrawString(pdf, font, PdfBrushes.Black, new PointF(0, 0));
