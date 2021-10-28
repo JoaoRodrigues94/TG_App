@@ -37,7 +37,7 @@ namespace TG.View
         if (user.Email == Login.Text && user.Senha == Senha.Text)
         {
           new Validacao().Add(user);
-          App.Current.MainPage = new RelatorioPage();
+          App.Current.MainPage = new NotificacaoPage();
         }
         else
         {

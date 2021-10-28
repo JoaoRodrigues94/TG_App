@@ -15,6 +15,7 @@ using Syncfusion.Pdf.Graphics;
 using Syncfusion.Pdf.Grid;
 using Syncfusion.Drawing;
 using System.IO;
+using Plugin.LocalNotifications;
 
 namespace TG_App.View
 {
@@ -162,8 +163,6 @@ namespace TG_App.View
         mediaG += Convert.ToInt32(sql.Resultado);
         dados.Add(sql);
       }
-
-      int j = 0;
 
       foreach (var item in listaS)
       {
@@ -478,6 +477,10 @@ namespace TG_App.View
 
       //Save the stream as a file in the device and invoke it for viewing
       Xamarin.Forms.DependencyService.Get<ISave>().SaveAndView("RelatorioGlicemia.pdf", "application / pdf", stream);
+    }
+    public void Start_Notification(object sender, EventArgs e)
+    {
+      CrossLocalNotifications.Current.Show("Atenção", "Hora de Registrar Exame de Glicemia!");
     }
   }
 }

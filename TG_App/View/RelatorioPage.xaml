@@ -46,6 +46,7 @@
         <Label x:Name="Periodo2" IsVisible="false" />
         <Label x:Name="Titulo_5" IsVisible="false" />
         <Label x:Name="Periodo3" IsVisible="false" />
+        <Button Text="Notification" Clicked="Start_Notification"/>
         <Button Text="Gerar PDF" BackgroundColor="Blue" TextColor="White" Clicked="OnButtonClicked" />
       </StackLayout>
     </ScrollView>
