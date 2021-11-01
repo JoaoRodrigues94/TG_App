@@ -3,6 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TG_App.App">
   <Application.Resources>
+    <!-- Cabeçalho -->
+    <Style TargetType="Label">
+      <Setter Property="TextColor" Value="White"/>
+    </Style>
+    <Style TargetType="StackLayout" x:Key="Cabecalho">
+      <Setter Property="BackgroundColor" Value="Blue"/>
+    </Style>
+    <Style TargetType="Label" x:Key="CabecalhoTitulo">
+      <Setter Property="TextColor" Value="White"/>
+      <Setter Property="HorizontalOptions" Value="Center"/>
+      <Setter Property="Padding" Value="10"/>
+    </Style>
+    
     <!-- Estilos Globais -->
     <Style TargetType="Frame">
       <Setter Property="OutlineColor" Value="Black" />

@@ -8,6 +8,7 @@ using TG_App;
 using TG_App.Banco;
 using TG_App.Model;
 using TG_App.View;
+using TG_App.View.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -37,7 +38,7 @@ namespace TG.View
         if (user.Email == Login.Text && user.Senha == Senha.Text)
         {
           new Validacao().Add(user);
-          App.Current.MainPage = new NotificacaoPage();
+          App.Current.MainPage = new NavigationPage(new Master());
         }
         else
         {

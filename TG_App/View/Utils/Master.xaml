@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:cont="clr-namespace:TG_App.View"
+             x:Class="TG_App.View.Utils.Master">
+  <MasterDetailPage.Master>
+    <ContentPage Title="Menu">
+      <StackLayout>
+        <Button Text="Home" BackgroundColor="Transparent" Clicked="GoHome"/>
+        <Button Text="Relatórios" BackgroundColor="Transparent" Clicked="GoRelatorio"/>
+      </StackLayout>
+    </ContentPage>
+  </MasterDetailPage.Master>
+  <MasterDetailPage.Detail>
+    <cont:HomePage/>
+  </MasterDetailPage.Detail>
+</MasterDetailPage>

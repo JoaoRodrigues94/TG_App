@@ -2,6 +2,7 @@
 using System.Globalization;
 using TG.View;
 using TG_App.View;
+using TG_App.View.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

@@ -149,4 +149,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\Search.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\menu.png" />
+  </ItemGroup>
 </Project>
