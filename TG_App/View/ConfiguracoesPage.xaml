@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behavior1="clr-namespace:TG.View"
+             x:Class="TG_App.View.ConfiguracoesPage">
+    <ContentPage.Content>
+    <ScrollView>
+      <StackLayout VerticalOptions="FillAndExpand">
+        <!--HORARIOS-->
+        <Frame IsVisible="{Binding CkHorario}">
+          <StackLayout>
+            <Label TextColor="DarkRed" Text="ADICIONAR NOVO HORÁRIO" FontAttributes="Bold" HorizontalTextAlignment="Center" IsVisible="{Binding CkHorario}"/>
+            <StackLayout Padding="0">
+              <!--<StackLayout x:Name="AddHorarios" Padding="0" />-->
+              <TimePicker Format="HH:mm" x:Name="NovoHorario"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+              <Button Text="Adicionar Novo Horário" BackgroundColor="Green" TextColor="White" Clicked="AddHorario" />
+              <Button Text="Salvar" BackgroundColor="Blue" TextColor="White" Clicked="Salvar"/>
+            </StackLayout>
+          </StackLayout>
+        </Frame>
+      </StackLayout>
+    </ScrollView>
+  </ContentPage.Content>
+</ContentPage>

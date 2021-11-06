@@ -8,6 +8,7 @@
       <StackLayout>
         <Button Text="Home" BackgroundColor="Transparent" Clicked="GoHome"/>
         <Button Text="Relatórios" BackgroundColor="Transparent" Clicked="GoRelatorio"/>
+        <Button Text="Configurações" BackgroundColor="Transparent" Clicked="Configuracoes"/>
       </StackLayout>
     </ContentPage>
   </MasterDetailPage.Master>

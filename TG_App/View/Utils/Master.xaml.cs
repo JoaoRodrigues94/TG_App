@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using TG_App.Banco;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,6 +17,8 @@ namespace TG_App.View.Utils
     public Master()
     {
       InitializeComponent();
+
+      DataBase DB = new DataBase();
 
       Notificacao.TaskScheduler.Instance.ScheduleTask(22, 35, 24,
       () =>
@@ -34,6 +36,11 @@ namespace TG_App.View.Utils
     private void GoRelatorio(object sender, EventArgs args)
     {
       Detail = new NavigationPage(new RelatorioPage());
+    }
+
+    private void Configuracoes(object sender, EventArgs args)
+    {
+      Detail = new NavigationPage(new ConfiguracoesPage());
     }
   }
 }

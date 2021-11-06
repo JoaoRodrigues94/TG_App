@@ -44,6 +44,15 @@ namespace TG_App.Banco
 
       return _conexao.Table<Usuario>().Where(x => x.Email == email).ToList();
     }
+    public List<Usuario> GetUsuarios()
+    {
+      return _conexao.Table<Usuario>().ToList();
+    }
+
+    public List<Horarios> GetHorarios()
+    {
+      return _conexao.Table<Horarios>().ToList();
+    }
     public List<Alimento> PesquisarAlimento()
     {
       //.Where(x => x.UsuarioID == id).ToList();

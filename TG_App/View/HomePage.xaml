@@ -1,11 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:cab="clr-namespace:TG_App.View.Utils"
              x:Class="TG_App.View.HomePage">
   <ContentPage.Content>
     <StackLayout Spacing="0" Padding="0">
-      <cab:Cabecalho/>
       <StackLayout>
           <Label Text="Bem Vindo!"
                 VerticalOptions="Center" 
