@@ -28,7 +28,7 @@
                 <x:String>Diabétes tipo 1</x:String>
                 <x:String>Diabétes tipo 2 - Faz uso de insulina de ação rápida e lenta</x:String>
                 <x:String>Diabétes tipo 2 - Faz uso somente de insulina de ação lenta</x:String>
-                <x:String>Diabétes tipo 2 - Faz uso de comprimidos</x:String>
+                <x:String>Diabétes tipo 2 - Faz uso somente de insulina de ação rápida</x:String>
               </Picker.Items>
             </Picker>
 
@@ -47,7 +47,7 @@
             
             <StackLayout Orientation="Horizontal" IsVisible="{Binding VisibleInsulinaR}" Padding="0">
               <StackLayout HorizontalOptions="FillAndExpand" Padding="0">
-                <Entry x:Name="NomeInsulinaR" Text="{Binding InsulinaRapida}" Placeholder="Medicamento de Ação Rápida"/>
+                <Entry x:Name="NomeInsulinaR" Text="{Binding InsulinaRapida}" Placeholder="Nome da Insulina de Ação Rápida"/>
               </StackLayout>
             </StackLayout>
             <Button Text="Próximo" HorizontalOptions="End" BackgroundColor="Gray" Command="{Binding Proximo_2}" IsVisible="{Binding Prox_2}"/>
@@ -55,6 +55,7 @@
         </Frame>
 
         <!--HORARIOS-->
+        <!--
         <Frame IsVisible="{Binding CkHorario}">
           <StackLayout>
             <Label TextColor="DarkRed" Text="HORÁRIOS" FontAttributes="Bold" HorizontalTextAlignment="Center" IsVisible="{Binding CkHorario}"/>
@@ -73,7 +74,7 @@
             </StackLayout>
           </StackLayout>
         </Frame>
-
+        -->
 
         <Frame IsVisible="{Binding CkUnidades}">
           <StackLayout>

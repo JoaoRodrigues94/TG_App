@@ -332,15 +332,21 @@ namespace TG_App.View
       Label lblMenor = new Label();
 
       lblExames.Text = "Total de registros: " + qtd + " Registros!";
+      lblExames.TextColor = Xamarin.Forms.Color.Black;
 
       lblMediaGeral.Text = "Glicemia Média Estimada no Período Selecionado: " + mediaGeral + " mg / dl";
+      lblMediaGeral.TextColor = Xamarin.Forms.Color.Black;
 
       lblDosagem.Text = "Total de Dosagens Aplicadas: " + dosagem + " Unidades";
+      lblDosagem.TextColor = Xamarin.Forms.Color.Black;
 
       lblMediaDosagem.Text = "Dosagem Média Estimada: " + MediaDosagem + " Unidades";
+      lblMediaDosagem.TextColor = Xamarin.Forms.Color.Black;
 
       lblMaior.Text = maior;
+      lblMaior.TextColor = Xamarin.Forms.Color.Black;
       lblMenor.Text = menor;
+      lblMenor.TextColor = Xamarin.Forms.Color.Black;
 
       StackLayout sl = new StackLayout();
       sl.Children.Add(Titulo);
@@ -414,9 +420,13 @@ namespace TG_App.View
         j++;
       }
       lblPeriodo.Text = per;
+      lblPeriodo.TextColor = Xamarin.Forms.Color.Black;
       lblPeriodo1.Text = per1;
+      lblPeriodo1.TextColor = Xamarin.Forms.Color.Black;
       lblPeriodo2.Text = per2;
+      lblPeriodo2.TextColor = Xamarin.Forms.Color.Black;
       lblPeriodo3.Text = per3;
+      lblPeriodo3.TextColor = Xamarin.Forms.Color.Black;
 
       sl.Children.Add(lblPeriodo);
       Periodo.Text = lblPeriodo.Text;

@@ -10,6 +10,7 @@ using TG.ModelView;
 using TG_App;
 using TG_App.Banco;
 using TG_App.View;
+using TG_App.View.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using static TG.Model.Horarios;
@@ -31,7 +32,7 @@ namespace TG.View
       BindingContext = new CadastroModelView();
 
       List<StackLayout> ListaS = new Gerenciador().Listagem();
-      CarregarHorarios('A');
+      //CarregarHorarios('A');
     }
     public void DadosHorarios(StackLayout dados)
     {
@@ -93,151 +94,151 @@ namespace TG.View
 
           DB.CadastrarUsuario(user);
 
-          if (TipoDiabete.SelectedIndex != 3)
-          {
-            Horarios lenta = new Horarios
-            {
-              UsuarioID = user.UsuarioID,
-              Horario = Convert.ToString(HorarioL.Time),
-              Pickers = 2,
-              NomeMedicamento = NomeInsulinaL.Text,
-              Unidades = Convert.ToDecimal(UnidadesL.Text)
-            };
-            DB.CadastrarHorario(lenta);
-          }
-          foreach (var item in stackLayout)
-          {
-            Horarios dados = new Horarios
-            {
-              UsuarioID = user.UsuarioID,
-              Horario = item.Horario,
-              Pickers = item.Pickers,
-              Unidades = item.Unidades,
-              NomeMedicamento = NomeInsulinaR.Text
-            };
-            DB.CadastrarHorario(dados);
-          }
-          App.Current.MainPage = new HomePage();
-        }
-      }
-    }
-    public void CarregarHorarios(char verif)
-    {
-      AddHorarios.Children.Clear();
-      stackLayout.Clear();
-
-      List<StackLayout> Lista = new Gerenciador().Listagem();
-
-      int i = 0;
-      var y = picker;
-      foreach (var item in Lista)
-      {
-        DadosHorarios(item);
-        ListaStacks(i, 1, Lista);
-        i++;
-      }
-      if (verif == 'A')
-      {
-        ListaStacks(cont, 0, Lista);
-        cont++;
-      }
-    }
-    public void Next(object sender, EventArgs args)
-    {
-      CarregarHorarios('N');
-    }
-    public void ListaStacks(int id, int verif, List<StackLayout> lista)
-    {
-      Picker p = new Picker { Title = "Selecione" };
-      p.Items.Add("Exame de Glicemia e Medicação");
-      p.Items.Add("Exame de Glicemia");
-      p.Items.Add("Medicação");
-
-      TimePicker tp = new TimePicker { Format = "HH:mm" };
-      Entry un = new Entry { Placeholder = "Unidades" };
-      Image btn2 = new Image { WidthRequest = 25, VerticalOptions = LayoutOptions.Center };
-      btn2.Source = "delete.png";
-
-      StackLayout horizontal = new StackLayout
-      {
-        Orientation = StackOrientation.Horizontal,
-        Padding = 0,
-      };
-
-      p.PropertyChanged += delegate
-      {
-        horizontal.Children.Clear();
-        if (p.SelectedIndex != 1)
-        {
-          horizontal.Children.Add(new StackLayout
-          {
-            Padding = 0,
-            HorizontalOptions = LayoutOptions.FillAndExpand,
-            Children =
-          {
-            tp
-          }
-          });
-          horizontal.Children.Add(new StackLayout
-          {
-            Padding = 0,
-            HorizontalOptions = LayoutOptions.FillAndExpand,
-            Children =
-          {
-            un
-          }
-          });
-        }
-        else
-        {
-          horizontal.Children.Add(new StackLayout
-          {
-            Padding = 0,
-            HorizontalOptions = LayoutOptions.FillAndExpand,
-            Children =
-          {
-            tp
-          }
-          });
-          un.Text = "0";
-          horizontal.Children.Add(new StackLayout
-          {
-            IsVisible = false,
-            Children =
-          {
-            un
-          }
-          });
-        }
-      };
-
-      var dadosLayout = new StackLayout
-      {
-        Padding = 0,
-        Children =
-            {
-              p,
-              horizontal
+                    //if (TipoDiabete.SelectedIndex != 3)
+                    //{
+                    //  Horarios lenta = new Horarios
+                    //  {
+                    //    UsuarioID = user.UsuarioID,
+                    //    Horario = Convert.ToString(HorarioL.Time),
+                    //    Pickers = 2,
+                    //    NomeMedicamento = NomeInsulinaL.Text,
+                    //    Unidades = Convert.ToDecimal(UnidadesL.Text)
+                    //  };
+                    //  DB.CadastrarHorario(lenta);
+                    //}
+                    //foreach (var item in stackLayout)
+                    //{
+                    //  Horarios dados = new Horarios
+                    //  {
+                    //    UsuarioID = user.UsuarioID,
+                    //    Horario = item.Horario,
+                    //    Pickers = item.Pickers,
+                    //    Unidades = item.Unidades,
+                    //    NomeMedicamento = NomeInsulinaR.Text
+                    //  };
+                    //  DB.CadastrarHorario(dados);
+                    //}
+                    App.Current.MainPage = new NavigationPage(new Master());
+                }
             }
-      };
-
-      if (verif == 0)
-      {
-        new Gerenciador().Add(dadosLayout);
-        CarregarHorarios('D');
-      }
-
-      List<StackLayout> Lista = new Gerenciador().Listagem();
-
-      foreach (var item in Lista)
-      {
-        AddHorarios.Children.Add(item);
-      }
     }
-    private void AddHorarioAcion(object sender, EventArgs args)
-    {
-      CarregarHorarios('A');
-    }
+    //public void CarregarHorarios(char verif)
+    //{
+    //  //AddHorarios.Children.Clear();
+    //  stackLayout.Clear();
+
+    //  List<StackLayout> Lista = new Gerenciador().Listagem();
+
+    //  int i = 0;
+    //  var y = picker;
+    //  foreach (var item in Lista)
+    //  {
+    //    DadosHorarios(item);
+    //    ListaStacks(i, 1, Lista);
+    //    i++;
+    //  }
+    //  if (verif == 'A')
+    //  {
+    //    ListaStacks(cont, 0, Lista);
+    //    cont++;
+    //  }
+    //}
+    //public void Next(object sender, EventArgs args)
+    //{
+    //  CarregarHorarios('N');
+    //}
+    //public void ListaStacks(int id, int verif, List<StackLayout> lista)
+    //{
+    //  Picker p = new Picker { Title = "Selecione" };
+    //  p.Items.Add("Exame de Glicemia e Medicação");
+    //  p.Items.Add("Exame de Glicemia");
+    //  p.Items.Add("Medicação");
+
+    //  TimePicker tp = new TimePicker { Format = "HH:mm" };
+    //  Entry un = new Entry { Placeholder = "Unidades" };
+    //  Image btn2 = new Image { WidthRequest = 25, VerticalOptions = LayoutOptions.Center };
+    //  btn2.Source = "delete.png";
+
+    //  StackLayout horizontal = new StackLayout
+    //  {
+    //    Orientation = StackOrientation.Horizontal,
+    //    Padding = 0,
+    //  };
+
+    //  p.PropertyChanged += delegate
+    //  {
+    //    horizontal.Children.Clear();
+    //    if (p.SelectedIndex != 1)
+    //    {
+    //      horizontal.Children.Add(new StackLayout
+    //      {
+    //        Padding = 0,
+    //        HorizontalOptions = LayoutOptions.FillAndExpand,
+    //        Children =
+    //      {
+    //        tp
+    //      }
+    //      });
+    //      horizontal.Children.Add(new StackLayout
+    //      {
+    //        Padding = 0,
+    //        HorizontalOptions = LayoutOptions.FillAndExpand,
+    //        Children =
+    //      {
+    //        un
+    //      }
+    //      });
+    //    }
+    //    else
+    //    {
+    //      horizontal.Children.Add(new StackLayout
+    //      {
+    //        Padding = 0,
+    //        HorizontalOptions = LayoutOptions.FillAndExpand,
+    //        Children =
+    //      {
+    //        tp
+    //      }
+    //      });
+    //      un.Text = "0";
+    //      horizontal.Children.Add(new StackLayout
+    //      {
+    //        IsVisible = false,
+    //        Children =
+    //      {
+    //        un
+    //      }
+    //      });
+    //    }
+    //  };
+
+    //  var dadosLayout = new StackLayout
+    //  {
+    //    Padding = 0,
+    //    Children =
+    //        {
+    //          p,
+    //          horizontal
+    //        }
+    //  };
+
+    //  if (verif == 0)
+    //  {
+    //    new Gerenciador().Add(dadosLayout);
+    //    CarregarHorarios('D');
+    //  }
+
+    //  List<StackLayout> Lista = new Gerenciador().Listagem();
+
+    //  foreach (var item in Lista)
+    //  {
+    //    AddHorarios.Children.Add(item);
+    //  }
+    //}
+    //private void AddHorarioAcion(object sender, EventArgs args)
+    //{
+    //  CarregarHorarios('A');
+    //}
 
     public void Voltar(object sender, EventArgs args)
     {
@@ -251,7 +252,7 @@ namespace TG.View
       if (itens.Count > 1)
       {
         new Gerenciador().Deletar(dados);
-        CarregarHorarios('D');
+        //CarregarHorarios('D');
       }
     }
 

@@ -5,7 +5,7 @@
   <Application.Resources>
     <!-- Cabeçalho -->
     <Style TargetType="Label">
-      <Setter Property="TextColor" Value="White"/>
+      <Setter Property="TextColor" Value="Black"/>
     </Style>
     <Style TargetType="StackLayout" x:Key="Cabecalho">
       <Setter Property="BackgroundColor" Value="Blue"/>
@@ -23,8 +23,8 @@
     </Style>
 
     <!-- Stack Layout -->
-    <Style TargetType="StackLayout">
-      <Setter Property="Padding" Value="10"/>
-    </Style>
-  </Application.Resources>
+        <Style TargetType="StackLayout">
+            <Setter Property="Padding" Value="10"/>
+        </Style>
+    </Application.Resources>
 </Application>
