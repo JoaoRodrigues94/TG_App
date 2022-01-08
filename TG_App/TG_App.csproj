@@ -21,6 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="View\AgendaPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="View\AlimentosEditPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
