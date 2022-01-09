@@ -30,6 +30,20 @@
 
                 <Frame>
                     <StackLayout Padding="0">
+                        <StackLayout>
+                            <Label Text="Filtrar" TextColor="Blue"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Entry x:Name="NomeEvent" Placeholder="Descrição do Evento" HorizontalOptions="FillAndExpand"/>
+                            <Entry x:Name="DataSearch" Placeholder="Data" Keyboard="Numeric" >
+                                <Entry.Behaviors>
+                                    <behavior1:MaskedData Mask="XX/XX/XXXX"/>
+                                </Entry.Behaviors>
+                            </Entry>
+                            <Button ImageSource="Search.png" BackgroundColor="Transparent" Clicked="Pesquisar" />
+                        </StackLayout>
+                        
+                        
                         <Label Text="Listagem" TextColor="DarkRed" FontAttributes="Bold"
                 HorizontalOptions="CenterAndExpand" />
                         
@@ -39,8 +53,8 @@
                                     <ViewCell>
                                         <Frame BorderColor="Blue">
                                             <StackLayout>
-                                                <Label Text="{Binding Descricao}" IsVisible="false" />
-                                                <Label Text="{Binding Local}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
+                                                <Label Text="{Binding Descricao}" FontAttributes="Bold"/>
+                                                <Label Text="{Binding Local}"  HorizontalOptions="FillAndExpand" />
                                                 <Label Text="{Binding Data}" HorizontalOptions="FillAndExpand" />
                                                 <Label Text="{Binding Observacao}" HorizontalOptions="FillAndExpand" />
                                                 <Picker SelectedIndex="{Binding Status}">

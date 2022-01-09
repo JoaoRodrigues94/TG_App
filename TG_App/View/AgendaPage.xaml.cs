@@ -66,6 +66,24 @@ namespace TG_App.View
             App.Current.MainPage = new MainPage();
         }
 
+        public void Pesquisar(object sender, EventArgs args)
+        {
+            DBAgenda Db = new DBAgenda();
+            var user = new Validacao().Listagem().SingleOrDefault();
+
+            var lista = Db.PesquisarAgenda().ToList();
+
+            if (!String.IsNullOrEmpty(DataSearch.Text))
+                lista = lista.Where(c => c.Data.Contains(DataSearch.Text)).ToList();
+
+            if (!String.IsNullOrEmpty(NomeEvent.Text))
+                lista = lista.Where(c => c.Descrição.Contains(NomeEvent.Text)).ToList();
+
+            ListaAgenda.ItemsSource = lista;
+            DataSearch.Text = null;
+            NomeEvent.Text = null;
+        }
+
         public void Atualizar(object sender, EventArgs args)
         {
             try
