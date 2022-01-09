@@ -1,38 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behavior1="clr-namespace:TG_App.View"
-             x:Class="TG_App.View.AgendaPage">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TG_App.View.AgendaIndex">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
                 <Frame>
-                    <StackLayout>
-                        <Label Text="Cadastro de Consultas e Exames Laboratoriais." TextColor="DarkRed" FontAttributes="Bold"
-                HorizontalOptions="CenterAndExpand" />
-                        <Entry x:Name="Descricao" Placeholder="Descrição" HorizontalOptions="FillAndExpand"/>
-                        <Entry x:Name="Local" Placeholder="Local" />
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="0">
-                            <Entry x:Name="Date" Placeholder="Data" Keyboard="Numeric" HorizontalOptions="FillAndExpand">
-                                <Entry.Behaviors>
-                                    <behavior1:MaskedData Mask="XX/XX/XXXX"/>
-                                </Entry.Behaviors>
-                            </Entry>
-                            <Label Text="Horário" />
-                            <TimePicker x:Name="Hours" Format="HH:mm" />
-                        </StackLayout>
-                        <Entry x:Name="Observacao" Placeholder="Observações" />
-                        <StackLayout Padding="0" Orientation="Horizontal" HorizontalOptions="Center">
-                            <Button Text="Salvar" TextColor="White" BackgroundColor="DarkGreen" Clicked="SaveAgenda"/>
-                            <Button Text="Voltar" TextColor="White" BackgroundColor="DarkRed" Clicked="VoltarAction"/>
-                        </StackLayout>
-                    </StackLayout>
-                </Frame>
-
-                <Frame>
                     <StackLayout Padding="0">
                         <Label Text="Listagem" TextColor="DarkRed" FontAttributes="Bold"
                 HorizontalOptions="CenterAndExpand" />
-                        
+
                         <ListView x:Name="ListaAgenda" HasUnevenRows="True">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
@@ -43,15 +20,15 @@
                                                 <Label Text="{Binding Local}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
                                                 <Label Text="{Binding Data}" HorizontalOptions="FillAndExpand" />
                                                 <Label Text="{Binding Observacao}" HorizontalOptions="FillAndExpand" />
-                                                <Picker SelectedIndex="{Binding Status}">
+                                                <Picker x:Name="Status" SelectedIndex="{Binding Status}" BindingContext="">
                                                     <Picker.Items>
                                                         <x:String>Pendente</x:String>
                                                         <x:String>Concluído</x:String>
                                                     </Picker.Items>
                                                 </Picker>
                                                 <StackLayout Orientation="Horizontal">
-                                                    <Button Text="Editar" BackgroundColor="Blue" TextColor="White" CommandParameter="{Binding .}" Clicked="Atualizar"/>
-                                                    <Button Text="Excluir" BackgroundColor="DarkRed" TextColor="white" CommandParameter="{Binding .}" Clicked="Excluir"/>
+                                                    <Button Text="Atualizar" BackgroundColor="Blue" TextColor="White" Command="{Binding Update}" />
+                                                    <Button Text="Excluir" BackgroundColor="DarkRed" TextColor="white" CommandParameter="{Binding .}"/>
                                                 </StackLayout>
                                             </StackLayout>
                                         </Frame>
