@@ -9,6 +9,9 @@
         <Button Text="Home" BackgroundColor="Transparent" Clicked="GoHome"/>
         <Button Text="Relatórios" BackgroundColor="Transparent" Clicked="GoRelatorio"/>
         <Button Text="Configurações" BackgroundColor="Transparent" Clicked="Configuracoes"/>
+        <Button Text="Alimentos" BackgroundColor="Transparent" Clicked="Alimentos"/>
+        <Button Text="Exames" BackgroundColor="Transparent" Clicked="Exames"/>
+        <Button Text="Atividades Físicas" BackgroundColor="Transparent" Clicked="AtFisico"/>
       </StackLayout>
     </ContentPage>
   </MasterDetailPage.Master>

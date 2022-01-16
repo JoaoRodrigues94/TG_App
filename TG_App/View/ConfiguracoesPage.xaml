@@ -3,23 +3,83 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behavior1="clr-namespace:TG.View"
              x:Class="TG_App.View.ConfiguracoesPage">
     <ContentPage.Content>
-    <ScrollView>
-      <StackLayout VerticalOptions="FillAndExpand">
-        <!--HORARIOS-->
-        <Frame IsVisible="{Binding CkHorario}">
-          <StackLayout>
-            <Label TextColor="DarkRed" Text="ADICIONAR NOVO HORÁRIO" FontAttributes="Bold" HorizontalTextAlignment="Center" IsVisible="{Binding CkHorario}"/>
-            <StackLayout Padding="0">
-              <!--<StackLayout x:Name="AddHorarios" Padding="0" />-->
-              <TimePicker Format="HH:mm" x:Name="NovoHorario"/>
+        <ScrollView>
+            <StackLayout VerticalOptions="FillAndExpand">
+                <Frame>
+                    <StackLayout>
+                        <Label TextColor="DarkRed" Text="DADOS PESSOAIS" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                        <Entry x:Name="Nome" Text="{Binding Nome}" Placeholder="Nome" />
+                        <Entry x:Name="Email" Text="{Binding Email}" Placeholder="Email" Keyboard="Email" />
+                        <Entry x:Name="Celular" Text="{Binding Celular}" Placeholder="Celular" Keyboard="Telephone" >
+                            <Entry.Behaviors>
+                                <behavior1:MaskedTelefone Mask="(XX)XXXXX-XXXX"/>
+                            </Entry.Behaviors>
+                        </Entry>
+                    </StackLayout>
+                </Frame>
+                <Frame>
+                    <StackLayout>
+                        <Label TextColor="DarkRed" Text="MEDICAMENTOS" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+
+                        <Picker Title="Selecione" x:Name="TipoDiabete" SelectedIndex="{Binding TipoDiabete}" >
+                            <Picker.Items>
+                                <x:String>Diabétes tipo 1</x:String>
+                                <x:String>Diabétes tipo 2 - Faz uso de insulina de ação rápida e lenta</x:String>
+                                <x:String>Diabétes tipo 2 - Faz uso somente de insulina de ação lenta</x:String>
+                                <x:String>Diabétes tipo 2 - Faz uso somente de insulina de ação rápida</x:String>
+                            </Picker.Items>
+                        </Picker>
+
+                        <!-- Insulina Lenta -->
+                        <StackLayout Orientation="Horizontal" Padding="0" >
+                            <Entry x:Name="NomeInsulinaL" Text="{Binding InsulinaLenta}" Placeholder="Nome da Insulina de Ação Lenta" HorizontalOptions="FillAndExpand" />
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Padding="0" >
+                            <Label Text="Unidades:"/>
+                            <Entry x:Name="UnidadesL" Placeholder="Unidades" Text="{Binding UnidadesLenta}"  Keyboard="Numeric" HorizontalOptions="FillAndExpand" />
+                            <Label Text="Horário:"/>
+                            <!--TODO Gravar em Horários -->
+                            <TimePicker Format="HH:mm" x:Name="HorarioL" HorizontalOptions="FillAndExpand" />
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Padding="0">
+                            <StackLayout HorizontalOptions="FillAndExpand" Padding="0">
+                                <Entry x:Name="NomeInsulinaR" Text="{Binding InsulinaRapida}" Placeholder="Nome da Insulina de Ação Rápida"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Frame>
+                    <StackLayout>
+                        <Label TextColor="DarkRed" Text="CORREÇÕES" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                        <Label Text="Correção Alimentar" FontAttributes="Bold"/>
+                        <StackLayout Orientation="Horizontal" Padding="0">
+                            <Entry x:Name="UniAlimento" Placeholder="Unidades" Text="{Binding AlimentoUni}" HorizontalOptions="FillAndExpand" Keyboard="Numeric"/>
+                            <Label Text="Para cada: "/>
+                            <Entry x:Name="Carboidratos" Placeholder="Gramas de Carboidratos" Text="{Binding GramasCarbo}" HorizontalOptions="FillAndExpand" Keyboard="Numeric"/>
+                        </StackLayout>
+
+                        <Label Text="Correção de Glicemia" FontAttributes="Bold"/>
+                        <StackLayout Orientation="Horizontal" Padding="0">
+                            <Entry x:Name="Correcao" Placeholder="Unidades" Text="{Binding UnidadeCorrecao}" HorizontalOptions="FillAndExpand" Keyboard="Numeric" />
+                            <Label Text="para cada"/>
+                            <Entry x:Name="GlicemiaUnd" Placeholder="Unidades de Glicemia" Text="{Binding UnidadeGlicemia}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Frame IsVisible="{Binding CkSenha}">
+                    <StackLayout>
+                        <Label TextColor="DarkRed" Text="SENHA" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                        <Entry x:Name="Senha" Placeholder="Senha Com no Minímo 6 Caracteres"  IsPassword="True"/>
+                        <Entry x:Name="ConfirmarSenha" Placeholder="Confirmar Senha" Text="{Binding ConfirmarSenha}" IsPassword="True"/>
+                    </StackLayout>
+                </Frame>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Button HorizontalOptions="CenterAndExpand" VerticalOptions="Center" BackgroundColor="DarkGreen" Text="Salvar" Clicked="Salvar" IsVisible="{Binding CkSenha}"/>
+                    <Button Text="Voltar" HorizontalOptions="CenterAndExpand" BackgroundColor="DarkRed" Clicked="Voltar"/>
+                </StackLayout>
             </StackLayout>
-            <StackLayout Orientation="Horizontal">
-              <Button Text="Adicionar Novo Horário" BackgroundColor="Green" TextColor="White" Clicked="AddHorario" />
-              <Button Text="Salvar" BackgroundColor="Blue" TextColor="White" Clicked="Salvar"/>
-            </StackLayout>
-          </StackLayout>
-        </Frame>
-      </StackLayout>
-    </ScrollView>
-  </ContentPage.Content>
+        </ScrollView>
+    </ContentPage.Content>
 </ContentPage>

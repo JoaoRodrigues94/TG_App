@@ -14,38 +14,38 @@ using Xamarin.Forms.Xaml;
 
 namespace TG.View
 {
-  [XamlCompilation(XamlCompilationOptions.Compile)]
-  public partial class LoginPage : ContentPage
-  {
-    public LoginPage()
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class LoginPage : ContentPage
     {
-      InitializeComponent();
-
-      BindingContext = new ModelView.LoginModelView();
-    }
-    public void EntrarAction(object sender, EventArgs args)
-    {
-      DataBase DB = new DataBase();
-
-      var user = DB.PesquisarEmail(Login.Text).SingleOrDefault();
-
-      if (user == null)
-      {
-        DisplayAlert("ERRO", "Usuário e senha inválidos!", "OK");
-      }
-      else
-      {
-        if (user.Email == Login.Text && user.Senha == Senha.Text)
+        public LoginPage()
         {
-          new Validacao().Add(user);
-                    //App.Current.MainPage = new NavigationPage(new Master());
-                    App.Current.MainPage = new AgendaPage();
+            InitializeComponent();
+
+            BindingContext = new ModelView.LoginModelView();
         }
-        else
+        public void EntrarAction(object sender, EventArgs args)
         {
-          DisplayAlert("ERRO", "Usuário e senha inválido!", "OK");
+            DataBase DB = new DataBase();
+
+            var user = DB.PesquisarEmail(Login.Text).SingleOrDefault();
+
+            if (user == null)
+            {
+                DisplayAlert("ERRO", "Usuário e senha inválidos!", "OK");
+            }
+            else
+            {
+                if (user.Email == Login.Text && user.Senha == Senha.Text)
+                {
+                    new Validacao().Add(user);
+                    App.Current.MainPage = new NavigationPage(new Master());
+                    //App.Current.MainPage = new AgendaPage();
+                }
+                else
+                {
+                    DisplayAlert("ERRO", "Usuário e senha inválido!", "OK");
+                }
+            }
         }
-      }
     }
-  }
 }
