@@ -31,8 +31,8 @@
                   <Entry x:Name="Observacao" Placeholder="Observação" />
                 </StackLayout>
                 <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
-                  <Button Text="Salvar" TextColor="White" BackgroundColor="Green" Clicked="SalvarAction"/>
-                  <Button Text="Voltar" TextColor="White" BackgroundColor="PaleVioletRed" Clicked="VoltarAction"/>
+                  <Button Text="Salvar" TextColor="White" BackgroundColor="Blue" Clicked="SalvarAction"/>
+                  <Button Text="Voltar" TextColor="White" BackgroundColor="Red" Clicked="VoltarAction"/>
                 </StackLayout>
               </StackLayout>
             </StackLayout>

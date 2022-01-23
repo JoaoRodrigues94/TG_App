@@ -17,15 +17,18 @@ namespace TG_App.View.Utils
         public Master()
         {
             InitializeComponent();
-
+            DataBase DB = new DataBase();
+        }
+        public Master(string tipo)
+        {
+            InitializeComponent();
             DataBase DB = new DataBase();
 
-            Notificacao.TaskScheduler.Instance.ScheduleTask(22, 35, 24,
-            () =>
-            {
-                Debug.WriteLine("task1: " + DateTime.Now);
-                CrossLocalNotifications.Current.Show("Atenção", "Hora de Registrar Seu Exame de Glicemia!");
-            });
+            if (tipo == "ExameList")
+                Exames();
+
+            if (tipo == "Calcular")
+                Calcular();
         }
 
         private void GoHome(object sender, EventArgs args)
@@ -51,12 +54,23 @@ namespace TG_App.View.Utils
         {
             Detail = new NavigationPage(new AlimentosPage());
         }
+        public void Alimentos()
+        {
+            Detail = new NavigationPage(new AlimentosPage());
+        }
 
         private void Exames(object sender, EventArgs args)
         {
             Detail = new NavigationPage(new ExamesListPage());
         }
-
+        public void Exames()
+        {
+            Detail = new NavigationPage(new ExamesListPage());
+        }
+        public void Calcular()
+        {
+            Detail = new NavigationPage(new ExamesPage());
+        }
         private void AtFisico(object sender, EventArgs args)
         {
             Detail = new NavigationPage(new AtividadeFisicaPage());

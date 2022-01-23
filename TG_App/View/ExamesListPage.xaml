@@ -1,59 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behavior1="clr-namespace:TG_App.View"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:behavior1="clr-namespace:TG_App.View"
              x:Class="TG_App.View.ExamesListPage">
     <ContentPage.Content>
-    <ScrollView>
-      <StackLayout VerticalOptions="FillAndExpand">
-        <Frame>
-          <StackLayout>
-            <Button Text="Registrar Exame" BackgroundColor="Blue" TextColor="White" Clicked="RegistrarAction"/>
-            <Button Text="Registrar Exame e Obter Sugestão de Dosagem" BackgroundColor="Green" Clicked="Sugestao" TextColor="White"/>
-          </StackLayout>
-        </Frame>
-        <Frame BorderColor="blue">
-          <StackLayout Padding="0">
-            <StackLayout>
-              <Label Text="Filtrar" TextColor="Blue"/>
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
-              <Entry x:Name="DataSearch" Placeholder="Data" Keyboard="Numeric" >
-                <Entry.Behaviors>
-                  <behavior1:MaskedData Mask="XX/XX/XXXX"/>
-                </Entry.Behaviors>
-              </Entry>
-              <Entry x:Name="ResultadoSearch" Placeholder="Resultado Exame" HorizontalOptions="FillAndExpand"/>
-              <Entry x:Name="SugestaoSearch" Placeholder="Sugestão Dosagem" HorizontalOptions="FillAndExpand"/>
-              <Button ImageSource="Search.png" BackgroundColor="Transparent" Clicked="Pesquisar" />
-            </StackLayout>
-          </StackLayout>
-        </Frame>
-        <Frame>
-          <StackLayout Padding="0">
-            <ListView x:Name="ListaExame" HasUnevenRows="True">
-              <ListView.ItemTemplate>
-                <DataTemplate>
-                  <ViewCell>
-                    <Frame BorderColor="Blue">
-                      <StackLayout>
-                        <Label Text="{Binding TipoSugestao}" IsVisible="false" />
-                        <Label Text="{Binding Data}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
-                        <Label Text="{Binding Resultado}" HorizontalOptions="FillAndExpand" />
-                        <Label Text="{Binding Dosagem}" HorizontalOptions="FillAndExpand" />
-                        <Label Text="{Binding SugestaoID}" IsVisible="false" HorizontalOptions="FillAndExpand" />
-                        <StackLayout Orientation="Horizontal">
-                          <Button Text="Detalhes" BackgroundColor="Blue" TextColor="White" CommandParameter="{Binding .}" Clicked="Details" />
-                          <Button Text="Excluir" BackgroundColor="DarkRed" TextColor="white" Clicked="Excluir" CommandParameter="{Binding .}"/>
+        <ScrollView>
+            <StackLayout VerticalOptions="FillAndExpand">
+                <Frame>
+                    <StackLayout>
+                        <Button Text="Registrar Exame" BackgroundColor="Blue" TextColor="White" Clicked="RegistrarAction"/>
+                        <Button Text="Registrar Exame e Obter Sugestão de Dosagem" BackgroundColor="Green" Clicked="Sugestao" TextColor="White"/>
+                    </StackLayout>
+                </Frame>
+                <Frame BorderColor="blue">
+                    <StackLayout Padding="0">
+                        <StackLayout>
+                            <Label Text="Filtrar" TextColor="Blue"/>
                         </StackLayout>
-                      </StackLayout>
-                    </Frame>
-                  </ViewCell>
-                </DataTemplate>
-              </ListView.ItemTemplate>
-            </ListView>
-          </StackLayout>
-        </Frame>
-      </StackLayout>
-    </ScrollView>
-  </ContentPage.Content>
+                        <StackLayout Orientation="Horizontal">
+                            <Entry x:Name="DataSearch" Placeholder="Data" Keyboard="Numeric" >
+                                <Entry.Behaviors>
+                                    <behavior1:MaskedData Mask="XX/XX/XXXX"/>
+                                </Entry.Behaviors>
+                            </Entry>
+                            <Entry x:Name="ResultadoSearch" Placeholder="Resultado Exame" HorizontalOptions="FillAndExpand"/>
+                            <Entry x:Name="SugestaoSearch" Placeholder="Sugestão Dosagem" HorizontalOptions="FillAndExpand"/>
+                            <Button ImageSource="Search.png" BackgroundColor="Transparent" Clicked="Pesquisar" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Frame>
+                    <StackLayout Padding="0">
+                        <ListView x:Name="ListaExame" HasUnevenRows="True">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Frame BorderColor="Blue">
+                                            <StackLayout>
+                                                <Label Text="{Binding TipoSugestao}" IsVisible="false" />
+                                                <Label Text="{Binding Data}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
+                                                <Label Text="{Binding Resultado}" HorizontalOptions="FillAndExpand" />
+                                                <Label Text="{Binding Dosagem}" HorizontalOptions="FillAndExpand" />
+                                                <Label Text="{Binding SugestaoID}" IsVisible="false" HorizontalOptions="FillAndExpand" />
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Button Text="Detalhes" BackgroundColor="Blue" TextColor="White" CommandParameter="{Binding .}" Clicked="Details" />
+                                                    <Button Text="Excluir" BackgroundColor="Red" TextColor="white" Clicked="Excluir" CommandParameter="{Binding .}"/>
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </Frame>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
 </ContentPage>

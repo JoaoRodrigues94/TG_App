@@ -12,85 +12,85 @@ using Xamarin.Forms.Xaml;
 
 namespace TG_App.View
 {
-  [XamlCompilation(XamlCompilationOptions.Compile)]
-  public partial class CadastrarAlimentoPage : ContentPage
-  {
-    public int UsuarioID { get; set; }
-    public CadastrarAlimentoPage()
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class CadastrarAlimentoPage : ContentPage
     {
-      InitializeComponent();
-
-      BindingContext = new AlimentoViewModel();
-    }
-    public void VoltarAction(object sender, EventArgs args)
-    {
-      App.Current.MainPage = new AlimentosPage();
-    }
-    public void SalvarAlimentoAction(object sender, EventArgs args)
-    {
-      string nome = Alimento.Text;
-      int medida = Medida.SelectedIndex;
-      decimal porcao = Convert.ToDecimal(PorcaoAlimento.Text.Replace(",", "."));
-      decimal carbo = Convert.ToDecimal(GramasCarbo.Text.Replace(",", "."));
-      int categoria = Categoria.SelectedIndex;
-      bool next = true;
-      string message = "";
-      var user = new Validacao().Listagem().SingleOrDefault();
-
-      DBAlimento DB = new DBAlimento();
-
-      var encontrar = DB.PesquisarAlimento().Where(x => x.NomeAlimento.ToUpper() == nome.ToUpper() && x.UsuarioID == user.UsuarioID).ToList();
-
-      if(encontrar.Count != 0)
-      {
-        next = false;
-        message += "Já existe um alimento cadastrado com esse nome!\n";
-      }
-
-      if(nome == null)
-      {
-        next = false;
-        message += "Nome do alimento é um campo obrigatório!\n";
-      }
-      if(porcao == 0)
-      {
-        next = false;
-        message += "Informe um valor válido para a porção!\n";
-      }
-      if(carbo == 0)
-      {
-        next = false;
-        message += "informe um valor válido para a quantidade de carboidratos!";
-      }
-      if (next)
-      {
-        int id = DB.PesquisarAlimento().Count + 1;
-        Alimento dados = new Alimento
+        public int UsuarioID { get; set; }
+        public CadastrarAlimentoPage()
         {
-          AlimentoID = id,
-          Categoria = categoria,
-          GramasCarbo = Convert.ToDecimal(carbo.ToString().Replace(",", ".")),
-          NomeAlimento = nome,
-          Medida = medida,
-          PorcaoAlimento = Convert.ToDecimal(porcao.ToString().Replace(",", ".")),
-          UsuarioID = user.UsuarioID
-        };
-        DB.CadastrarAlimento(dados);
-        App.Current.MainPage = new AlimentosPage();
-      }
-      else
-      {
-        DisplayAlert("Erro", message, "OK");
-      }
-    }
+            InitializeComponent();
 
-    public void Usuario(int id)
-    {
-      UsuarioID = id;
-    }
-    public void ExcluirAlimentoAction(object sender, EventArgs args)
-    {
+            BindingContext = new AlimentoViewModel();
+        }
+        public void VoltarAction(object sender, EventArgs args)
+        {
+            App.Current.MainPage = new AlimentosPage();
+        }
+        public void SalvarAlimentoAction(object sender, EventArgs args)
+        {
+            string nome = Alimento.Text;
+            int medida = Medida.SelectedIndex;
+            decimal porcao = Convert.ToDecimal(PorcaoAlimento.Text.Replace(",", "."));
+            decimal carbo = Convert.ToDecimal(GramasCarbo.Text.Replace(",", "."));
+            int categoria = Categoria.SelectedIndex;
+            bool next = true;
+            string message = "";
+            var user = new Validacao().Listagem().SingleOrDefault();
 
+            DBAlimento DB = new DBAlimento();
+
+            var encontrar = DB.PesquisarAlimento().Where(x => x.NomeAlimento.ToUpper() == nome.ToUpper() && x.UsuarioID == user.UsuarioID).ToList();
+
+            if (encontrar.Count != 0)
+            {
+                next = false;
+                message += "Já existe um alimento cadastrado com esse nome!\n";
+            }
+
+            if (nome == null)
+            {
+                next = false;
+                message += "Nome do alimento é um campo obrigatório!\n";
+            }
+            if (porcao == 0)
+            {
+                next = false;
+                message += "Informe um valor válido para a porção!\n";
+            }
+            if (carbo == 0)
+            {
+                next = false;
+                message += "informe um valor válido para a quantidade de carboidratos!";
+            }
+            if (next)
+            {
+                int id = DB.PesquisarAlimento().Count + 1;
+                Alimento dados = new Alimento
+                {
+                    AlimentoID = id,
+                    Categoria = categoria,
+                    GramasCarbo = Convert.ToDecimal(carbo.ToString().Replace(",", ".")),
+                    NomeAlimento = nome,
+                    Medida = medida,
+                    PorcaoAlimento = Convert.ToDecimal(porcao.ToString().Replace(",", ".")),
+                    UsuarioID = user.UsuarioID
+                };
+                DB.CadastrarAlimento(dados);
+                App.Current.MainPage = new AlimentosPage();
+            }
+            else
+            {
+                DisplayAlert("Erro", message, "OK");
+            }
+        }
+
+        public void Usuario(int id)
+        {
+            UsuarioID = id;
+        }
+        public void ExcluirAlimentoAction(object sender, EventArgs args)
+        {
+
+        }
     }
-  }
 }

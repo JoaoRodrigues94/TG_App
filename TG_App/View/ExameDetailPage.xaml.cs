@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TG_App.Model;
+using TG_App.View.Utils;
 using TG_App.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -61,7 +62,7 @@ namespace TG_App.View
     }
     public void VoltarAction(object sender, EventArgs args)
     {
-      App.Current.MainPage = new ExamesListPage();
+      App.Current.MainPage = new Master("ExameList");
     }
   }
 }

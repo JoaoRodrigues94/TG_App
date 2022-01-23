@@ -62,9 +62,9 @@
 
                         <Label Text="Correção de Glicemia" FontAttributes="Bold"/>
                         <StackLayout Orientation="Horizontal" Padding="0">
-                            <Entry x:Name="Correcao" Placeholder="Unidades" Text="{Binding UnidadeCorrecao}" HorizontalOptions="FillAndExpand" Keyboard="Numeric" />
-                            <Label Text="para cada"/>
-                            <Entry x:Name="GlicemiaUnd" Placeholder="Unidades de Glicemia" Text="{Binding UnidadeGlicemia}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" />
+                            <Entry x:Name="GlicemiaUnd" Placeholder="Unidades" Text="{Binding UnidadeCorrecao}" HorizontalOptions="FillAndExpand" Keyboard="Numeric" />
+                            <Label Text="Para cada"/>
+                            <Entry x:Name="Correcao" Placeholder="Unidades de Glicemia" Text="{Binding UnidadeGlicemia}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" />
                         </StackLayout>
                     </StackLayout>
                 </Frame>
