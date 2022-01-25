@@ -29,6 +29,9 @@ namespace TG_App.View.Utils
 
             if (tipo == "Calcular")
                 Calcular();
+
+            if (tipo == "AlimentosPage")
+                Alimentos();
         }
 
         private void GoHome(object sender, EventArgs args)

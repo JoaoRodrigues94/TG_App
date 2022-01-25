@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TG.Model;
 using TG_App.Banco;
 using TG_App.Model;
+using TG_App.View.Utils;
 using TG_App.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -24,7 +25,7 @@ namespace TG_App.View
         }
         public void VoltarAction(object sender, EventArgs args)
         {
-            App.Current.MainPage = new AlimentosPage();
+            App.Current.MainPage = new Master("AlimentosPage");
         }
         public void SalvarAlimentoAction(object sender, EventArgs args)
         {
@@ -76,7 +77,7 @@ namespace TG_App.View
                     UsuarioID = user.UsuarioID
                 };
                 DB.CadastrarAlimento(dados);
-                App.Current.MainPage = new AlimentosPage();
+                App.Current.MainPage = new Master("AlimentosPage");
             }
             else
             {
