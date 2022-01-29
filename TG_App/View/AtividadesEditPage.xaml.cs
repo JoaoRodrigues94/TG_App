@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TG.Model;
 using TG_App.Banco;
 using TG_App.Model;
+using TG_App.View.Utils;
 using TG_App.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -72,7 +73,7 @@ namespace TG_App.View
 
         DB.UpdateAtividade(dados);
         DisplayAlert("", "Dados atualizados com sucesso!", "OK");
-        App.Current.MainPage = new ListagemAtividadesPage();
+        App.Current.MainPage = new Master("AtividadesFisicas");
       }
       else
       {
@@ -82,7 +83,7 @@ namespace TG_App.View
 
     public void VoltarAction(object sender, EventArgs args)
     {
-      App.Current.MainPage = new ListagemAtividadesPage();
+      App.Current.MainPage = new Master("AtividadesFisicas");
     }
   }
 }

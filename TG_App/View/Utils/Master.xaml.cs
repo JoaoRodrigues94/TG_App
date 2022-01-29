@@ -32,6 +32,9 @@ namespace TG_App.View.Utils
 
             if (tipo == "AlimentosPage")
                 Alimentos();
+
+            if (tipo == "AtividadesFisicas")
+                AtFisica();
         }
 
         private void GoHome(object sender, EventArgs args)
@@ -76,7 +79,11 @@ namespace TG_App.View.Utils
         }
         private void AtFisico(object sender, EventArgs args)
         {
-            Detail = new NavigationPage(new AtividadeFisicaPage());
+            Detail = new NavigationPage(new ListagemAtividadesPage());
+        }
+        public void AtFisica()
+        {
+            Detail = new NavigationPage(new ListagemAtividadesPage());
         }
     }
 }

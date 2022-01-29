@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TG_App.Banco;
 using TG_App.Model;
+using TG_App.View.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,7 +23,7 @@ namespace TG_App.View
 
     public void VoltarAction(object sender, EventArgs args)
     {
-      App.Current.MainPage = new ListagemAtividadesPage();
+      App.Current.MainPage = new Master("AtividadesFisicas");
     }
     public void SalvarAction(object sender, EventArgs args)
     {
@@ -68,7 +69,7 @@ namespace TG_App.View
 
         DB.CadastrarAtividade(dados);
         DisplayAlert("", "Dados cadastrados com sucesso!", "OK");
-        App.Current.MainPage = new ListagemAtividadesPage();
+        App.Current.MainPage = new Master("AtividadesFisicas");
       }
       else
       {
