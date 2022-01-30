@@ -12,6 +12,7 @@
         <Button Text="Alimentos" BackgroundColor="Transparent" Clicked="Alimentos"/>
         <Button Text="Exames" BackgroundColor="Transparent" Clicked="Exames"/>
         <Button Text="Atividades Físicas" BackgroundColor="Transparent" Clicked="AtFisico"/>
+        <Button Text="Agenda" BackgroundColor="Transparent" Clicked="Agenda"/>
       </StackLayout>
     </ContentPage>
   </MasterDetailPage.Master>

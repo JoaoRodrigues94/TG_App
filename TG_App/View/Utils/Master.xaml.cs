@@ -35,6 +35,9 @@ namespace TG_App.View.Utils
 
             if (tipo == "AtividadesFisicas")
                 AtFisica();
+
+            if (tipo == "AgendaPage")
+                Agenda();
         }
 
         private void GoHome(object sender, EventArgs args)
@@ -84,6 +87,14 @@ namespace TG_App.View.Utils
         public void AtFisica()
         {
             Detail = new NavigationPage(new ListagemAtividadesPage());
+        }
+        private void Agenda(object sender, EventArgs args)
+        {
+            Detail = new NavigationPage(new AgendaPage());
+        }
+        public void Agenda()
+        {
+            Detail = new NavigationPage(new AgendaPage());
         }
     }
 }

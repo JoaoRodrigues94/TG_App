@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TG.Model;
 using TG_App.DB;
 using TG_App.Model;
+using TG_App.View.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -43,7 +44,7 @@ namespace TG_App.View
 
         public void Agendamento(object sender, EventArgs args)
         {
-            App.Current.MainPage = new AgendaPage();
+            App.Current.MainPage = new Master("AgendaPage");
         }
 
         public void Atualizar(object sender, EventArgs args)
@@ -57,8 +58,6 @@ namespace TG_App.View
 
             Button btn = (Button)sender;
             var user = new Validacao().Listagem().SingleOrDefault();
-
-
         }
     }
 }

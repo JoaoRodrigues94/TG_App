@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TG.Model;
 using TG_App.DB;
 using TG_App.Model;
+using TG_App.View.Utils;
 using TG_App.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -58,7 +59,7 @@ namespace TG_App.View
             };
 
             DB.CadastrarAgenda(dados);
-            App.Current.MainPage = new AgendaPage();
+            App.Current.MainPage = new Master("AgendaPage");
         }
         // TODO - corrigir
         public void VoltarAction(object sender, EventArgs args)
@@ -108,7 +109,7 @@ namespace TG_App.View
                 };
 
                 DB.UpdateAgenda(dados);
-                App.Current.MainPage = new AgendaPage();
+                App.Current.MainPage = new Master("AgendaPage");
             }
             catch
             {
@@ -127,7 +128,7 @@ namespace TG_App.View
 
             var busca = DB.PesquisarAgenda().SingleOrDefault(x => x.UsuarioID == user.UsuarioID && x.AgendaID == lista.AgendaID);
             DB.DeleteAgenda(busca);
-            App.Current.MainPage = new AgendaPage();
+            App.Current.MainPage = new Master("AgendaPage");
         }
     }
 }
