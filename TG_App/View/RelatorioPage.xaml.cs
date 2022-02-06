@@ -26,8 +26,8 @@ namespace TG_App.View
         {
             InitializeComponent();
 
-            Inicio.Text = DateTime.Now.ToString("dd/MM/yyyy");
-            Termino.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            Inicio.Placeholder = DateTime.Now.ToString("dd/MM/yyyy");
+            Termino.Placeholder = DateTime.Now.ToString("dd/MM/yyyy");
         }
 
         public void Pesquisar(object sender, EventArgs args)
@@ -39,15 +39,27 @@ namespace TG_App.View
 
             var user = new Validacao().Listagem().SingleOrDefault();
 
-            int dia = Convert.ToInt32(Inicio.Text.Substring(0, 2));
-            int mes = Convert.ToInt32(Inicio.Text.Substring(3, 2));
-            int ano = Convert.ToInt32(Inicio.Text.Substring(6, 4));
+            string start = "";
+            string end = "";
+            if (String.IsNullOrEmpty(Inicio.Text))
+                start = Inicio.Placeholder;
+            else
+                start = Inicio.Text;
+
+            if (String.IsNullOrEmpty(Termino.Text))
+                end = Termino.Placeholder;
+            else
+                end = Termino.Text;
+
+            int dia = Convert.ToInt32(start.Substring(0, 2));
+            int mes = Convert.ToInt32(start.Substring(3, 2));
+            int ano = Convert.ToInt32(start.Substring(6, 4));
 
             DateTime dtInicio = Convert.ToDateTime(mes + "/" + dia + "/" + ano + " 00:00:00");
 
-            int diaTermino = Convert.ToInt32(Termino.Text.Substring(0, 2));
-            int mesTermino = Convert.ToInt32(Termino.Text.Substring(3, 2));
-            int anoTermino = Convert.ToInt32(Termino.Text.Substring(6, 4));
+            int diaTermino = Convert.ToInt32(end.Substring(0, 2));
+            int mesTermino = Convert.ToInt32(end.Substring(3, 2));
+            int anoTermino = Convert.ToInt32(end.Substring(6, 4));
 
             DateTime dtTermino = Convert.ToDateTime(mesTermino + "/" + diaTermino + "/" + anoTermino + " 23:59:59");
 
@@ -75,6 +87,7 @@ namespace TG_App.View
                     Resultado = item.Resultado,
                     Dosagem = item.Dosagem.ToString()
                 };
+                string valRes = sql.Resultado == "HI" ? "600" : (sql.Resultado == "LO" ? "20" : sql.Resultado);
 
                 if (sql.Resultado == resM)
                 {
@@ -86,7 +99,7 @@ namespace TG_App.View
                     MenorResultado = "Menor Índice de Glícemia Registrado: " + sql.Resultado + " mg / dl em - " + sql.Data;
                     resM = "LO";
                 }
-                else if (Convert.ToInt32(sql.Resultado) < Convert.ToInt32(resM) || i == 0)
+                else if (Convert.ToInt32((sql.Resultado == "HI" ? "600" : (item.Resultado == "LO" ? "20" : item.Resultado))) < Convert.ToInt32(resM) || i == 0)
                 {
                     MenorResultado = "Menor Índice de Glícemia Registrado: " + sql.Resultado + " mg / dl em - " + sql.Data;
                     resM = sql.Resultado;
@@ -103,7 +116,7 @@ namespace TG_App.View
                     res = "HI";
                 }
 
-                else if (Convert.ToInt32(sql.Resultado) > Convert.ToInt32(res))
+                else if (Convert.ToInt32((sql.Resultado == "HI" ? "600" : (item.Resultado == "LO" ? "20" : item.Resultado))) > Convert.ToInt32(res == "HI" ? "600" : (res == "LO" ? "20" : res)))
                 {
                     MaiorResultado = "Maior Índice de Glicemia Registrado: " + sql.Resultado + " mg / dl em " + sql.Data;
                     res = sql.Resultado;
@@ -116,20 +129,16 @@ namespace TG_App.View
 
                 if (sql.DataHora >= Convert.ToDateTime(sql.Hora + " 00:00") && sql.DataHora <= Convert.ToDateTime(sql.Hora + " 06:00"))
                 {
-                    hora0 += Convert.ToInt32(sql.Resultado);
+                    hora0 += Convert.ToInt32(valRes);
                     count0++;
                     dos0 += Convert.ToInt16(sql.Dosagem);
 
-                    // TODO - modificar a lógica implementando LO
-                    string valRes = sql.Resultado == "HI" ? "600" : (sql.Resultado == "LO" ? "20" : sql.Resultado);
                     menor0 = Convert.ToInt32(valRes) < menor0 ? Convert.ToInt32(valRes) : menor0;
                     maior0 = Convert.ToInt32(valRes) > maior0 ? Convert.ToInt32(valRes) : maior0;
                 }
 
                 if (sql.DataHora >= Convert.ToDateTime(sql.Hora + " 06:01") && sql.DataHora <= Convert.ToDateTime(sql.Hora + " 12:00"))
                 {
-                    string valRes = sql.Resultado == "HI" ? "600" : (sql.Resultado == "LO" ? "20" : sql.Resultado);
-
                     hora1 += Convert.ToInt32(valRes);
                     count1++;
                     dos1 += Convert.ToInt16(sql.Dosagem);
@@ -141,31 +150,29 @@ namespace TG_App.View
 
                 if (sql.DataHora >= Convert.ToDateTime(sql.Hora + " 12:01") && sql.DataHora <= Convert.ToDateTime(sql.Hora + " 18:00"))
                 {
-                    hora2 += Convert.ToInt32(sql.Resultado);
+                    hora2 += Convert.ToInt32(valRes);
                     count2++;
                     dos2 += Convert.ToInt16(sql.Dosagem);
                     aux++;
 
-                    string valRes = sql.Resultado == "HI" ? "600" : (sql.Resultado == "LO" ? "20" : sql.Resultado);
                     menor2 = Convert.ToInt32(valRes) < menor2 ? Convert.ToInt32(valRes) : menor2;
                     maior2 = Convert.ToInt32(valRes) > maior2 ? Convert.ToInt32(valRes) : maior2;
                 }
 
                 if (sql.DataHora >= Convert.ToDateTime(sql.Hora + " 18:01") && sql.DataHora <= Convert.ToDateTime(sql.Hora + " 23:59"))
                 {
-                    hora3 += Convert.ToInt32(sql.Resultado);
+                    hora3 += Convert.ToInt32(valRes);
                     count3++;
                     dos3 += Convert.ToInt16(sql.Dosagem);
                     aux++;
 
-                    string valRes = sql.Resultado == "HI" ? "600" : (sql.Resultado == "LO" ? "20" : sql.Resultado);
                     menor3 = Convert.ToInt32(valRes) < menor3 ? Convert.ToInt32(valRes) : menor3;
                     maior3 = Convert.ToInt32(valRes) > maior1 ? Convert.ToInt32(valRes) : maior3;
                 }
 
                 lista.Add(sql);
                 i++;
-                mediaG += Convert.ToInt32(sql.Resultado);
+                mediaG += Convert.ToInt32(valRes);
                 dados.Add(sql);
             }
 
@@ -286,8 +293,8 @@ namespace TG_App.View
                 Menor3 = menor3
             };
 
-            int MediaGeral = mediaG / dados.Count;
-            int MediaDosagem = dosagem / aux;
+            int MediaGeral = mediaG / (dados.Count == 0 ? 1 : dados.Count);
+            int MediaDosagem = dosagem / (aux == 0 ? 1 : aux);
 
             GeraRelatorio(dados.Count, MediaGeral, dosagem, MediaDosagem, MaiorResultado, MenorResultado, per);
         }
@@ -298,7 +305,7 @@ namespace TG_App.View
             {
                 TextColor = System.Drawing.Color.Blue,
                 FontAttributes = FontAttributes.Bold,
-                Text = "Relatório de exames - " + Inicio.Text + " até " + Termino.Text
+                Text = "Relatório de exames - " + (String.IsNullOrEmpty(Inicio.Text) ? Inicio.Placeholder : Inicio.Text) + " até " + (String.IsNullOrEmpty(Termino.Text) ? Termino.Placeholder : Termino.Text)
             };
 
             Label Titulo2 = new Label
@@ -358,6 +365,7 @@ namespace TG_App.View
             lblMenor.TextColor = Xamarin.Forms.Color.Black;
 
             StackLayout sl = new StackLayout();
+            sl.Children.Clear();
             sl.Children.Add(Titulo);
             Titulo_.Text = Titulo.Text;
             sl.Children.Add(lblMediaGeral);

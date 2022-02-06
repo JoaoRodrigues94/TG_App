@@ -142,13 +142,13 @@ namespace TG_App.View
             {
                 var busca = DB.Pesquisar().SingleOrDefault(x => x.UsuarioID == user.UsuarioID && x.ExameID == lista.SugestaoID);
                 DB.Delete(busca);
-                App.Current.MainPage = new ExamesListPage();
+                App.Current.MainPage = new Master("ExameList");
             }
             if (lista.TipoSugestao == "S")
             {
                 var busca = DB2.Pesquisar().SingleOrDefault(x => x.UsuarioID == user.UsuarioID && x.SugestaoID == lista.SugestaoID);
                 DB2.Delete(busca);
-                App.Current.MainPage = new ExamesListPage();
+                App.Current.MainPage = new Master("ExameList");
             }
         }
         public void Details(object sender, EventArgs args)

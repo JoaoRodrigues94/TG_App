@@ -13,7 +13,7 @@
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Início:"/>
-                            <Entry x:Name="Inicio" Placeholder="Data" HorizontalOptions="FillAndExpand" Keyboard="Numeric" >
+                            <Entry x:Name="Inicio" Placeholder="{Binding Start}" HorizontalOptions="FillAndExpand" Keyboard="Numeric" >
                                 <Entry.Behaviors>
                                     <behavior1:MaskedData Mask="XX/XX/XXXX"/>
                                 </Entry.Behaviors>
@@ -46,7 +46,6 @@
                 <Label x:Name="Periodo2" IsVisible="false" />
                 <Label x:Name="Titulo_5" IsVisible="false" />
                 <Label x:Name="Periodo3" IsVisible="false" />
-                <Button Text="Gerar PDF" BackgroundColor="Blue" TextColor="White" Clicked="OnButtonClicked" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
