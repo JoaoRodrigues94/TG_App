@@ -25,6 +25,7 @@
     <!-- Stack Layout -->
         <Style TargetType="StackLayout">
             <Setter Property="Padding" Value="10"/>
+            <Setter Property="BackgroundColor" Value="Beige" />
         </Style>
     </Application.Resources>
 </Application>

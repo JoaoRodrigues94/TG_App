@@ -15,7 +15,7 @@ namespace TG_App.View
   [XamlCompilation(XamlCompilationOptions.Compile)]
   public partial class AlimentosEditPage : ContentPage
   {
-    public AlimentosEditPage(Alimento dados)
+    public AlimentosEditPage(Food dados)
     {
       InitializeComponent();
 
@@ -30,7 +30,7 @@ namespace TG_App.View
     public void SalvarAction(object sender, EventArgs args)
     {
       var user = new Validacao().Listagem().SingleOrDefault();
-      Alimento dados = new Alimento
+      Food dados = new Food
       {
         AlimentoID = Convert.ToInt32(Codigo.Text),
         Categoria = Categoria.SelectedIndex,

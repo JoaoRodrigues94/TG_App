@@ -53,7 +53,7 @@ namespace TG_App.View
             ListaAlimentosViewModel lista = btn.CommandParameter as ListaAlimentosViewModel;
             var user = new Validacao().Listagem().SingleOrDefault();
             DBAlimento DB = new DBAlimento();
-            var encontrar = DB.PesquisarAlimento().Where(x => x.NomeAlimento.ToUpper() == lista.Alimento.Replace("Alimento: ", "") && x.UsuarioID == user.UsuarioID && lista.AlimentoID == x.AlimentoID).SingleOrDefault();
+            var encontrar = DB.PesquisarAlimento().SingleOrDefault(c => c.UsuarioID == user.UsuarioID && c.AlimentoID == lista.AlimentoID);
             DB.DeleteAlimento(encontrar);
             App.Current.MainPage = new Master("AlimentosPage");
         }
@@ -65,7 +65,7 @@ namespace TG_App.View
 
             DBAlimento DB = new DBAlimento();
             var user = new Validacao().Listagem().SingleOrDefault();
-            var dados = DB.PesquisarAlimento().Where(x => x.NomeAlimento.ToUpper() == lista.Alimento.Replace("Alimento: ", "") && x.UsuarioID == user.UsuarioID).SingleOrDefault();
+            var dados = DB.PesquisarAlimento().SingleOrDefault(c => c.UsuarioID == user.UsuarioID && c.AlimentoID == lista.AlimentoID);
 
             App.Current.MainPage = new AlimentosEditPage(dados);
         }

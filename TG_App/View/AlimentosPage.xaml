@@ -8,7 +8,7 @@
         <Frame>
           <StackLayout Padding="0">
             <Label Text="Alimentos" TextColor="DarkRed" HorizontalOptions="Center" FontAttributes="Bold" />
-            <StackLayout Orientation="Horizontal" Padding="0">
+            <StackLayout Orientation="Horizontal">
               <Button Text="Cadastrar Alimento" Clicked="CadastrarAlimentoAction" BackgroundColor="Blue" TextColor="White"/>
             </StackLayout>
             <StackLayout>

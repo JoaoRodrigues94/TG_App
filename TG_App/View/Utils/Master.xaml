@@ -5,14 +5,14 @@
              x:Class="TG_App.View.Utils.Master">
   <MasterDetailPage.Master>
     <ContentPage Title="Menu">
-      <StackLayout>
-        <Button Text="Home" BackgroundColor="Transparent" Clicked="GoHome"/>
-        <Button Text="Relatórios" BackgroundColor="Transparent" Clicked="GoRelatorio"/>
-        <Button Text="Configurações" BackgroundColor="Transparent" Clicked="Configuracoes"/>
-        <Button Text="Alimentos" BackgroundColor="Transparent" Clicked="Alimentos"/>
-        <Button Text="Exames" BackgroundColor="Transparent" Clicked="Exames"/>
-        <Button Text="Atividades Físicas" BackgroundColor="Transparent" Clicked="AtFisico"/>
-        <Button Text="Agenda" BackgroundColor="Transparent" Clicked="Agenda"/>
+      <StackLayout BackgroundColor="LightBlue">
+        <Button Text="Home" BackgroundColor="White" Clicked="GoHome"/>
+                <Button Text="Relatórios" BackgroundColor="White" Clicked="GoRelatorio"/>
+                <Button Text="Configurações" BackgroundColor="White" Clicked="Configuracoes"/>
+                <Button Text="Alimentos" BackgroundColor="White" Clicked="Alimentos"/>
+                <Button Text="Exames" BackgroundColor="White" Clicked="Exames"/>
+                <Button Text="Atividades Físicas" BackgroundColor="White" Clicked="AtFisico"/>
+                <Button Text="Agenda" BackgroundColor="White" Clicked="Agenda"/>
       </StackLayout>
     </ContentPage>
   </MasterDetailPage.Master>

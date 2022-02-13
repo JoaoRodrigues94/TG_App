@@ -9,40 +9,40 @@ using Xamarin.Forms;
 
 namespace TG_App.Banco
 {
-  class DBAlimento
-  {
-    // String de Conexão
-    private SQLiteConnection _conexao;
-    public DBAlimento()
+    class DBAlimento
     {
-      var dep = DependencyService.Get<ICaminho>();
-      string caminho = dep.ObterCaminho("diabetes.sqlite");
+        // String de Conexão
+        private SQLiteConnection _conexao;
+        public DBAlimento()
+        {
+            var dep = DependencyService.Get<ICaminho>();
+            string caminho = dep.ObterCaminho("diabetes.sqlite");
 
-      _conexao = new SQLiteConnection(caminho);
-      // Criar tabela
-      _conexao.CreateTable<Alimento>();
-    }
+            _conexao = new SQLiteConnection(caminho);
+            // Criar tabela
+            _conexao.CreateTable<Food>();
+        }
 
-    // Métodos  Cadastro
-    public void CadastrarAlimento(Alimento alimento)
-    {
-      _conexao.Insert(alimento);
+        // Métodos  Cadastro
+        public void CadastrarAlimento(Food alimento)
+        {
+            _conexao.Insert(alimento);
+        }
+        // Métodos Pesquisa
+        public List<Food> PesquisarAlimento()
+        {
+            //.Where(x => x.UsuarioID == id).ToList();
+            return _conexao.Table<Food>().ToList();
+        }
+        // Métodos Update
+        public void UpdateAlimento(Food alimento)
+        {
+            _conexao.Update(alimento);
+        }
+        // Métodos Exclusão
+        public void DeleteAlimento(Food alimento)
+        {
+            _conexao.Delete(alimento);
+        }
     }
-    // Métodos Pesquisa
-    public List<Alimento> PesquisarAlimento()
-    {
-      //.Where(x => x.UsuarioID == id).ToList();
-      return _conexao.Table<Alimento>().ToList(); 
-    }
-    // Métodos Update
-    public void UpdateAlimento(Alimento alimento)
-    {
-      _conexao.Update(alimento);
-    }
-    // Métodos Exclusão
-    public void DeleteAlimento(Alimento alimento)
-    {
-      _conexao.Delete(alimento);
-    }
-  }
 }

@@ -66,9 +66,8 @@ namespace TG_App.View
             if (next)
             {
                 int id = DB.PesquisarAlimento().Count + 1;
-                Alimento dados = new Alimento
+                Food dados = new Food
                 {
-                    AlimentoID = id,
                     Categoria = categoria,
                     GramasCarbo = Convert.ToDecimal(carbo.ToString().Replace(",", ".")),
                     NomeAlimento = nome,

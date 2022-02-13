@@ -22,7 +22,7 @@ namespace TG_App.Banco
       // Criar tabela
       _conexao.CreateTable<Usuario>();
       _conexao.CreateTable<Horarios>();
-      _conexao.CreateTable<Alimento>();
+      //_conexao.CreateTable<Alimento>();
     }
 
     // Métodos  Cadastro
