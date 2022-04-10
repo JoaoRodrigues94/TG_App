@@ -9,40 +9,40 @@ using Xamarin.Forms;
 
 namespace TG_App.Banco
 {
-  class DBSugestao
-  {
-    // String de Conexão
-    private SQLiteConnection _conexao;
-    public DBSugestao()
+    class DBSugestao
     {
-      var dep = DependencyService.Get<ICaminho>();
-      string caminho = dep.ObterCaminho("diabetes.sqlite");
+        // String de Conexão
+        private SQLiteConnection _conexao;
+        public DBSugestao()
+        {
+            var dep = DependencyService.Get<ICaminho>();
+            string caminho = dep.ObterCaminho("diabetes.sqlite");
 
-      _conexao = new SQLiteConnection(caminho);
-      // Criar tabela
-      _conexao.CreateTable<Sugestao>();
-    }
+            _conexao = new SQLiteConnection(caminho);
+            // Criar tabela
+            _conexao.CreateTable<Sugestao>();
+        }
 
-    // Métodos  Cadastro
-    public void Cadastrar(Sugestao sugestao)
-    {
-      _conexao.Insert(sugestao);
+        // Métodos  Cadastro
+        public void Cadastrar(Sugestao sugestao)
+        {
+            _conexao.Insert(sugestao);
+        }
+        // Métodos Pesquisa
+        public List<Sugestao> Pesquisar()
+        {
+            //.Where(x => x.UsuarioID == id).ToList();
+            return _conexao.Table<Sugestao>().ToList();
+        }
+        // Métodos Update
+        public void Update(Sugestao sugestao)
+        {
+            _conexao.Update(sugestao);
+        }
+        // Métodos Exclusão
+        public void Delete(Sugestao sugestao)
+        {
+            _conexao.Delete(sugestao);
+        }
     }
-    // Métodos Pesquisa
-    public List<Sugestao> Pesquisar()
-    {
-      //.Where(x => x.UsuarioID == id).ToList();
-      return _conexao.Table<Sugestao>().ToList(); 
-    }
-    // Métodos Update
-    public void Update(Sugestao sugestao)
-    {
-      _conexao.Update(sugestao);
-    }
-    // Métodos Exclusão
-    public void Delete(Sugestao sugestao)
-    {
-      _conexao.Delete(sugestao);
-    }
-  }
 }

@@ -4,48 +4,61 @@
              x:Class="TG_App.View.ExamesPage">
   <ContentPage.Content>
     <ScrollView>
-      <StackLayout VerticalOptions="FillAndExpand">
-        <Frame>
-          <StackLayout Padding="0">
-            <Label Text="Cadastro de Exames de Glicemia!" TextColor="DarkRed" FontAttributes="Bold" HorizontalOptions="Center" />
-            <StackLayout>
-              <Label x:Name="DataExame" FontAttributes="Bold" TextColor="blue" />
+            <StackLayout VerticalOptions="FillAndExpand">
+                <Frame>
+                    <StackLayout Padding="0">
+                        <Label Text="Cadastro de Exames de Glicemia!" TextColor="DarkRed" FontAttributes="Bold" HorizontalOptions="Center" />
+                        <StackLayout>
+                            <Label x:Name="DataExame" FontAttributes="Bold" TextColor="blue" />
+                        </StackLayout>
+                        <StackLayout>
+                            <Picker x:Name="TipoCalculo" Title="Informe o tipo de CÁLCULO que o sistema deverá realizar!" SelectedIndex="{Binding Calculo}">
+                                <Picker.Items>
+                                    <x:String>Correção de Glicemia</x:String>
+                                    <x:String>Correção para alimentos</x:String>
+                                    <x:String>Correção de glicemia e alimentos</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                        <StackLayout Padding="0">
+                            <StackLayout x:Name="Glicemia" Orientation="Horizontal" IsVisible="{Binding BoolGlicemia}">
+                                <Entry x:Name="ExameGlicemia" Placeholder="Resultado do Exame de glicemia" HorizontalOptions="FillAndExpand" Keyboard="Numeric"/>
+                                <Button Text="LO" BackgroundColor="RED" TextColor="White" Clicked="LO"/>
+                                <Button Text="HI" BackgroundColor="DarkRed" TextColor="White" Clicked="HI" />
+                            </StackLayout>
+                            <StackLayout Padding="0" x:Name="slAlimento"/>
+                            <StackLayout HorizontalOptions="Center" Orientation="Horizontal" IsVisible="{Binding Btn}">
+                                <Button Text="Adicionar Alimento" TextColor="white" BackgroundColor="Green" Clicked="Limpar" Command="{Binding MostrarPesquisa}"/>
+                                <Button Text="Remover Alimento" TextColor="white" BackgroundColor="Red" Clicked="Delete"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" IsVisible="{Binding Alimento}">
+                                <Entry x:Name="NomeAlimento" Placeholder="Nome do Alimento" HorizontalOptions="FillAndExpand"/>
+                                <Button ImageSource="Search.png" BackgroundColor="Transparent" Clicked="Alimento" Command="{Binding AlimentoVisibility}" />
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout>
+                            <Entry x:Name="Observacao" Placeholder="Observação" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <StackLayout HorizontalOptions="Center" Orientation="Horizontal" IsVisible="{Binding Resultado}">
+                    <Button Text="Cálcular" TextColor="White" BackgroundColor="Blue" Clicked="CalcularAction" Command="{Binding ResultadoOk}"/>
+                    <Button Text="Voltar" TextColor="White" BackgroundColor="red" Clicked="VoltarAction"/>
+                </StackLayout>
+                <Frame IsVisible="{Binding VerResultado}">
+                    <StackLayout Padding="0">
+                        <StackLayout HorizontalOptions="Center">
+                            <Label x:Name="Resultado" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontSize="15"/>
+                            <Label Text="Informe a quantidade de insulina aplicada caso o valor seja diferente da sugestão."/>
+                            <Entry x:Name="ConfirmarAplicacao" />
+                        </StackLayout>
+                        <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+                            <Button Text="Confirmar" TextColor="White" BackgroundColor="Blue" Clicked="ConfirmarDados" />
+                            <Button Text="Voltar" TextColor="White" BackgroundColor="red" Clicked="VoltarAction"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
             </StackLayout>
-            <StackLayout>
-              <Picker x:Name="TipoCalculo" Title="Informe o tipo de CÁLCULO que o sistema deverá realizar!" SelectedIndex="{Binding Calculo}">
-                <Picker.Items>
-                  <x:String>Correção de Glicemia</x:String>
-                  <x:String>Correção para alimentos</x:String>
-                  <x:String>Correção de glicemia e alimentos</x:String>
-                </Picker.Items>
-              </Picker>
-            </StackLayout>
-            <StackLayout Padding="0">
-              <StackLayout x:Name="Glicemia" Orientation="Horizontal" IsVisible="{Binding BoolGlicemia}">
-                <Entry x:Name="ExameGlicemia" Placeholder="Resultado do Exame de glicemia" HorizontalOptions="FillAndExpand" Keyboard="Numeric"/>
-                <Button Text="LO" BackgroundColor="RED" TextColor="White" Clicked="LO"/>
-                <Button Text="HI" BackgroundColor="DarkRed" TextColor="White" Clicked="HI" />
-              </StackLayout>
-              <StackLayout Padding="0" x:Name="slAlimento"/>
-              <StackLayout HorizontalOptions="Center" Orientation="Horizontal" IsVisible="{Binding Btn}">
-                <Button Text="Adicionar Alimento" TextColor="white" BackgroundColor="Green" Clicked="Limpar" Command="{Binding MostrarPesquisa}"/>
-                <Button Text="Remover Alimento" TextColor="white" BackgroundColor="Red" Clicked="Delete"/>
-              </StackLayout>
-              <StackLayout Orientation="Horizontal" IsVisible="{Binding Alimento}">
-                <Entry x:Name="NomeAlimento" Placeholder="Nome do Alimento" HorizontalOptions="FillAndExpand"/>
-                <Button ImageSource="Search.png" BackgroundColor="Transparent" Clicked="Alimento" Command="{Binding AlimentoVisibility}" />
-              </StackLayout>
-            </StackLayout>
-            <StackLayout>
-              <Entry x:Name="Observacao" Placeholder="Observação" />
-            </StackLayout>
-          </StackLayout>
-        </Frame>
-        <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
-          <Button Text="Cálcular" TextColor="White" BackgroundColor="Blue" Clicked="CalcularAction"/>
-          <Button Text="Voltar" TextColor="White" BackgroundColor="red" Clicked="VoltarAction"/>
-        </StackLayout>
-      </StackLayout>
-    </ScrollView>
+        </ScrollView>
   </ContentPage.Content>
 </ContentPage>

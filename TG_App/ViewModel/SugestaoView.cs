@@ -14,6 +14,7 @@ namespace TG_App.ViewModel
     public string Observacao { get; set; }
     public string Data { get; set; }
     public string Hora { get; set; }
+    public string Aplicado { get; set; }
     public DateTime DataHora { get; set; }
     public char Identificacao { get; set; }
   }

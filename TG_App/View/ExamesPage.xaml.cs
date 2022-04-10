@@ -106,7 +106,7 @@ namespace TG_App.View
             DBSugestao DB = new DBSugestao();
             DBAlimento DB2 = new DBAlimento();
             var user = new Validacao().Listagem().SingleOrDefault();
-            decimal c = user.UnidadeCorrecao;
+            decimal c = user.UnidadeGlicemia;
             int resultado = 0;
             string returning = "";
             bool verification = true;
@@ -139,8 +139,10 @@ namespace TG_App.View
                     var n = (Label)sl.Children[0];
                     string nome = n.Text.ToUpper();
                     var x = (Entry)sl.Children[1];
+                    var alm = DB2.PesquisarAlimento().Where(j => j.NomeAlimento.ToUpper() == nome).FirstOrDefault();
                     var y = Convert.ToDecimal(x.Text);
-                    soma += y;
+                    var grm = (alm.GramasCarbo * y) / alm.PorcaoAlimento;
+                    soma += grm;
                     i++;
                 }
                 int retorno = CalculoAlimento(soma, user.GramasCarbo, user.AlimentoUni);
@@ -156,7 +158,8 @@ namespace TG_App.View
                 TipoSugestao = TipoCalculo.SelectedIndex,
                 Resultado = ExameGlicemia.Text,
                 Observacao = Observacao.Text,
-                Dosagem = resultado
+                Dosagem = resultado,
+                Confirmar = false
             };
 
             DB.Cadastrar(dados);
@@ -184,13 +187,16 @@ namespace TG_App.View
 
             if (verification)
             {
-                DisplayAlert("Sugestão", returning + " Unidades!", "Ok");
-                App.Current.MainPage = new NavigationPage(new Master("ExameList"));
+                //DisplayAlert("Sugestão", returning + " Unidades!", "Ok");
+                //App.Current.MainPage = new NavigationPage(new Master("ExameList"));
+
+                Resultado.Text = "Sugestão: " + returning + " Unidades";
+
             }
             else
             {
                 DisplayAlert("Erro", "Informe um valor válido!", "Ok");
-                App.Current.MainPage = new ExamesPage();
+                //App.Current.MainPage = new ExamesPage();
             }
         }
         private int CalculoGlicemia(int x, decimal carbs)
@@ -217,7 +223,7 @@ namespace TG_App.View
 
             for (var i = 1; i < Convert.ToInt32(x); i++)
             {
-                if (x >= unidades)
+                if ((x) >= unidades)
                 {
                     x -= unidades;
                     val++;
@@ -228,6 +234,23 @@ namespace TG_App.View
                 }
             }
             return val;
+        }
+
+        public void ConfirmarDados(object sender, EventArgs args)
+        {
+            var user = new Validacao().Listagem().SingleOrDefault();
+            DBSugestao DB = new DBSugestao();
+
+            DB.Pesquisar().LastOrDefault();
+
+            Sugestao dados = new Sugestao
+            {
+                Aplicado = Convert.ToInt32(ConfirmarAplicacao.Text),
+                Confirmar = true
+            };
+
+            DB.Update(dados);
+            App.Current.MainPage = new NavigationPage(new Master("ExameList"));
         }
         public void VoltarAction(object sender, EventArgs args)
         {

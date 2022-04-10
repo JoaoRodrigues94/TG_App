@@ -47,7 +47,8 @@ namespace TG_App.View
                     DataHora = item.Data,
                     Resultado = "RESULTADO DO EXAME: " + item.Resultado,
                     Dosagem = "SUGESTÃO DE DOSAGEM: " + item.Dosagem.ToString() + " UNIDADES",
-                    TipoSugestao = "S"
+                    TipoSugestao = "S",
+                    Aplicado = "Quantidade de insulina utilizada: " + (item.Aplicado == 0 ? item.Dosagem : item.Aplicado).ToString() + " Unidades"
                 };
                 dados.Add(x);
             }
