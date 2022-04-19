@@ -16,12 +16,16 @@ using Syncfusion.Pdf.Grid;
 using Syncfusion.Drawing;
 using System.IO;
 using Plugin.LocalNotifications;
+using Microcharts;
+using SkiaSharp;
 
 namespace TG_App.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RelatorioPage : ContentPage
     {
+        public static SKColor TextColor { get; private set; }
+
         public RelatorioPage()
         {
             InitializeComponent();
@@ -112,13 +116,13 @@ namespace TG_App.View
 
                 else if (sql.Resultado == "HI")
                 {
-                    MaiorResultado = "Maior Índice de Glicemia Registrado: " + sql.Resultado + " mg / dl em " + sql.Data;
+                    MaiorResultado = "Maior Índice de Glicemia Registrado: " + sql.Resultado + " mg / dl";
                     res = "HI";
                 }
 
                 else if (Convert.ToInt32((sql.Resultado == "HI" ? "600" : (item.Resultado == "LO" ? "20" : item.Resultado))) > Convert.ToInt32(res == "HI" ? "600" : (res == "LO" ? "20" : res)))
                 {
-                    MaiorResultado = "Maior Índice de Glicemia Registrado: " + sql.Resultado + " mg / dl em " + sql.Data;
+                    MaiorResultado = "Maior Índice de Glicemia Registrado: " + sql.Resultado + " mg / dl";
                     res = sql.Resultado;
                 }
 
@@ -247,13 +251,13 @@ namespace TG_App.View
 
                 else if (sql.Resultado == "HI")
                 {
-                    MaiorResultado = "Maior Índice de Glicemia Registrado: " + sql.Resultado + " mg / dl em " + sql.Data + "\n";
+                    MaiorResultado = "Maior Índice de Glicemia Registrado: " + sql.Resultado + " mg / dl \n";
                     res = "HI";
                 }
 
                 else if (Convert.ToInt32(sql.Resultado == "LO" ? "20" : (sql.Resultado == "HI" ? "600" : sql.Resultado)) > Convert.ToInt32(res == "HI" ? "600" : (res == "LO" ? "20" : res)))
                 {
-                    MaiorResultado = "Maior Índice de Glicemia Registrado: " + sql.Resultado + " mg / dl em " + sql.Data + "\n";
+                    MaiorResultado = "Maior Índice de Glicemia Registrado: " + sql.Resultado + " mg / dl em \n";
                     res = sql.Resultado;
                 }
 
@@ -393,8 +397,8 @@ namespace TG_App.View
                         if (periodo.h0 != 0)
                         {
                             
-                            per += "Glicemia Média Estimada: " + periodo.h0 + " md / dl \n" + "Total de Registros - " + periodo.TR0 + "Registros\nTotal de Dosagens Aplicadas - " + periodo.TD0 + " Unidades \nDosagem Média Estimada - " + periodo.MD0 + " Unidades \nMaior Índice de Glicemia Registrado -" + (periodo.Maior0.ToString() == "600" ? "HI" : periodo.Maior0.ToString()) + " md / dl \n" +
-                              "Menor Índice de Glicemia Registrado - " + (periodo.Menor0.ToString() == "20" ? "LO" : periodo.Menor0.ToString()) + " md / dl";
+                            per += "Glicemia Média Estimada: " + periodo.h0 + " md / dl \n" + "Total de Registros - " + periodo.TR0 + "Registros\nTotal de Dosagens Aplicadas - " + periodo.TD0 + " Unidades \nDosagem Média Estimada - " + periodo.MD0 + " Unidades \nMaior Índice de Glicemia Registrado -" + (periodo.Maior0 >= 600 ? "HI" : periodo.Maior0.ToString()) + " md / dl \n" +
+                              "Menor Índice de Glicemia Registrado - " + (periodo.Menor0 <= 20 ? "LO" : periodo.Menor0.ToString()) + " md / dl";
                         }
                         else
                         {
@@ -404,8 +408,8 @@ namespace TG_App.View
                     case 1:
                         if (periodo.h1 != 0)
                         {
-                            per1 += "Glicemia Média Estimada: " + periodo.h1 + " md / dl \n" + "Total de Registros - " + periodo.TR1 + "Registros\nTotal de Dosagens Aplicadas - " + periodo.TD1 + " Unidades \nDosagem Média Estimada - " + periodo.MD1 + " Unidades \nMaior Índice de Glicemia Registrado -" + (periodo.Maior1.ToString() == "600" ? "HI" : periodo.Maior1.ToString()) + " md / dl \n" +
-                              "Menor Índice de Glicemia Registrado - " + (periodo.Menor1.ToString() == "20" ? "LO" : periodo.Menor1.ToString()) + " md / dl";
+                            per1 += "Glicemia Média Estimada: " + periodo.h1 + " md / dl \n" + "Total de Registros - " + periodo.TR1 + "Registros\nTotal de Dosagens Aplicadas - " + periodo.TD1 + " Unidades \nDosagem Média Estimada - " + periodo.MD1 + " Unidades \nMaior Índice de Glicemia Registrado -" + (periodo.Maior1  >= 600 ? "HI" : periodo.Maior1.ToString()) + " md / dl \n" +
+                              "Menor Índice de Glicemia Registrado - " + (periodo.Menor1 <= 20 ? "LO" : periodo.Menor1.ToString()) + " md / dl";
                         }
                         else
                         {
@@ -415,8 +419,8 @@ namespace TG_App.View
                     case 2:
                         if (periodo.h2 != 0)
                         {
-                            per2 += "Glicemia Média Estimada: " + periodo.h2 + " md / dl \n" + "Total de Registros - " + periodo.TR2 + "Registros\nTotal de Dosagens Aplicadas - " + periodo.TD2 + " Unidades \nDosagem Média Estimada - " + periodo.MD0 + " Unidades \nMaior Índice de Glicemia Registrado -" + (periodo.Maior2.ToString() == "600" ? "HI" : periodo.Menor2.ToString()) + " md / dl \n" +
-                              "Menor Índice de Glicemia Registrado - " + (periodo.Menor2.ToString() == "20" ? "LO" : periodo.Menor2.ToString()) + " md / dl";
+                            per2 += "Glicemia Média Estimada: " + periodo.h2 + " md / dl \n" + "Total de Registros - " + periodo.TR2 + "Registros\nTotal de Dosagens Aplicadas - " + periodo.TD2 + " Unidades \nDosagem Média Estimada - " + periodo.MD0 + " Unidades \nMaior Índice de Glicemia Registrado -" + (periodo.Maior2 >= 600 ? "HI" : periodo.Menor2.ToString()) + " md / dl \n" +
+                              "Menor Índice de Glicemia Registrado - " + (periodo.Menor2 <= 20  ? "LO" : periodo.Menor2.ToString()) + " md / dl";
                         }
                         else
                         {
@@ -426,8 +430,8 @@ namespace TG_App.View
                     case 3:
                         if (periodo.h3 != 0)
                         {
-                            per3 += "Glicemia Média Estimada: " + periodo.h3 + " md / dl \n" + "Total de Registros - " + periodo.TR3 + "Registros\nTotal de Dosagens Aplicadas - " + periodo.TD3 + " Unidades \nDosagem Média Estimada - " + periodo.MD3 + " Unidades /n\nMaior Índice de Glicemia Registrado -" + (periodo.Maior3.ToString() == "600" ? "HI" : periodo.Maior3.ToString()) + " md / dl \n" +
-                              "Menor Índice de Glicemia Registrado - " + (periodo.Menor3.ToString() == "20" ? "LO" : periodo.Menor3.ToString()) + " md / dl";
+                            per3 += "Glicemia Média Estimada: " + periodo.h3 + " md / dl \n" + "Total de Registros - " + periodo.TR3 + "Registros\nTotal de Dosagens Aplicadas - " + periodo.TD3 + " Unidades \nDosagem Média Estimada - " + periodo.MD3 + " Unidades /n\nMaior Índice de Glicemia Registrado -" + (periodo.Maior3 >= 600 ? "HI" : periodo.Maior3.ToString()) + " md / dl \n" +
+                              "Menor Índice de Glicemia Registrado - " + (periodo.Menor3 <= 20 ? "LO" : periodo.Menor3.ToString()) + " md / dl";
                         }
                         else
                         {
@@ -505,6 +509,90 @@ namespace TG_App.View
 
             //Save the stream as a file in the device and invoke it for viewing
             Xamarin.Forms.DependencyService.Get<ISave>().SaveAndView("RelatorioGlicemia.pdf", "application / pdf", stream);
+        }
+
+        public static Chart[] CreateXamarinSample()
+        {
+            var entries = new[]
+            {
+                new ChartEntry(33.4f)
+                {
+                    Label = "Switch",
+                    ValueLabel = "33.4M",
+                    Color = SKColor.Parse("#E52510"),
+                    TextColor = TextColor
+                },
+                new ChartEntry(95.1f)
+                {
+                    Label = "PS4",
+                    ValueLabel = "95.1M",
+                    Color = SKColor.Parse("#003791"),
+                      TextColor = TextColor
+                },
+                new ChartEntry(42.3f)
+                {
+                    Label = "Xbox One",
+                    ValueLabel = "45.3M",
+                    Color = SKColor.Parse("#107b10"),
+                      TextColor = TextColor
+                },
+                new ChartEntry(74.4f)
+                {
+                    Label = "3DS",
+                    ValueLabel = "74.4M",
+                    Color = SKColor.Parse("#E52510"),
+                    TextColor = TextColor
+                }
+            };
+
+            return new Chart[]
+            {
+                new BarChart()
+                {
+                  Entries = entries ,
+                  LabelTextSize = 35
+                },
+                new PointChart()
+                 {
+                  Entries = entries ,
+                  LabelTextSize = 35
+                  },
+                new LineChart()
+                {
+                    Entries = entries,
+                    LineMode = LineMode.Straight,
+                    LineSize = 8,
+                    PointMode = PointMode.Square,
+                    PointSize = 18,
+                    LabelTextSize = 35
+                },
+                new DonutChart()
+                { Entries = entries,
+                  LabelTextSize = 35
+                },
+                new RadialGaugeChart()
+                { Entries = entries ,
+                  LabelTextSize = 35
+                },
+                new RadarChart()
+                {
+                  Entries = entries ,
+                  LabelTextSize = 35
+                },
+            };
+
+
+        }
+
+        protected override void OnAppearing()
+        {
+            var charts = CreateXamarinSample();
+            this.chart1.Chart = charts[0];
+            this.chart2.Chart = charts[1];
+            this.chart3.Chart = charts[2];
+            this.chart4.Chart = charts[3];
+            this.chart5.Chart = charts[4];
+            this.chart6.Chart = charts[5];
         }
     }
 }

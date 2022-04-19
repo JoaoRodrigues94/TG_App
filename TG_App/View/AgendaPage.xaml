@@ -23,7 +23,6 @@
                         <Entry x:Name="Observacao" Placeholder="Observações" />
                         <StackLayout Padding="0" Orientation="Horizontal" HorizontalOptions="Center">
                             <Button Text="Salvar" TextColor="White" BackgroundColor="DarkGreen" Clicked="SaveAgenda"/>
-                            <Button Text="Voltar" TextColor="White" BackgroundColor="DarkRed" Clicked="VoltarAction"/>
                         </StackLayout>
                     </StackLayout>
                 </Frame>
@@ -53,7 +52,7 @@
                                     <ViewCell>
                                         <Frame BorderColor="Blue">
                                             <StackLayout>
-                                                <Label Text="{Binding Descricao}" FontAttributes="Bold"/>
+                                                <Label Text="{Binding Descrição}" FontAttributes="Bold"/>
                                                 <Label Text="{Binding Local}"  HorizontalOptions="FillAndExpand" />
                                                 <Label Text="{Binding Data}" HorizontalOptions="FillAndExpand" />
                                                 <Label Text="{Binding Observacao}" HorizontalOptions="FillAndExpand" />

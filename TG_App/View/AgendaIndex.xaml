@@ -16,7 +16,7 @@
                                     <ViewCell>
                                         <Frame BorderColor="Blue">
                                             <StackLayout>
-                                                <Label Text="{Binding Descricao}" IsVisible="false" />
+                                                <Label Text="{Binding Descricao}" />
                                                 <Label Text="{Binding Local}" FontAttributes="Bold" HorizontalOptions="FillAndExpand" />
                                                 <Label Text="{Binding Data}" HorizontalOptions="FillAndExpand" />
                                                 <Label Text="{Binding Observacao}" HorizontalOptions="FillAndExpand" />

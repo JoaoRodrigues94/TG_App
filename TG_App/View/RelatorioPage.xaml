@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behavior1="clr-namespace:TG_App.View"
-             x:Class="TG_App.View.RelatorioPage">
+             x:Class="TG_App.View.RelatorioPage"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
+>
     <ContentPage.Content>
         <ScrollView>
             <StackLayout VerticalOptions="FillAndExpand">
@@ -46,6 +48,16 @@
                 <Label x:Name="Periodo2" IsVisible="false" />
                 <Label x:Name="Titulo_5" IsVisible="false" />
                 <Label x:Name="Periodo3" IsVisible="false" />
+
+                <StackLayout Spacing="10" BackgroundColor="#EEEEEE">
+                    <Label Margin="20,20,20,20" Text="Vendas de Consoles Global  - Atualizado Abril 2019" FontAttributes="Bold" FontSize="Medium"></Label>
+                    <microcharts:ChartView x:Name="chart1" HeightRequest="300" BackgroundColor="black" />
+                    <microcharts:ChartView x:Name="chart2" HeightRequest="300" BackgroundColor="White" />
+                    <microcharts:ChartView x:Name="chart3" HeightRequest="300" BackgroundColor="White" />
+                    <microcharts:ChartView x:Name="chart4" HeightRequest="300" BackgroundColor="White" />
+                    <microcharts:ChartView x:Name="chart5" HeightRequest="300" BackgroundColor="White" />
+                    <microcharts:ChartView x:Name="chart6" HeightRequest="300" BackgroundColor="White" />
+                </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
