@@ -18,6 +18,7 @@ using System.IO;
 using Plugin.LocalNotifications;
 using Microcharts;
 using SkiaSharp;
+using TG.Model;
 
 namespace TG_App.View
 {
@@ -465,6 +466,26 @@ namespace TG_App.View
             sl.Children.Add(lblPeriodo3);
             Periodo3.Text = lblPeriodo3.Text;
 
+            List<int> lstMedias = new List<int>();
+            lstMedias.Add(mediaGeral);
+            lstMedias.Add(periodo.h0);
+            lstMedias.Add(periodo.h1);
+            lstMedias.Add(periodo.h2);
+            lstMedias.Add(periodo.h3);
+
+            DataBase Db = new DataBase();
+            var user = new Validacao().Listagem().SingleOrDefault();
+            Usuario lista = Db.GetUsuarios().Where(c => c.UsuarioID == user.UsuarioID).ToList().SingleOrDefault(); ;
+
+            List<int> lstInsulina = new List<int>();
+            lstInsulina.Add((int)lista.UnidadesLenta);
+            lstInsulina.Add(periodo.MD0);
+            lstInsulina.Add(periodo.MD1);
+            lstInsulina.Add(periodo.MD2);
+            lstInsulina.Add(periodo.MD3);
+
+            OnAppearing(lstMedias, lstInsulina);
+
             slListagem.Children.Add(sl);
         }
         public void OnButtonClicked(object sender, EventArgs e)
@@ -511,36 +532,43 @@ namespace TG_App.View
             Xamarin.Forms.DependencyService.Get<ISave>().SaveAndView("RelatorioGlicemia.pdf", "application / pdf", stream);
         }
 
-        public static Chart[] CreateXamarinSample()
+        public static Chart[] CreateXamarinSample(List<int> medias, List<int> insulinas)
         {
             var entries = new[]
             {
-                new ChartEntry(33.4f)
+                new ChartEntry(medias[0])
                 {
-                    Label = "Switch",
-                    ValueLabel = "33.4M",
+                    Label = "Média Geral",
+                    ValueLabel = medias[0].ToString() + " Mg/dl",
                     Color = SKColor.Parse("#E52510"),
                     TextColor = TextColor
                 },
-                new ChartEntry(95.1f)
+                new ChartEntry(medias[1])
                 {
-                    Label = "PS4",
-                    ValueLabel = "95.1M",
+                    Label = "00:00 - 06:00",
+                    ValueLabel = medias[1].ToString() + " Mg/dl",
                     Color = SKColor.Parse("#003791"),
                       TextColor = TextColor
                 },
-                new ChartEntry(42.3f)
+                new ChartEntry(medias[2])
                 {
-                    Label = "Xbox One",
-                    ValueLabel = "45.3M",
+                    Label = "06:01 - 12:00",
+                    ValueLabel = medias[2].ToString() + " Mg/dl",
                     Color = SKColor.Parse("#107b10"),
                       TextColor = TextColor
                 },
-                new ChartEntry(74.4f)
+                new ChartEntry(medias[3])
                 {
-                    Label = "3DS",
-                    ValueLabel = "74.4M",
-                    Color = SKColor.Parse("#E52510"),
+                    Label = "12:01 - 18:00",
+                    ValueLabel = medias[3].ToString() + " Mg/dl",
+                    Color = SKColor.Parse("#f0dc82"),
+                    TextColor = TextColor
+                },
+                new ChartEntry(medias[4])
+                {
+                    Label = "18:01 - 23:59",
+                    ValueLabel = medias[4].ToString() + " Mg/dl",
+                    Color = SKColor.Parse("#e5791d"),
                     TextColor = TextColor
                 }
             };
@@ -550,13 +578,8 @@ namespace TG_App.View
                 new BarChart()
                 {
                   Entries = entries ,
-                  LabelTextSize = 35
+                  LabelTextSize = 25
                 },
-                new PointChart()
-                 {
-                  Entries = entries ,
-                  LabelTextSize = 35
-                  },
                 new LineChart()
                 {
                     Entries = entries,
@@ -565,34 +588,17 @@ namespace TG_App.View
                     PointMode = PointMode.Square,
                     PointSize = 18,
                     LabelTextSize = 35
-                },
-                new DonutChart()
-                { Entries = entries,
-                  LabelTextSize = 35
-                },
-                new RadialGaugeChart()
-                { Entries = entries ,
-                  LabelTextSize = 35
-                },
-                new RadarChart()
-                {
-                  Entries = entries ,
-                  LabelTextSize = 35
-                },
+                }
             };
 
 
         }
 
-        protected override void OnAppearing()
+        protected void OnAppearing(List<int> medias, List<int> insulinas)
         {
-            var charts = CreateXamarinSample();
+            var charts = CreateXamarinSample(medias, insulinas);
             this.chart1.Chart = charts[0];
-            this.chart2.Chart = charts[1];
-            this.chart3.Chart = charts[2];
-            this.chart4.Chart = charts[3];
-            this.chart5.Chart = charts[4];
-            this.chart6.Chart = charts[5];
+            this.chart3.Chart = charts[1];
         }
     }
 }

@@ -50,13 +50,10 @@
                 <Label x:Name="Periodo3" IsVisible="false" />
 
                 <StackLayout Spacing="10" BackgroundColor="#EEEEEE">
-                    <Label Margin="20,20,20,20" Text="Vendas de Consoles Global  - Atualizado Abril 2019" FontAttributes="Bold" FontSize="Medium"></Label>
-                    <microcharts:ChartView x:Name="chart1" HeightRequest="300" BackgroundColor="black" />
-                    <microcharts:ChartView x:Name="chart2" HeightRequest="300" BackgroundColor="White" />
+                    <Label Margin="20,20,20,20" Text="Gráfico de Média de Glicemia" FontAttributes="Bold" FontSize="Medium"></Label>
+                    <microcharts:ChartView x:Name="chart1" HeightRequest="300" BackgroundColor="White" />
+                    <Label Margin="20,20,20,20" Text="Gráfico de Média de Insulina aplicada" FontAttributes="Bold" FontSize="Medium"/>
                     <microcharts:ChartView x:Name="chart3" HeightRequest="300" BackgroundColor="White" />
-                    <microcharts:ChartView x:Name="chart4" HeightRequest="300" BackgroundColor="White" />
-                    <microcharts:ChartView x:Name="chart5" HeightRequest="300" BackgroundColor="White" />
-                    <microcharts:ChartView x:Name="chart6" HeightRequest="300" BackgroundColor="White" />
                 </StackLayout>
             </StackLayout>
         </ScrollView>
