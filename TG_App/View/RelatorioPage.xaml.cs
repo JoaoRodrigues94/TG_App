@@ -79,8 +79,10 @@ namespace TG_App.View
 
             int hora0 = 0, count0 = 0, hora1 = 0, count1 = 0, hora2 = 0, count2 = 0, hora3 = 0, count3 = 0, dos0 = 0, dos1 = 0, dos2 = 0, dos3 = 0, menor0 = 600, menor1 = 600, menor2 = 600, menor3 = 600, maior0 = 0, maior1 = 0, maior2 = 0, maior3 = 0;
 
-            int dosagem = 0;
-            int aux = 0;
+            int dosagem = 0, dosInsulina = 0;
+            int aux = 0, auxInsulina = 0;
+
+            string dataRegistro = "";
 
             foreach (var item in listaE)
             {
@@ -92,6 +94,8 @@ namespace TG_App.View
                     Resultado = item.Resultado,
                     Dosagem = item.Dosagem.ToString()
                 };
+                dosInsulina += item.Dosagem;
+
                 string valRes = sql.Resultado == "HI" ? "600" : (sql.Resultado == "LO" ? "20" : sql.Resultado);
 
                 if (sql.Resultado == resM)
@@ -175,6 +179,13 @@ namespace TG_App.View
                     maior3 = Convert.ToInt32(valRes) > maior1 ? Convert.ToInt32(valRes) : maior3;
                 }
 
+                if (dataRegistro != sql.DataHora.ToShortDateString())
+                {
+                    auxInsulina++;
+                    dataRegistro = sql.DataHora.ToShortDateString();
+                }
+                    
+
                 lista.Add(sql);
                 i++;
                 mediaG += Convert.ToInt32(valRes);
@@ -191,6 +202,8 @@ namespace TG_App.View
                     Resultado = item.Resultado,
                     Dosagem = item.Dosagem.ToString()
                 };
+
+                dosInsulina += item.Dosagem;
 
                 if (sql.DataHora >= Convert.ToDateTime(sql.Hora + " 00:00") && sql.DataHora <= Convert.ToDateTime(sql.Hora + " 06:00"))
                 {
@@ -262,6 +275,12 @@ namespace TG_App.View
                     res = sql.Resultado;
                 }
 
+                if (dataRegistro != sql.DataHora.ToShortDateString())
+                {
+                    auxInsulina++;
+                    dataRegistro = sql.DataHora.ToShortDateString();
+                }
+
                 aux++;
                 mediaG += Convert.ToInt32(sql.Resultado == "HI" ? "600" : (sql.Resultado == "LO" ? "20" : sql.Resultado));
                 dosagem += Convert.ToInt32(sql.Dosagem);
@@ -299,7 +318,7 @@ namespace TG_App.View
             };
 
             int MediaGeral = mediaG / (dados.Count == 0 ? 1 : dados.Count);
-            int MediaDosagem = dosagem / (aux == 0 ? 1 : aux);
+            int MediaDosagem = dosInsulina / (auxInsulina == 0 ? 1 : auxInsulina);
 
             GeraRelatorio(dados.Count, MediaGeral, dosagem, MediaDosagem, MaiorResultado, MenorResultado, per);
         }
@@ -358,10 +377,9 @@ namespace TG_App.View
             lblMediaGeral.Text = "Glicemia Média Estimada no Período Selecionado: " + mediaGeral + " mg / dl";
             lblMediaGeral.TextColor = Xamarin.Forms.Color.Black;
 
-            lblDosagem.Text = "Total de Dosagens Aplicadas: " + dosagem + " Unidades";
-            lblDosagem.TextColor = Xamarin.Forms.Color.Black;
+            int media = periodo.MD0 + periodo.MD1 + periodo.MD2 + periodo.MD3;
 
-            lblMediaDosagem.Text = "Dosagem Média Estimada: " + MediaDosagem + " Unidades";
+            lblMediaDosagem.Text = "Dosagem Média Estimada: " + media + " Unidades";
             lblMediaDosagem.TextColor = Xamarin.Forms.Color.Black;
 
             lblMaior.Text = maior;
@@ -479,6 +497,7 @@ namespace TG_App.View
 
             List<int> lstInsulina = new List<int>();
             lstInsulina.Add((int)lista.UnidadesLenta);
+            lstInsulina.Add(media);
             lstInsulina.Add(periodo.MD0);
             lstInsulina.Add(periodo.MD1);
             lstInsulina.Add(periodo.MD2);
@@ -573,21 +592,69 @@ namespace TG_App.View
                 }
             };
 
+            var insulina = new[]
+            {
+                new ChartEntry(insulinas[0])
+                {
+                    Label = "Ação Lenta",
+                    ValueLabel = insulinas[0] + " Un.",
+                    Color = SKColor.Parse("#E52510"),
+                    TextColor = TextColor
+                },
+                new ChartEntry(insulinas[1])
+                {
+                    Label = "24h",
+                    ValueLabel = insulinas[1] + " Un.",
+                    Color = SKColor.Parse("#E52510"),
+                    TextColor = TextColor
+                },
+                new ChartEntry(insulinas[2])
+                {
+                    Label = "00:00 - 06:00",
+                    ValueLabel = insulinas[2] + " Un.",
+                    Color = SKColor.Parse("#003791"),
+                      TextColor = TextColor
+                },
+                new ChartEntry(insulinas[3])
+                {
+                    Label = "06:01 - 12:00",
+                    ValueLabel = insulinas[3] + " Un.",
+                    Color = SKColor.Parse("#107b10"),
+                      TextColor = TextColor
+                },
+                new ChartEntry(insulinas[4])
+                {
+                    Label = "12:01 - 18:00",
+                    ValueLabel = insulinas[4] + " Un",
+                    Color = SKColor.Parse("#f0dc82"),
+                    TextColor = TextColor
+                },
+                new ChartEntry(insulinas[5])
+                {
+                    Label = "18:01 - 23:59",
+                    ValueLabel =  insulinas[5] + " Un",
+                    Color = SKColor.Parse("#e5791d"),
+                    TextColor = TextColor
+                }
+            };
+
             return new Chart[]
             {
                 new BarChart()
                 {
                   Entries = entries ,
-                  LabelTextSize = 25
+                  LabelTextSize = 25,
+                  LabelOrientation = Orientation.Horizontal
                 },
                 new LineChart()
                 {
-                    Entries = entries,
+                    Entries = insulina,
                     LineMode = LineMode.Straight,
-                    LineSize = 8,
+                    LineSize = 6,
                     PointMode = PointMode.Square,
-                    PointSize = 18,
-                    LabelTextSize = 35
+                    PointSize = 15,
+                    LabelTextSize = 25,
+                    LabelOrientation = Orientation.Horizontal
                 }
             };
 
@@ -598,7 +665,7 @@ namespace TG_App.View
         {
             var charts = CreateXamarinSample(medias, insulinas);
             this.chart1.Chart = charts[0];
-            this.chart3.Chart = charts[1];
+            this.chart2.Chart = charts[1];
         }
     }
 }

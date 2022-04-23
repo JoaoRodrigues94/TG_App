@@ -52,8 +52,8 @@
                 <StackLayout Spacing="10" BackgroundColor="#EEEEEE">
                     <Label Margin="20,20,20,20" Text="Gráfico de Média de Glicemia" FontAttributes="Bold" FontSize="Medium"></Label>
                     <microcharts:ChartView x:Name="chart1" HeightRequest="300" BackgroundColor="White" />
-                    <Label Margin="20,20,20,20" Text="Gráfico de Média de Insulina aplicada" FontAttributes="Bold" FontSize="Medium"/>
-                    <microcharts:ChartView x:Name="chart3" HeightRequest="300" BackgroundColor="White" />
+                    <Label Margin="20,20,20,20" Text="Gráfico de Média de Unidades de  Insulina aplicada" FontAttributes="Bold" FontSize="Medium"/>
+                    <microcharts:ChartView x:Name="chart2" HeightRequest="300" BackgroundColor="White" />
                 </StackLayout>
             </StackLayout>
         </ScrollView>
