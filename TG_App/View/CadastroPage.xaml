@@ -26,9 +26,7 @@
             <Picker Title="Selecione" x:Name="TipoDiabete" SelectedIndex="{Binding TipoDiabete}" >
               <Picker.Items>
                 <x:String>Diabétes tipo 1</x:String>
-                <x:String>Diabétes tipo 2 - Faz uso de insulina de ação rápida e lenta</x:String>
-                <x:String>Diabétes tipo 2 - Faz uso somente de insulina de ação lenta</x:String>
-                <x:String>Diabétes tipo 2 - Faz uso somente de insulina de ação rápida</x:String>
+                <x:String>Diabétes tipo 2</x:String>
               </Picker.Items>
             </Picker>
 
@@ -50,7 +48,7 @@
                 <Entry x:Name="NomeInsulinaR" Text="{Binding InsulinaRapida}" Placeholder="Nome da Insulina de Ação Rápida"/>
               </StackLayout>
             </StackLayout>
-            <Button Text="Próximo" HorizontalOptions="End" BackgroundColor="Gray" Command="{Binding Proximo_2}" IsVisible="{Binding Prox_2}"/>
+            <Button Text="Próximo" HorizontalOptions="End" BackgroundColor="Gray" Command="{Binding Proximo_3}" IsVisible="{Binding Prox_3}"/>
           </StackLayout>
         </Frame>
 

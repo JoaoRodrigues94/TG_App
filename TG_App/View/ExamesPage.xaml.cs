@@ -241,13 +241,9 @@ namespace TG_App.View
             var user = new Validacao().Listagem().SingleOrDefault();
             DBSugestao DB = new DBSugestao();
 
-            DB.Pesquisar().LastOrDefault();
+            Sugestao dados = DB.Pesquisar().LastOrDefault();
 
-            Sugestao dados = new Sugestao
-            {
-                Aplicado = Convert.ToInt32(ConfirmarAplicacao.Text),
-                Confirmar = true
-            };
+            dados.Aplicado = Convert.ToInt32(ConfirmarAplicacao.Text);
 
             DB.Update(dados);
             App.Current.MainPage = new NavigationPage(new Master("ExameList"));

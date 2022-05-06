@@ -14,7 +14,7 @@
                             <Label Text="* Esse software destina-se a pessoas portadoras da doença Diabetes Mellitus, que fazem o uso constante de medicamentos para controle de glicemia." />
                             <Label Text="* O Software tem por finalidade ajudar no controle e monitoramento da doença, exibindo SUGESTÕES referentes a quantidade de medicamento a ser utilizado, e podendo ser feito anotações referentes ao monitoramento da doença."/>
                             <Label Text="* O software somente deverá ser utilizado com base na receita feita pelo médico, o sistema não substitui as consultas que deveram continuar serem feitas regularmente."/>
-                            <Label Text="* Tendo em vista que a doença é de difícil controle, não será calculado os valores inferiores a 70 um/dl, o software destina-se ao controle de hiperglicêmia. "/>
+                            <Label Text="* Tendo em vista que a doença é de difícil controle, não será calculado os valores inferiores a 70 um/dl, o software destina-se ao controle de hiperglicemia. "/>
                             <Label Text="* Os valores obtidos no exame de glicemia que tiverem como resultado HI, terá seu valor cálculado como base no valor de 600 un / dl."/>
                             <Label Text="* Consulte um médico antes de preencher as informações de cadastro, os valores cadastrados devem ser baseados na RECEITA Médica!"/>
                             <StackLayout Orientation="Horizontal">

@@ -33,6 +33,7 @@ namespace TG_App.View
 
             Inicio.Placeholder = DateTime.Now.ToString("dd/MM/yyyy");
             Termino.Placeholder = DateTime.Now.ToString("dd/MM/yyyy");
+            Grafico.IsVisible = false;
         }
 
         public void Pesquisar(object sender, EventArgs args)
@@ -504,6 +505,7 @@ namespace TG_App.View
 
             OnAppearing(lstMedias, lstInsulina);
 
+            Grafico.IsVisible = true;
             slListagem.Children.Add(sl);
         }
         public void OnButtonClicked(object sender, EventArgs e)

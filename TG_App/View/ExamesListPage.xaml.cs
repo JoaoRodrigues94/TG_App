@@ -34,6 +34,7 @@ namespace TG_App.View
                     Data = "DATA: " + item.Data.ToString("dd/MM/yyyy HH:mm"),
                     DataHora = item.Data,
                     Resultado = "RESULTADO DO EXAME: " + item.Resultado,
+                    Dosagem = "DOZAGEM UTILIZADA: " + item.Dosagem + " Unidades",
                     TipoSugestao = "E"
                 };
                 dados.Add(x);
@@ -48,7 +49,7 @@ namespace TG_App.View
                     Resultado = "RESULTADO DO EXAME: " + item.Resultado,
                     Dosagem = "SUGESTÃO DE DOSAGEM: " + item.Dosagem.ToString() + " UNIDADES",
                     TipoSugestao = "S",
-                    Aplicado = "Quantidade de insulina utilizada: " + (item.Aplicado == 0 ? item.Dosagem : item.Aplicado).ToString() + " Unidades"
+                    Aplicado = "DOSAGEM UTILIZADA: " + (item.Aplicado == 0 ? item.Dosagem : item.Aplicado).ToString() + " Unidades"
                 };
                 dados.Add(x);
             }
@@ -106,7 +107,9 @@ namespace TG_App.View
                 {
                     SugestaoID = item.ExameID,
                     Data = "DATA: " + item.Data.ToString("dd/MM/yyyy HH:mm"),
+                    DataHora = item.Data,
                     Resultado = "RESULTADO DO EXAME: " + item.Resultado,
+                    Dosagem = "DOZAGEM UTILIZADA: " + item.Dosagem + " Unidades",
                     TipoSugestao = "E"
                 };
                 dados.Add(x);
@@ -117,9 +120,11 @@ namespace TG_App.View
                 {
                     SugestaoID = item.SugestaoID,
                     Data = item.Data.ToString("dd/MM/yyyy HH:mm"),
+                    DataHora = item.Data,
                     Resultado = "RESULTADO DO EXAME: " + item.Resultado,
                     Dosagem = "SUGESTÃO DE DOSAGEM: " + item.Dosagem.ToString() + " UNIDADES",
-                    TipoSugestao = "S"
+                    TipoSugestao = "S",
+                    Aplicado = "DOSAGEM UTILIZADA: " + (item.Aplicado == 0 ? item.Dosagem : item.Aplicado).ToString() + " Unidades"
                 };
                 dados.Add(x);
             }

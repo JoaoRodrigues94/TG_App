@@ -49,7 +49,7 @@
                 <Label x:Name="Titulo_5" IsVisible="false" />
                 <Label x:Name="Periodo3" IsVisible="false" />
 
-                <StackLayout Spacing="10" BackgroundColor="#EEEEEE">
+                <StackLayout x:Name="Grafico" Spacing="10" BackgroundColor="#EEEEEE" >
                     <Label Margin="20,20,20,20" Text="Gráfico de Média de Glicemia" FontAttributes="Bold" FontSize="Medium"></Label>
                     <microcharts:ChartView x:Name="chart1" HeightRequest="300" BackgroundColor="White" />
                     <Label Margin="20,20,20,20" Text="Gráfico de Média de Unidades de  Insulina aplicada" FontAttributes="Bold" FontSize="Medium"/>

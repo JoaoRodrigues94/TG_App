@@ -222,6 +222,7 @@ namespace TG.ModelView
             {
                 CkUnidades = true;
                 Prox_3 = true;
+                Prox_2 = false;
             }
             else
             {
