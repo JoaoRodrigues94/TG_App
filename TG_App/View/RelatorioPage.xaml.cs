@@ -105,21 +105,21 @@ namespace TG_App.View
 
                 else if (sql.Resultado == "LO")
                 {
-                    MenorResultado = "Menor Índice de Glícemia Registrado: " + sql.Resultado + " mg / dl em - " + sql.Data;
+                    MenorResultado = "Menor Índice de Glícemia Registrado: " + sql.Resultado + " mg / dl";
                     resM = "LO";
                 }
                 else if (Convert.ToInt32((sql.Resultado == "HI" ? "600" : (item.Resultado == "LO" ? "20" : item.Resultado))) < Convert.ToInt32(resM) || i == 0)
                 {
-                    MenorResultado = "Menor Índice de Glícemia Registrado: " + sql.Resultado + " mg / dl em - " + sql.Data;
+                    MenorResultado = "Menor Índice de Glícemia Registrado: " + sql.Resultado + " mg / dl";
                     resM = sql.Resultado;
                 }
 
                 if (sql.Resultado == res)
                 {
-                    MaiorResultado += "; " + sql.Data;
+                    MaiorResultado = MaiorResultado;
                 }
 
-                else if (sql.Resultado == "HI")
+                if (sql.Resultado == "HI")
                 {
                     MaiorResultado = "Maior Índice de Glicemia Registrado: " + sql.Resultado + " mg / dl";
                     res = "HI";
@@ -244,23 +244,18 @@ namespace TG_App.View
 
                 if (sql.Resultado == resM)
                 {
-                    MenorResultado += "; " + sql.Data;
+                    MenorResultado = MenorResultado;
                 }
 
                 else if (sql.Resultado == "LO")
                 {
-                    MenorResultado = "Menor Índice de Glícemia Registrado: " + sql.Resultado + " mg / dl em - " + sql.Data + "\n";
+                    MenorResultado = "Menor Índice de Glícemia Registrado: " + sql.Resultado + " mg / dl\n";
                     resM = "LO";
                 }
                 else if (Convert.ToInt32(sql.Resultado == "HI" ? "600" : sql.Resultado) < Convert.ToInt32(resM == "HI" ? "600" : (resM == "LO" ? "20" : resM)) || i == 0)
                 {
-                    MenorResultado = "Menor Índice de Glícemia Registrado: " + sql.Resultado + " mg / dl em - " + sql.Data + "\n";
+                    MenorResultado = "Menor Índice de Glícemia Registrado: " + sql.Resultado + " mg / dl em - \n";
                     resM = sql.Resultado;
-                }
-
-                if (sql.Resultado == res)
-                {
-                    MaiorResultado += "; " + sql.Data;
                 }
 
                 else if (sql.Resultado == "HI")
@@ -271,7 +266,7 @@ namespace TG_App.View
 
                 else if (Convert.ToInt32(sql.Resultado == "LO" ? "20" : (sql.Resultado == "HI" ? "600" : sql.Resultado)) > Convert.ToInt32(res == "HI" ? "600" : (res == "LO" ? "20" : res)))
                 {
-                    MaiorResultado = "Maior Índice de Glicemia Registrado: " + sql.Resultado + " mg / dl em \n";
+                    MaiorResultado = "Maior Índice de Glicemia Registrado: " + sql.Resultado + " mg / dl";
                     res = sql.Resultado;
                 }
 
@@ -364,6 +359,7 @@ namespace TG_App.View
             Label lblMediaGeral = new Label();
             Label lblDosagem = new Label();
             Label lblMediaDosagem = new Label();
+            Label lblInulinaLenta= new Label();
             Label lblMaior = new Label();
             Label lblPeriodo = new Label();
             Label lblPeriodo1 = new Label();
@@ -376,6 +372,13 @@ namespace TG_App.View
 
             lblMediaGeral.Text = "Glicemia Média Estimada no Período Selecionado: " + mediaGeral + " mg / dl";
             lblMediaGeral.TextColor = Xamarin.Forms.Color.Black;
+
+            DataBase Db = new DataBase();
+            var user = new Validacao().Listagem().SingleOrDefault();
+            Usuario lista = Db.GetUsuarios().Where(c => c.UsuarioID == user.UsuarioID).ToList().SingleOrDefault(); ;
+
+            lblInulinaLenta.Text = "Unidades de Insulina Lenta: " + lista.UnidadesLenta + " Un.";
+            lblInulinaLenta.TextColor = Xamarin.Forms.Color.Black;
 
             int media = periodo.MD0 + periodo.MD1 + periodo.MD2 + periodo.MD3;
 
@@ -395,8 +398,8 @@ namespace TG_App.View
             MediaGeral.Text = lblMediaGeral.Text;
             sl.Children.Add(lblExames);
             Exames.Text = lblExames.Text;
-            sl.Children.Add(lblDosagem);
-            Dosagem.Text = lblDosagem.Text;
+            sl.Children.Add(lblInulinaLenta);
+            Dosagem.Text = lblInulinaLenta.Text;
             sl.Children.Add(lblMediaDosagem);
             MediaDosagem_.Text = lblMediaDosagem.Text;
             sl.Children.Add(lblMaior);
@@ -490,10 +493,6 @@ namespace TG_App.View
             lstMedias.Add(periodo.h1);
             lstMedias.Add(periodo.h2);
             lstMedias.Add(periodo.h3);
-
-            DataBase Db = new DataBase();
-            var user = new Validacao().Listagem().SingleOrDefault();
-            Usuario lista = Db.GetUsuarios().Where(c => c.UsuarioID == user.UsuarioID).ToList().SingleOrDefault(); ;
 
             List<int> lstInsulina = new List<int>();
             lstInsulina.Add((int)lista.UnidadesLenta);
