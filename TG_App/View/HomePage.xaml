@@ -4,13 +4,44 @@
              x:Class="TG_App.View.HomePage">
   <ContentPage.Content>
     <StackLayout Spacing="0" Padding="0">
-      <StackLayout>
-          <Label Text="Bem Vindo!"
+            <StackLayout>
+                <Label Text="Bem Vindo!"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center"
                 TextColor="Blue"
                    FontSize="Large"/>
+            </StackLayout>
+            <Frame>
+                <StackLayout>
+                    <Label Text="Como utilizar corretamente este software?" TextColor="Red" FontSize="Title"/>
+                    <Label Text="1 - Cadastre os alimentos que fazem parte de seu cotidiano na opção - ALIMENTOS; " />
+                    <Label Text="2 - Registre seus exames de glicemia e obtenha sugestões de dosagens de seu medicamento na opção - EXAMES DE GLICEMIA;" />
+                    <Label Text="3 - Obtenha um relatório detalhado de seus exames de glicemia na opção - RELATÓRIOS;" />
+                    <Label Text="4 - Cadastre as atividades físicas realizadas durante o dia na opção - ATIVIDADES FÍSICAS;" />
+                    <Label Text="5 - Agende suas próximas consultas, exames de labóratorios e demais atividades na opção - AGENDA;" />
+                    <Label Text="6 - Altera os seus dados de cadastro na opção - CONFIGURAÇÕES." />
+                </StackLayout>
+            </Frame>
+            <Frame>
+                <StackLayout Padding="0">
+                    <StackLayout>
+                        <Label Text="Próximos Eventos Agendados" TextColor="Red" FontSize="Title" />
+                    </StackLayout>
+                    <StackLayout Padding="0">
+                            <ListView x:Name="Agenda" HasUnevenRows="True">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <StackLayout>
+                                                <Label Text="{Binding Descrição}" FontAttributes="Bold"/>
+                                            </StackLayout>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                </StackLayout>
+            </Frame>
         </StackLayout>
-    </StackLayout>
   </ContentPage.Content>
 </ContentPage>

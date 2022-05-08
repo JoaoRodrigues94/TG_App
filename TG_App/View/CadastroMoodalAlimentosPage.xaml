@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TG_App.View.CadastroMoodalAlimentosPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame>
+                <StackLayout>
+                    <Label Text="Cadastro de Alimentos" TextColor="DarkRed" FontAttributes="Bold"
+                HorizontalOptions="CenterAndExpand" />
+                    <Entry x:Name="Alimento" Placeholder="Nome do Alimento" HorizontalOptions="FillAndExpand"/>
+                    <StackLayout Orientation="Horizontal" Padding="0">
+                        <Label Text="Medida:"/>
+                        <Picker x:Name="Medida" HorizontalOptions="FillAndExpand" SelectedIndex="{Binding Medida}">
+                            <Picker.Items>
+                                <x:String>Unidade</x:String>
+                                <x:String>Gramas</x:String>
+                                <x:String>ml</x:String>
+                            </Picker.Items>
+                        </Picker>
+                        <Entry x:Name="PorcaoAlimento" Placeholder="Porção do alimento" Keyboard="Numeric"/>
+                        <Entry x:Name="GramasCarbo" Placeholder="Gramas(Carbs)" HorizontalOptions="FillAndExpand"/>
+                    </StackLayout>
+                    <Picker Title="Categoria" x:Name="Categoria" SelectedIndex="{Binding Categoria}" HorizontalOptions="FillAndExpand">
+                        <Picker.Items>
+                            <x:String>Cereais, Pães e Tubérculos</x:String>
+                            <x:String>Hortaliças</x:String>
+                            <x:String>Frutas</x:String>
+                            <x:String>Leguminosas</x:String>
+                            <x:String>Carnes e Ovos</x:String>
+                            <x:String>Leite e Derivados</x:String>
+                            <x:String>Óleos e Gorduras</x:String>
+                            <x:String>Açúcares</x:String>
+                        </Picker.Items>
+                    </Picker>
+                    <StackLayout Padding="0" Orientation="Horizontal" HorizontalOptions="Center">
+                        <Button Text="Cadastrar" TextColor="White" BackgroundColor="DarkGreen" Clicked="SalvarAlimentoAction"/>
+                        <Button Text="Voltar" TextColor="White" BackgroundColor="DarkRed" Clicked="VoltarAction"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

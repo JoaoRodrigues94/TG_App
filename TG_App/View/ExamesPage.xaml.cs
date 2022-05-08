@@ -36,17 +36,27 @@ namespace TG_App.View
         public void Alimento(object sender, EventArgs args)
         {
             DBAlimento DB = new DBAlimento();
+            var user = new Validacao().Listagem().SingleOrDefault();
 
-            // TODO - Modificar ao alterar o bando de alimentos
-            var pesquisa = DB.PesquisarAlimento().Where(x => x.NomeAlimento.ToUpper() == NomeAlimento.Text.ToUpper()).SingleOrDefault();
+            var lst = DB.PesquisarAlimento().Where(x => x.UsuarioID == user.UsuarioID);
 
-            if (pesquisa == null)
+            StackLayout sl = new StackLayout
             {
-                DisplayAlert("ERRO", "Alimento não cadastrado", "OK");
+                Orientation = StackOrientation.Horizontal,
+            };
+
+            int atual = lst.Count();
+
+            if (lst.SingleOrDefault(c => c.NomeAlimento.ToUpper() == NomeAlimento.Text.ToUpper()) == null)
+            {
+                OnAlertYesNoClicked(sender, args);
+
+               
+                DeleteFood.IsVisible = false;
             }
             else
             {
-                count++;
+                var pesquisa = lst.SingleOrDefault(c => c.NomeAlimento.ToUpper() == NomeAlimento.Text.ToUpper());
                 Label nome = new Label
                 {
                     Text = pesquisa.NomeAlimento
@@ -64,17 +74,40 @@ namespace TG_App.View
                     Text = Medidas(pesquisa.Medida)
                 };
 
-                StackLayout sl = new StackLayout
-                {
-                    Orientation = StackOrientation.Horizontal,
-                };
                 sl.Children.Add(nome);
                 sl.Children.Add(consumo);
                 sl.Children.Add(medida);
 
+                DeleteFood.IsVisible = true;
+
+
                 slAlimento.Children.Add(sl);
             }
         }
+
+        public async void OnAlertYesNoClicked(object obj, EventArgs e)
+        {
+            bool answer = await DisplayAlert("Alimento Não Encontrado", "Desaj Cadastrar este alimento?", "Sim", "Não");
+
+            DBAlimento DB = new DBAlimento();
+            var user = new Validacao().Listagem().SingleOrDefault();
+            var lst = DB.PesquisarAlimento().Where(x => x.UsuarioID == user.UsuarioID);
+
+            int varificar = lst.Count();
+
+            StackLayout sl = new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
+            };
+
+            if (answer)
+            {
+                _ = Navigation.PushModalAsync(new CadastroMoodalAlimentosPage());
+            }
+            else
+                DeleteFood.IsVisible = false;
+        }
+
         public string Medidas(int id)
         {
             string nome = "";
@@ -250,7 +283,18 @@ namespace TG_App.View
         }
         public void VoltarAction(object sender, EventArgs args)
         {
+            DBSugestao DB = new DBSugestao();
+            var user = new Validacao().Listagem().SingleOrDefault();
+
+            Sugestao dados = DB.Pesquisar().LastOrDefault();
+            DB.Delete(dados);
+
             App.Current.MainPage = new NavigationPage(new Master("ExameList"));
+        }
+
+        public void CancelarModal()
+        {
+
         }
     }
 }

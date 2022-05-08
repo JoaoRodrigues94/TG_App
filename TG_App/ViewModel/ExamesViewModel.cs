@@ -25,6 +25,7 @@ namespace TG_App.ViewModel
         public Command AlimentoVisibility { get; set; }
         public Command MostrarPesquisa { get; set; }
         public Command ResultadoOk { get; set; }
+        public Command Visibilidade { get; set; }
         public ExamesViewModel()
         {
             Validar = new Command(Mostrar);

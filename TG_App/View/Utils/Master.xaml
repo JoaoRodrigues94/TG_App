@@ -10,7 +10,7 @@
                 <Button Text="Relatórios" BackgroundColor="White" Clicked="GoRelatorio"/>
                 <Button Text="Configurações" BackgroundColor="White" Clicked="Configuracoes"/>
                 <Button Text="Alimentos" BackgroundColor="White" Clicked="Alimentos"/>
-                <Button Text="Exames" BackgroundColor="White" Clicked="Exames"/>
+                <Button Text="Exames De Glicemia" BackgroundColor="White" Clicked="Exames"/>
                 <Button Text="Atividades Físicas" BackgroundColor="White" Clicked="AtFisico"/>
                 <Button Text="Agenda" BackgroundColor="White" Clicked="Agenda"/>
       </StackLayout>

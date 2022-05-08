@@ -29,7 +29,7 @@
                             <StackLayout Padding="0" x:Name="slAlimento"/>
                             <StackLayout HorizontalOptions="Center" Orientation="Horizontal" IsVisible="{Binding Btn}">
                                 <Button Text="Adicionar Alimento" TextColor="white" BackgroundColor="Green" Clicked="Limpar" Command="{Binding MostrarPesquisa}"/>
-                                <Button Text="Remover Alimento" TextColor="white" BackgroundColor="Red" Clicked="Delete"/>
+                                <Button x:Name="DeleteFood" Text="Remover Alimento" TextColor="white" BackgroundColor="Red" Clicked="Delete" />
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" IsVisible="{Binding Alimento}">
                                 <Entry x:Name="NomeAlimento" Placeholder="Nome do Alimento" HorizontalOptions="FillAndExpand"/>

@@ -34,7 +34,7 @@ namespace TG_App.View
       {
         AlimentoID = Convert.ToInt32(Codigo.Text),
         Categoria = Categoria.SelectedIndex,
-        GramasCarbo = Convert.ToDecimal(GramasCarbo.Text),
+        GramasCarbo = Convert.ToDecimal(GramasCarbo.Text.Replace(",", ".")),
         Medida = Medida.SelectedIndex,
         NomeAlimento = Alimento.Text,
         PorcaoAlimento = Convert.ToDecimal(PorcaoAlimento.Text),

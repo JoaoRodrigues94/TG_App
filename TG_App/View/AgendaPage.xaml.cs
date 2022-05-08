@@ -22,7 +22,7 @@ namespace TG_App.View
 
             DBAgenda DB = new DBAgenda();
             var user = new Validacao().Listagem().SingleOrDefault();
-            var dados = DB.PesquisarAgenda().Where(c => c.UsuarioID == user.UsuarioID).ToList();
+            var dados = DB.PesquisarAgenda().Where(c => c.UsuarioID == user.UsuarioID).OrderBy(c => Convert.ToDateTime(c.Data + " " + c.Horario)).OrderBy(c => c.Status).ToList();
 
             List<Agenda> lstAgenda = new List<Agenda>();
             foreach(var item in dados)

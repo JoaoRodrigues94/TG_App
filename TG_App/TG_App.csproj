@@ -44,6 +44,9 @@
     <EmbeddedResource Update="View\CadastrarAlimentoPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="View\CadastroMoodalAlimentosPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="View\CadastroPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

@@ -24,9 +24,7 @@
                         <Picker Title="Selecione" x:Name="TipoDiabete" SelectedIndex="{Binding TipoDiabete}" >
                             <Picker.Items>
                                 <x:String>Diabétes tipo 1</x:String>
-                                <x:String>Diabétes tipo 2 - Faz uso de insulina de ação rápida e lenta</x:String>
-                                <x:String>Diabétes tipo 2 - Faz uso somente de insulina de ação lenta</x:String>
-                                <x:String>Diabétes tipo 2 - Faz uso somente de insulina de ação rápida</x:String>
+                                <x:String>Diabétes tipo 2</x:String>
                             </Picker.Items>
                         </Picker>
 
@@ -62,9 +60,9 @@
 
                         <Label Text="Correção de Glicemia" FontAttributes="Bold"/>
                         <StackLayout Orientation="Horizontal" Padding="0">
-                            <Entry x:Name="GlicemiaUnd" Placeholder="Unidades" Text="{Binding UnidadeCorrecao}" HorizontalOptions="FillAndExpand" Keyboard="Numeric" />
+                            <Entry x:Name="Correcao" Placeholder="Unidades" Text="{Binding UnidadeCorrecao}" HorizontalOptions="FillAndExpand" Keyboard="Numeric" />
                             <Label Text="Para cada"/>
-                            <Entry x:Name="Correcao" Placeholder="Unidades de Glicemia" Text="{Binding UnidadeGlicemia}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" />
+                            <Entry x:Name="GlicemiaUnd" Placeholder="Unidades de Glicemia" Text="{Binding UnidadeGlicemia}" Keyboard="Numeric" HorizontalOptions="FillAndExpand" />
                         </StackLayout>
                     </StackLayout>
                 </Frame>

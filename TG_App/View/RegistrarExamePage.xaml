@@ -12,7 +12,7 @@
               <StackLayout Padding="0">
                 <StackLayout Orientation="Horizontal">
                   <Label Text="Data"/>
-                  <Entry x:Name="Data" Text="{Binding Data}" Keyboard="Numeric" >
+                  <Entry x:Name="Data" Placeholder="{Binding Data}" Keyboard="Numeric" HorizontalOptions="Fill" WidthRequest="100">
                     <Entry.Behaviors>
                       <behavior1:MaskedData Mask="XX/XX/XXXX"/>
                     </Entry.Behaviors>
