@@ -75,6 +75,7 @@ namespace TG_App.View
                     UsuarioID = user.UsuarioID
                 };
                 DB.CadastrarAlimento(dados);
+                DisplayAlert("Cadstro realizado com sucesso", "O alimento já se encontra preparado para uso.", "OK");
                 Navigation.PopModalAsync();
             }
             else

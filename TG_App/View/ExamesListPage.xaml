@@ -9,7 +9,8 @@
                 <Frame>
                     <StackLayout>
                         <Button Text="Registrar Exame" BackgroundColor="Blue" TextColor="White" Clicked="RegistrarAction"/>
-                        <Button Text="Registrar Exame e Obter Sugestão de Dosagem" BackgroundColor="Green" Clicked="Sugestao" TextColor="White"/>
+                        <Button x:Name="btnSugestao" Text="Registrar Exame e Obter Sugestão de Dosagem" BackgroundColor="Green" Clicked="Sugestao" TextColor="White"/>
+                        <Label x:Name="lblSugestao" IsVisible="false" FontSize="Medium" FontAttributes="Bold" TextColor="Red"/>
                     </StackLayout>
                 </Frame>
                 <Frame BorderColor="blue">

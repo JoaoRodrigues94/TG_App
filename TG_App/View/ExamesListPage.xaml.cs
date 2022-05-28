@@ -54,6 +54,18 @@ namespace TG_App.View
                 dados.Add(x);
             }
 
+            if(lista2.Count() != 0 && lista2.LastOrDefault().Data <= DateTime.Now.AddHours(2))
+            {
+                btnSugestao.IsVisible = false;
+                lblSugestao.Text = "Para previnir um possível caso de hipoglicemia,  a ação de sugestões de dosagens somente será exibida após 2 horas de seu ultimo registro! Ultimo registro realizado em: " + lista2.LastOrDefault().Data.ToString("dd/MM/yyyy HH:mm");
+                lblSugestao.IsVisible = true;
+            }
+            else
+            {
+                btnSugestao.IsVisible = true;
+                lblSugestao.IsVisible = false;
+            }
+
             var ret = dados.OrderByDescending(c => c.DataHora);
             ListaExame.ItemsSource = ret;
 
