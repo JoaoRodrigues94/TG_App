@@ -16,7 +16,7 @@
                 <StackLayout>
                   <Label Text="Filtrar Alimentos" TextColor="Blue"/>
                   <Entry x:Name="SearchAlimento" Placeholder="Pesquisar Por Alimento" HorizontalOptions="FillAndExpand"/>
-                  <StackLayout Orientation="Horizontal">
+                  <StackLayout Orientation="Horizontal" Padding="0">
                     <Picker Title="Categoria" x:Name="FiltroCategoria" HorizontalOptions="FillAndExpand">
                       <Picker.Items>
                         <x:String>Cereais, Pães e Tubérculos</x:String>

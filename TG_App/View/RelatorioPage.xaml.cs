@@ -420,7 +420,7 @@ namespace TG_App.View
                         if (periodo.h0 != 0)
                         {
                             
-                            per += "Glicemia Média Estimada: " + periodo.h0 + " md / dl \n" + "Total de Registros - " + periodo.TR0 + "Registros\nTotal de Dosagens Aplicadas - " + periodo.TD0 + " Unidades \nDosagem Média Estimada - " + periodo.MD0 + " Unidades \nMaior Índice de Glicemia Registrado -" + (periodo.Maior0 >= 600 ? "HI" : periodo.Maior0.ToString()) + " md / dl \n" +
+                            per += "Glicemia Média Estimada: " + periodo.h0 + " md / dl \n" + "Total de Registros - " + periodo.TR0 + " Registros\nTotal de Dosagens Aplicadas - " + periodo.TD0 + " Unidades \nDosagem Média Estimada - " + periodo.MD0 + " Unidades \nMaior Índice de Glicemia Registrado -" + (periodo.Maior0 >= 600 ? "HI" : periodo.Maior0.ToString()) + " md / dl \n" +
                               "Menor Índice de Glicemia Registrado - " + (periodo.Menor0 <= 20 ? "LO" : periodo.Menor0.ToString()) + " md / dl";
                         }
                         else
@@ -431,7 +431,7 @@ namespace TG_App.View
                     case 1:
                         if (periodo.h1 != 0)
                         {
-                            per1 += "Glicemia Média Estimada: " + periodo.h1 + " md / dl \n" + "Total de Registros - " + periodo.TR1 + "Registros\nTotal de Dosagens Aplicadas - " + periodo.TD1 + " Unidades \nDosagem Média Estimada - " + periodo.MD1 + " Unidades \nMaior Índice de Glicemia Registrado -" + (periodo.Maior1  >= 600 ? "HI" : periodo.Maior1.ToString()) + " md / dl \n" +
+                            per1 += "Glicemia Média Estimada: " + periodo.h1 + " md / dl \n" + "Total de Registros - " + periodo.TR1 + " Registros\nTotal de Dosagens Aplicadas - " + periodo.TD1 + " Unidades \nDosagem Média Estimada - " + periodo.MD1 + " Unidades \nMaior Índice de Glicemia Registrado -" + (periodo.Maior1  >= 600 ? "HI" : periodo.Maior1.ToString()) + " md / dl \n" +
                               "Menor Índice de Glicemia Registrado - " + (periodo.Menor1 <= 20 ? "LO" : periodo.Menor1.ToString()) + " md / dl";
                         }
                         else
@@ -442,7 +442,7 @@ namespace TG_App.View
                     case 2:
                         if (periodo.h2 != 0)
                         {
-                            per2 += "Glicemia Média Estimada: " + periodo.h2 + " md / dl \n" + "Total de Registros - " + periodo.TR2 + "Registros\nTotal de Dosagens Aplicadas - " + periodo.TD2 + " Unidades \nDosagem Média Estimada - " + periodo.MD0 + " Unidades \nMaior Índice de Glicemia Registrado -" + (periodo.Maior2 >= 600 ? "HI" : periodo.Menor2.ToString()) + " md / dl \n" +
+                            per2 += "Glicemia Média Estimada: " + periodo.h2 + " md / dl \n" + "Total de Registros - " + periodo.TR2 + " Registros\nTotal de Dosagens Aplicadas - " + periodo.TD2 + " Unidades \nDosagem Média Estimada - " + periodo.MD0 + " Unidades \nMaior Índice de Glicemia Registrado -" + (periodo.Maior2 >= 600 ? "HI" : periodo.Menor2.ToString()) + " md / dl \n" +
                               "Menor Índice de Glicemia Registrado - " + (periodo.Menor2 <= 20  ? "LO" : periodo.Menor2.ToString()) + " md / dl";
                         }
                         else
@@ -453,7 +453,7 @@ namespace TG_App.View
                     case 3:
                         if (periodo.h3 != 0)
                         {
-                            per3 += "Glicemia Média Estimada: " + periodo.h3 + " md / dl \n" + "Total de Registros - " + periodo.TR3 + "Registros\nTotal de Dosagens Aplicadas - " + periodo.TD3 + " Unidades \nDosagem Média Estimada - " + periodo.MD3 + " Unidades /n\nMaior Índice de Glicemia Registrado -" + (periodo.Maior3 >= 600 ? "HI" : periodo.Maior3.ToString()) + " md / dl \n" +
+                            per3 += "Glicemia Média Estimada: " + periodo.h3 + " md / dl \n" + "Total de Registros - " + periodo.TR3 + " Registros\nTotal de Dosagens Aplicadas - " + periodo.TD3 + " Unidades \nDosagem Média Estimada - " + periodo.MD3 + " Unidades /n\nMaior Índice de Glicemia Registrado -" + (periodo.Maior3 >= 600 ? "HI" : periodo.Maior3.ToString()) + " md / dl \n" +
                               "Menor Índice de Glicemia Registrado - " + (periodo.Menor3 <= 20 ? "LO" : periodo.Menor3.ToString()) + " md / dl";
                         }
                         else
@@ -506,6 +506,7 @@ namespace TG_App.View
             OnAppearing(lstMedias, lstInsulina);
 
             Grafico.IsVisible = true;
+            slListagem.Children.Clear();
             slListagem.Children.Add(sl);
         }
         public void OnButtonClicked(object sender, EventArgs e)

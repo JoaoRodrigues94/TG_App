@@ -77,7 +77,11 @@ namespace TG_App.View
             }
 
             if (salvar)
+            {
                 DB.UpdateUsuario(obj);
+                DisplayAlert("Sucesso", "Dados atualizados com sucesso!", "Ok");
+
+            }
             Master master = new Master();
             master.Configuracoes();
         }

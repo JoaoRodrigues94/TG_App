@@ -6,7 +6,7 @@
 >
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout VerticalOptions="FillAndExpand">
+            <StackLayout x:Name="RelatorioKey" VerticalOptions="FillAndExpand">
                 <Label Text="Relatório de Exames" TextColor="DarkRed" HorizontalOptions="Center" FontAttributes="Bold" />
                 <Frame BorderColor="Blue">
                     <StackLayout Padding="0">

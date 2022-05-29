@@ -6,13 +6,13 @@
   <MasterDetailPage.Master>
     <ContentPage Title="Menu">
       <StackLayout BackgroundColor="LightBlue">
-        <Button Text="Home" BackgroundColor="White" Clicked="GoHome"/>
-                <Button Text="Relatórios" BackgroundColor="White" Clicked="GoRelatorio"/>
-                <Button Text="Configurações" BackgroundColor="White" Clicked="Configuracoes"/>
+                <Button Text="Início" BackgroundColor="White" Clicked="GoHome"/>
                 <Button Text="Alimentos" BackgroundColor="White" Clicked="Alimentos"/>
                 <Button Text="Exames De Glicemia" BackgroundColor="White" Clicked="Exames"/>
+                <Button Text="Relatórios" BackgroundColor="White" Clicked="GoRelatorio"/>
                 <Button Text="Atividades Físicas" BackgroundColor="White" Clicked="AtFisico"/>
                 <Button Text="Agenda" BackgroundColor="White" Clicked="Agenda"/>
+                <Button Text="Configurações" BackgroundColor="White" Clicked="Configuracoes"/>
       </StackLayout>
     </ContentPage>
   </MasterDetailPage.Master>

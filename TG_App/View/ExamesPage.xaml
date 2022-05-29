@@ -8,10 +8,10 @@
                 <Frame>
                     <StackLayout Padding="0">
                         <Label Text="Cadastro de Exames de Glicemia!" TextColor="DarkRed" FontAttributes="Bold" HorizontalOptions="Center" />
-                        <StackLayout>
+                        <StackLayout Padding="0">
                             <Label x:Name="DataExame" FontAttributes="Bold" TextColor="blue" />
                         </StackLayout>
-                        <StackLayout>
+                        <StackLayout Padding="0">
                             <Picker x:Name="TipoCalculo" Title="Informe o tipo de CÁLCULO que o sistema deverá realizar!" SelectedIndex="{Binding Calculo}">
                                 <Picker.Items>
                                     <x:String>Correção de Glicemia</x:String>
@@ -36,7 +36,7 @@
                                 <Button ImageSource="Search.png" BackgroundColor="Transparent" Clicked="Alimento" Command="{Binding AlimentoVisibility}" />
                             </StackLayout>
                         </StackLayout>
-                        <StackLayout>
+                        <StackLayout Padding="0">
                             <Entry x:Name="Observacao" Placeholder="Observação" />
                         </StackLayout>
                     </StackLayout>
@@ -47,7 +47,7 @@
                 </StackLayout>
                 <Frame IsVisible="{Binding VerResultado}">
                     <StackLayout Padding="0">
-                        <StackLayout HorizontalOptions="Center">
+                        <StackLayout HorizontalOptions="Center" Padding="0">
                             <Label x:Name="Resultado" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontSize="15"/>
                             <Label Text="Informe a quantidade de insulina aplicada caso o valor seja diferente da sugestão."/>
                             <Entry x:Name="ConfirmarAplicacao" />
