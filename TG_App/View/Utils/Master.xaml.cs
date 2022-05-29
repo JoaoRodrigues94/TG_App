@@ -38,6 +38,9 @@ namespace TG_App.View.Utils
 
             if (tipo == "AgendaPage")
                 Agenda();
+
+            if (tipo == "Configuracoes")
+                TelaConfiguracoes();
         }
 
         private void GoHome(object sender, EventArgs args)
@@ -51,6 +54,10 @@ namespace TG_App.View.Utils
         }
 
         private void Configuracoes(object sender, EventArgs args)
+        {
+            Detail = new NavigationPage(new VerificarConfiguracoesPage());
+        }
+        private void TelaConfiguracoes()
         {
             Detail = new NavigationPage(new ConfiguracoesPage());
         }

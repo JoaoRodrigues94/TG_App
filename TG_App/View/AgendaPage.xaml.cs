@@ -22,11 +22,33 @@ namespace TG_App.View
 
             DBAgenda DB = new DBAgenda();
             var user = new Validacao().Listagem().SingleOrDefault();
-            var dados = DB.PesquisarAgenda().Where(c => c.UsuarioID == user.UsuarioID).OrderBy(c => Convert.ToDateTime(c.Data + " " + c.Horario)).OrderBy(c => c.Status).ToList();
+            var dadosData = DB.PesquisarAgenda().Where(c => c.UsuarioID == user.UsuarioID).ToList();
+
+
+            List<Agenda> dadosDT = new List<Agenda>();
+            foreach(var item in dadosData)
+            {
+                string dia = item.Data.Substring(0, 2);
+                string mes = item.Data.Substring(3, 2);
+                string ano = item.Data.Substring(6, 4);
+
+                string newDate = mes + "/" + dia + "/" + ano;
+
+                item.Data = newDate;
+
+                dadosDT.Add(item);
+            };
+            var dados =  dadosDT.OrderBy(c => Convert.ToDateTime(c.Data + " " + c.Horario)).OrderBy(c => c.Status).ToList();
 
             List<Agenda> lstAgenda = new List<Agenda>();
             foreach(var item in dados)
             {
+                string dia = item.Data.Substring(0, 2);
+                string mes = item.Data.Substring(3, 2);
+                string ano = item.Data.Substring(6, 4);
+
+                item.Data = mes + "/" + dia + "/" + ano;
+
                 Agenda dadosAgenda = new Agenda
                 {
                     AgendaID = item.AgendaID,
@@ -119,16 +141,28 @@ namespace TG_App.View
 
         public void Excluir(object sender, EventArgs args)
         {
-            DBAgenda DB = new DBAgenda();
+            OnAlertYesNoClicked(sender, args);
+        }
 
-            Button btn = (Button)sender;
-            var user = new Validacao().Listagem().SingleOrDefault();
+        public async void OnAlertYesNoClicked(object sender, EventArgs args)
+        {
+            bool answer = await DisplayAlert("Excluir Evento", "Deseja Realmente excluir este evento?", "Sim", "Não");
 
-            Agenda lista = btn.CommandParameter as Agenda;
+            if (answer)
+            {
+                DBAgenda DB = new DBAgenda();
 
-            var busca = DB.PesquisarAgenda().SingleOrDefault(x => x.UsuarioID == user.UsuarioID && x.AgendaID == lista.AgendaID);
-            DB.DeleteAgenda(busca);
-            App.Current.MainPage = new Master("AgendaPage");
+                Button btn = (Button)sender;
+                var user = new Validacao().Listagem().SingleOrDefault();
+
+                Agenda lista = btn.CommandParameter as Agenda;
+
+                var busca = DB.PesquisarAgenda().SingleOrDefault(x => x.UsuarioID == user.UsuarioID && x.AgendaID == lista.AgendaID);
+                DB.DeleteAgenda(busca);
+                App.Current.MainPage = new Master("AgendaPage");
+            }
+            else
+                App.Current.MainPage = new Master("AgendaPage");
         }
     }
 }

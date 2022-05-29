@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TG_App.View.VerificarConfiguracoesPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout VerticalOptions="FillAndExpand">
+                <Frame>
+                    <StackLayout>
+                        <Label Text="Para acessar a tela de configurações informe a sua senha" TextColor="DarkRed" FontAttributes="Bold" HorizontalOptions="Center" />
+                        <StackLayout Padding="0">
+                            <Entry x:Name="Senha" Placeholder="Senha do Usuário" IsPassword="true"/>
+                        </StackLayout>
+                        <StackLayout Padding="0" Orientation="Horizontal" HorizontalOptions="Center">
+                            <Button Text="Confirmar" TextColor="White" BackgroundColor="DarkGreen" Clicked="ConfirmarAction"/>
+                            <Button Text="Voltar" TextColor="White" BackgroundColor="DarkRed" Clicked="VoltarAction"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

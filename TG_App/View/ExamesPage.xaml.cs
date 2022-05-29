@@ -87,7 +87,7 @@ namespace TG_App.View
 
         public async void OnAlertYesNoClicked(object obj, EventArgs e)
         {
-            bool answer = await DisplayAlert("Alimento Não Encontrado", "Desaj Cadastrar este alimento?", "Sim", "Não");
+            bool answer = await DisplayAlert("Alimento Não Encontrado", "Desaja Cadastrar este alimento?", "Sim", "Não");
 
             DBAlimento DB = new DBAlimento();
             var user = new Validacao().Listagem().SingleOrDefault();

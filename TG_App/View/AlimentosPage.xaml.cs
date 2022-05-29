@@ -49,13 +49,26 @@ namespace TG_App.View
 
         public void ExcluirAction(object sender, EventArgs args)
         {
-            Button btn = (Button)sender;
-            ListaAlimentosViewModel lista = btn.CommandParameter as ListaAlimentosViewModel;
-            var user = new Validacao().Listagem().SingleOrDefault();
-            DBAlimento DB = new DBAlimento();
-            var encontrar = DB.PesquisarAlimento().SingleOrDefault(c => c.UsuarioID == user.UsuarioID && c.AlimentoID == lista.AlimentoID);
-            DB.DeleteAlimento(encontrar);
-            App.Current.MainPage = new Master("AlimentosPage");
+            OnAlertYesNoClicked(sender, args);
+        }
+
+        public async void OnAlertYesNoClicked(object sender, EventArgs args)
+        {
+            bool answer = await DisplayAlert("Excluir Alimento", "Deseja Realmente excluir este alimento", "Sim", "Não");
+
+            if (answer)
+            {
+                Button btn = (Button)sender;
+                ListaAlimentosViewModel lista = btn.CommandParameter as ListaAlimentosViewModel;
+                var user = new Validacao().Listagem().SingleOrDefault();
+                DBAlimento DB = new DBAlimento();
+                var encontrar = DB.PesquisarAlimento().SingleOrDefault(c => c.UsuarioID == user.UsuarioID && c.AlimentoID == lista.AlimentoID);
+                DB.DeleteAlimento(encontrar);
+                App.Current.MainPage = new Master("AlimentosPage");
+            }
+            else
+                App.Current.MainPage = new Master("AlimentosPage");
+
         }
 
         public void EditarAction(object sender, EventArgs args)

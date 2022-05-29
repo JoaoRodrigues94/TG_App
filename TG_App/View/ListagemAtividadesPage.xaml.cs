@@ -48,13 +48,24 @@ namespace TG_App.View
         }
         public void ExcluirAction(object sender, EventArgs args)
         {
-            Button btn = (Button)sender;
-            AtividadeFisicaViewModel lista = btn.CommandParameter as AtividadeFisicaViewModel;
-            var user = new Validacao().Listagem().SingleOrDefault();
-            DBExercicios DB = new DBExercicios();
-            var encontrar = DB.PesquisarAtividade().SingleOrDefault(x => x.UsuarioID == user.UsuarioID && x.AtividadeFisicaID == lista.AtividadeFisicaID);
-            DB.DeleteAtividade(encontrar);
-            App.Current.MainPage = new Master("AtividadesFisicas");
+            OnAlertYesNoClicked(sender, args);
+        }
+        public async void OnAlertYesNoClicked(object sender, EventArgs args)
+        {
+            bool answer = await DisplayAlert("Excluir Atividade Fisica", "Deseja Realmente excluir esta atividade física?", "Sim", "Não");
+
+            if (answer)
+            {
+                Button btn = (Button)sender;
+                AtividadeFisicaViewModel lista = btn.CommandParameter as AtividadeFisicaViewModel;
+                var user = new Validacao().Listagem().SingleOrDefault();
+                DBExercicios DB = new DBExercicios();
+                var encontrar = DB.PesquisarAtividade().SingleOrDefault(x => x.UsuarioID == user.UsuarioID && x.AtividadeFisicaID == lista.AtividadeFisicaID);
+                DB.DeleteAtividade(encontrar);
+                App.Current.MainPage = new Master("AtividadesFisicas");
+            }
+            else
+                App.Current.MainPage = new Master("AtividadesFisicas");
         }
         public void EditAction(object sender, EventArgs args)
         {

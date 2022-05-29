@@ -148,26 +148,39 @@ namespace TG_App.View
         }
         public void Excluir(object sender, EventArgs args)
         {
-            DBExame DB = new DBExame();
-            DBSugestao DB2 = new DBSugestao();
+            OnAlertYesNoClicked(sender, args);
+        }
 
-            Button btn = (Button)sender;
-            var user = new Validacao().Listagem().SingleOrDefault();
+        public async void OnAlertYesNoClicked(object sender, EventArgs args)
+        {
+            bool answer = await DisplayAlert("Excluir Registro de Exame", "Deseja Realmente excluir este registro de exame?", "Sim", "Não");
 
-            SugestaoView lista = btn.CommandParameter as SugestaoView;
-
-            if (lista.TipoSugestao == "E")
+            if (answer)
             {
-                var busca = DB.Pesquisar().SingleOrDefault(x => x.UsuarioID == user.UsuarioID && x.ExameID == lista.SugestaoID);
-                DB.Delete(busca);
-                App.Current.MainPage = new Master("ExameList");
+                DBExame DB = new DBExame();
+                DBSugestao DB2 = new DBSugestao();
+
+                Button btn = (Button)sender;
+                var user = new Validacao().Listagem().SingleOrDefault();
+
+                SugestaoView lista = btn.CommandParameter as SugestaoView;
+
+                if (lista.TipoSugestao == "E")
+                {
+                    var busca = DB.Pesquisar().SingleOrDefault(x => x.UsuarioID == user.UsuarioID && x.ExameID == lista.SugestaoID);
+                    DB.Delete(busca);
+                    App.Current.MainPage = new Master("ExameList");
+                }
+                if (lista.TipoSugestao == "S")
+                {
+                    var busca = DB2.Pesquisar().SingleOrDefault(x => x.UsuarioID == user.UsuarioID && x.SugestaoID == lista.SugestaoID);
+                    DB2.Delete(busca);
+                    App.Current.MainPage = new Master("ExameList");
+                }
             }
-            if (lista.TipoSugestao == "S")
-            {
-                var busca = DB2.Pesquisar().SingleOrDefault(x => x.UsuarioID == user.UsuarioID && x.SugestaoID == lista.SugestaoID);
-                DB2.Delete(busca);
+            else
                 App.Current.MainPage = new Master("ExameList");
-            }
+
         }
         public void Details(object sender, EventArgs args)
         {
